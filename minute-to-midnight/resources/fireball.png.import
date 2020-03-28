@@ -1,0 +1,15 @@
+[remap]
+
+importer="texture_atlas"
+type="Texture"
+path="res://.import/fireball.png-05546f7059e35503e792915fb3ba3397.res"
+
+[deps]
+
+source_file="res://resources/fireball.png"
+dest_files=[ "res://.import/fireball.png-05546f7059e35503e792915fb3ba3397.res" ]
+
+[params]
+
+atlas_file="res://resources/fireball.png"
+import_mode=0
