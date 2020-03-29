@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://prefabs/Player/PlayerController.cs" type="Script" id=1]
+[ext_resource path="res://resources/knight_a/knight_a_anim.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 19.8453, 21.0104 )
+
+[node name="Player" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 1 )
+Speed = 100.0
+Gravity = 9.0
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2, 0 )
+frames = ExtResource( 2 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -13.0694, 9.90817 )
+shape = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+smoothing_speed = 8.0
+
+[node name="Light" parent="." instance=ExtResource( 3 )]
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
