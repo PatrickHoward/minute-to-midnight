@@ -21,11 +21,12 @@ scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0.223529, 0.168627, 0.168627, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 79.5679, 281.824 )
+position = Vector2( 81.5679, 281.824 )
 JumpHeight = 250.0
 Speed = 100.0
 Gravity = 9.0
