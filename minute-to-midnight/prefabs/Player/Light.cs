@@ -82,11 +82,12 @@ public class Light : KinematicBody2D
 
     [Signal] public delegate void extinguished();
 
+    private Timer _timer;
+    
     private int _speedMultiplier = 100;
 
     private float _timeRemaining;
 
-    private Timer _timer;
 
     private Light2D _lightSource;
 
@@ -162,11 +163,21 @@ public class Light : KinematicBody2D
 
         _lightStrength.Apply(_lightSource);
 
-        if (_timeRemaining == 0)
+        if (_timeRemaining <= 0)
         {
             _timer.Stop();
 
             EmitSignal(nameof(extinguished));
         }
+    }
+
+    public void AddTimeToTimer(float time)
+    {
+        _timeRemaining = Mathf.Min(time + _timeRemaining, 60);
+    }
+
+    public void RemoveTimeFromTimer(float time)
+    {
+        _timeRemaining -= time;
     }
 }

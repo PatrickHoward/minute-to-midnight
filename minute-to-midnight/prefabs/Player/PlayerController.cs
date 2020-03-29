@@ -38,7 +38,7 @@ public class PlayerController : KinematicBody2D
 	
 	private PlayerAnimationState _animationState;
 	private AnimatedSprite _animations;
-	
+
 	public override void _Ready()
 	{
 		_movement = new Vector2();
