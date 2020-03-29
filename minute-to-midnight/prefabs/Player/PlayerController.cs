@@ -23,7 +23,7 @@ public enum PlayerState
     Attacking,
 }
 
-public class PlayerController : Node2D
+public class PlayerController : KinematicBody2D
 {
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
@@ -45,17 +45,14 @@ public class PlayerController : Node2D
 
     private Node2D _light;
 
-    private KinematicBody2D _playerCollider;
-
     private Node2D _display;
 
     public override void _Ready()
     {
         _movement = new Vector2();
         _animations = GetChild<AnimatedSprite>(0);
-        _playerCollider = GetNode<KinematicBody2D>("PlayerCollider");
 
-        _display = _playerCollider.GetNode<Node2D>("Display");
+        _display = GetNode<Node2D>("Display");
         _sprite = _display.GetNode<Sprite>("Sprite");
         _light = _display.GetNode<Node2D>("Light");
 
@@ -75,7 +72,7 @@ public class PlayerController : Node2D
         //Left and Right Movement
         if (Input.IsActionPressed("Move-Left"))
         {
-            if (_playerCollider.IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state == PlayerState.Idle)
             {
                 _state = PlayerState.Runnning;
             }
@@ -84,7 +81,7 @@ public class PlayerController : Node2D
         }
         else if (Input.IsActionPressed("Move-Right"))
         {
-            if (_playerCollider.IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state == PlayerState.Idle)
             {
                 _state = PlayerState.Runnning;
             }
@@ -99,7 +96,7 @@ public class PlayerController : Node2D
         //Jump Action
         if (Input.IsActionPressed("Jump"))
         {
-            if (_playerCollider.IsOnFloor() && _animationState != PlayerAnimationState.JumpLoop)
+            if (IsOnFloor() && _animationState != PlayerAnimationState.JumpLoop)
             {
                 _state = PlayerState.Jumping;
                 _movement.y = -JumpHeight;
@@ -115,7 +112,7 @@ public class PlayerController : Node2D
         //Constant weight of gravity pushes down on us all
         _movement.y += Gravity;
 
-        _movement = _playerCollider.MoveAndSlide(_movement, _floor);
+        _movement = MoveAndSlide(_movement, _floor);
 
         if (_movement == Vector2.Zero && _state != PlayerState.Attacking)
         {
@@ -168,7 +165,7 @@ public class PlayerController : Node2D
             _display.Scale = new Vector2(1, 1);
         }
 
-        if (_animationState == PlayerAnimationState.JumpLoop && _playerCollider.IsOnFloor())
+        if (_animationState == PlayerAnimationState.JumpLoop && IsOnFloor())
         {
             _animationState = PlayerAnimationState.Run;
         }
@@ -196,18 +193,18 @@ public class PlayerController : Node2D
                 break;
 
             case PlayerAnimationState.Attack1:
-                _animations.Animation = "attack_1";
+                _animationPlayer.Play("attack_1");
                 break;
         }
     }
 
     public void _on_Sprite_animation_finished()
     {
-        if (_movement == Vector2.Zero && _playerCollider.IsOnFloor())
+        if (_movement == Vector2.Zero && IsOnFloor())
         {
             _state = PlayerState.Idle;
         }
-        else if (_playerCollider.IsOnFloor())
+        else if (IsOnFloor())
         {
             _state = PlayerState.Runnning;
         }

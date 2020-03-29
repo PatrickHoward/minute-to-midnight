@@ -80,7 +80,7 @@ visible = false
 position = Vector2( 0, 5.54779 )
 scale = Vector2( 1.68, 1.68 )
 frames = SubResource( 12 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
