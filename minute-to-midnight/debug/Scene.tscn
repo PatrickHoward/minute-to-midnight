@@ -50,3 +50,4 @@ position = Vector2( 762.85, 96.9 )
 [node name="Light" parent="." instance=ExtResource( 2 )]
 position = Vector2( 510.15, 354.35 )
 Duration = 10.0
+DisableDimming = true

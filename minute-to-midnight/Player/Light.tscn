@@ -23,5 +23,4 @@ shadow_filter_smooth = 8.2
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
-autostart = true
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

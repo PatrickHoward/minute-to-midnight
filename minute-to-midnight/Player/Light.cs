@@ -17,6 +17,9 @@ public class Light : KinematicBody2D
     [Export]
     public float Duration = 60.0f;
 
+    [Export]
+    public bool DisableDimming = false;
+
     private int _speedMultiplier = 100;
 
     private float _timeRemaining;
@@ -49,6 +52,11 @@ public class Light : KinematicBody2D
         _timer = GetNode<Timer>("Timer");
         _lightSource = GetNode<Light2D>("Light2D");
         _timeRemaining = Duration;
+
+        if (!DisableDimming)
+        {
+            _timer.Start();
+        }
 
         _lightSource.Energy = _maxEnergy;
         _lightSource.SetScale(new Vector2(_maxScale, _maxScale));
