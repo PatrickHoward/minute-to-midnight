@@ -53,7 +53,7 @@ public class LightStrength
 public class Light : KinematicBody2D
 {
     private readonly Tuple<float, float> _scaleLimits = Tuple.Create(0.1f, 1.0f);
-    private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.0f, 1.0f);
+    private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.5f, 1.0f);
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
     private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 50.0f);
     private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 10.0f);
@@ -153,9 +153,6 @@ public class Light : KinematicBody2D
             particlesMaterial.ScaleRandom = LinearModel(_particleScaleRandomnessLimits, percentTimeRemaining);
             particlesMaterial.EmissionSphereRadius = LinearModel(_particlesEmissionSphereRadiusLimits, percentTimeRemaining);
             particlesMaterial.LinearAccel = LinearModel(_particleLinearAccelerationLimits, percentTimeRemaining);
-
-            // NOTE: Remove after debugging
-            GD.Print(percentTimeRemaining);
         }
 
         _lightStrength.Apply(_lightSource);
@@ -163,6 +160,7 @@ public class Light : KinematicBody2D
         if (_timeRemaining == 0)
         {
             _timer.Stop();
+
             EmitSignal(nameof(extinguished));
         }
     }

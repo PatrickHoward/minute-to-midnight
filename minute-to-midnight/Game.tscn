@@ -11,4 +11,4 @@
 position = Vector2( 488.301, 473.101 )
 Debug = true
 MaxSpeed = 1
-Duration = 60.0
+Duration = 30.0
