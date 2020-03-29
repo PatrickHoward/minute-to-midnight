@@ -53,8 +53,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player\Light.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test_character\NewPlayer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
