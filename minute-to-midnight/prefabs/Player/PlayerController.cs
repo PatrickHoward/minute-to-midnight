@@ -37,24 +37,16 @@ public class PlayerController : KinematicBody2D
     private PlayerState _state;
 
     private PlayerAnimationState _animationState;
-    private AnimatedSprite _animations;
-
-    private Sprite _sprite;
 
     private AnimationPlayer _animationPlayer;
-
-    private Node2D _light;
 
     private Node2D _display;
 
     public override void _Ready()
     {
         _movement = new Vector2();
-        _animations = GetChild<AnimatedSprite>(0);
 
         _display = GetNode<Node2D>("Display");
-        _sprite = _display.GetNode<Sprite>("Sprite");
-        _light = _display.GetNode<Node2D>("Light");
 
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("idle");
