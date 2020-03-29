@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public class Light : KinematicBody2D
@@ -7,9 +8,11 @@ public class Light : KinematicBody2D
     private readonly float _maxEnergy = 1.0f;
     private readonly float _minEnergy = 0.0f;
     private readonly float _maxTime = 60;
+    private float _maxFlicker = 1.1f;
+    private float _minFlicker = 1.0f;
 
     [Export]
-    public bool debug = false;
+    public bool Debug = false;
 
     [Export]
     public int MaxSpeed = 10;
@@ -19,6 +22,9 @@ public class Light : KinematicBody2D
 
     [Export]
     public bool DisableDimming = false;
+
+    [Export]
+    public bool Flicker = true;
 
     private int _speedMultiplier = 100;
 
@@ -65,7 +71,7 @@ public class Light : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if (debug)
+        if (Debug)
         {
             var velocity = GetInput() * _speedMultiplier * MaxSpeed * delta;
             Position += velocity;
@@ -76,6 +82,10 @@ public class Light : KinematicBody2D
     {
         _timeRemaining = Mathf.Max(_timeRemaining - _timer.WaitTime, 0);
         setStrength();
+
+        var noise = (float)(new Random()).NextDouble() * (1.1f - 1.0f) + 1.0f;
+        _lightSource.Energy *= noise;
+
         if (_timeRemaining == 0)
         {
             _timer.Stop();
