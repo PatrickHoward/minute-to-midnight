@@ -52,8 +52,8 @@ public class LightStrength
 
 public class Light : KinematicBody2D
 {
-    private readonly Tuple<float, float> _scaleLimits = Tuple.Create(0.1f, 1.0f);
-    private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.5f, 1.0f);
+    private Tuple<float, float> _scaleLimits;
+    private Tuple<float, float> _energyLimits;
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
     private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 50.0f);
     private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 5.0f);
@@ -64,6 +64,12 @@ public class Light : KinematicBody2D
 
     [Export] public float MaxEnergy = 1.0f;
     
+    [Export] public float MinEnergy = 0.5f;
+    
+    [Export] public float MaxScale = 1.0f;
+    
+    [Export] public float MinScale = 0.1f;
+
     [Export] public bool Debug = false;
 
     [Export] public int MaxSpeed = 10;
@@ -107,6 +113,9 @@ public class Light : KinematicBody2D
         _lightSource = GetNode<Light2D>("Light2D");
         _particles = GetNode<Particles2D>("Particles2D");
         _timeRemaining = Duration;
+
+        _scaleLimits = Tuple.Create(0.1f, 1.0f);
+        _energyLimits = Tuple.Create(MinEnergy, MaxEnergy);
 
         _lightStrength = new LightStrength(_energyLimits, _scaleLimits);
         _lightStrength.Apply(_lightSource);

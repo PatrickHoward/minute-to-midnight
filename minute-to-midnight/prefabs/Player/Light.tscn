@@ -44,8 +44,9 @@ texture = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
 rotation = -1.5708
-amount = 500
-lifetime = 2.0
+scale = Vector2( 0.75, 0.5 )
+amount = 250
+lifetime = 0.5
 local_coords = false
 process_material = SubResource( 5 )
 

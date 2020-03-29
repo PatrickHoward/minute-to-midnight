@@ -1,75 +1,33 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=1]
-[ext_resource path="res://resources/powerups/32x32_brazier_lit.png" type="Texture" id=2]
 [ext_resource path="res://resources/powerups/32x32_brazier_unlit.png" type="Texture" id=3]
 [ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
 
-[sub_resource type="AtlasTexture" id=1]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=2]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-flags = 4
-atlas = ExtResource( 2 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "unlit",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "lit",
-"speed": 10.0
-} ]
-
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.36131, 7.77531 )
 
 [node name="Brazier" type="Node2D"]
 script = ExtResource( 4 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="Light" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0.069294, 2.06194 )
+scale = Vector2( 0.319999, 0.2 )
+MaxEnergy = 0.5
+MinEnergy = 0.1
+MaxScale = 0.4
+MaxSpeed = 5
+DisableDimming = true
+
+[node name="sprite" type="Sprite" parent="."]
 position = Vector2( 0.0638499, 0.0633364 )
 scale = Vector2( 0.522231, 0.478797 )
-frames = SubResource( 7 )
-animation = "lit"
-speed_scale = 1.309
-playing = true
-
-[node name="Light" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0.142395, -0.642681 )
-DisableDimming = true
+texture = ExtResource( 3 )
 
 [node name="Area2D" type="Area2D" parent="."]
 priority = 10.0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 8 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
