@@ -9,5 +9,4 @@
 
 [node name="Light" parent="." instance=ExtResource( 2 )]
 Debug = true
-MaxSpeed = 1
-DisableDimming = true
+Duration = 10.0
