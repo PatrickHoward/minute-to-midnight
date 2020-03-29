@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/powerups/32x32_brazier_unlit.png" type="Texture" id=3]
+[ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 5.36131, 7.77531 )
+
+[node name="Brazier" type="Node2D"]
+script = ExtResource( 4 )
+time = 10.0
+
+[node name="Light" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0.069294, 2.06194 )
+scale = Vector2( 0.319999, 0.2 )
+MaxEnergy = 0.8
+MinEnergy = 0.1
+MaxScale = 0.4
+DisableDimming = true
+
+[node name="sprite" type="Sprite" parent="."]
+position = Vector2( 0.0638499, 0.0633364 )
+scale = Vector2( 0.522231, 0.478797 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+priority = 10.0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

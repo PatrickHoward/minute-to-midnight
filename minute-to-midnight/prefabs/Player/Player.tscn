@@ -271,10 +271,9 @@ shape = SubResource( 1 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
-frame = 74
 
 [node name="Light" parent="Display" instance=ExtResource( 3 )]
-position = Vector2( -34.7657, -8.91001 )
+position = Vector2( -28.5653, -8.05217 )
 Duration = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

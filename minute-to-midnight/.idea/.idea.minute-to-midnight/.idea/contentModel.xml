@@ -11,6 +11,7 @@
       <e p="minute-to-midnight.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
       <e p="prefabs" t="Include">
+        <e p="brazier.cs" t="Include" />
         <e p="Player" t="Include">
           <e p="Light.cs" t="Include" />
           <e p="PlayerController.cs" t="Include" />

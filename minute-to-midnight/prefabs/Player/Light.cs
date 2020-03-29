@@ -52,8 +52,8 @@ public class LightStrength
 
 public class Light : KinematicBody2D
 {
-    private readonly Tuple<float, float> _scaleLimits = Tuple.Create(0.1f, 1.0f);
-    private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.5f, 1.0f);
+    private Tuple<float, float> _scaleLimits;
+    private Tuple<float, float> _energyLimits;
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
     private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 10.0f);
     private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 3.0f);
@@ -61,6 +61,14 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 3.0f);
     private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 20.0f);
     private readonly float _maxTime = 60;
+
+    [Export] public float MaxEnergy = 1.0f;
+    
+    [Export] public float MinEnergy = 0.5f;
+    
+    [Export] public float MaxScale = 1.0f;
+    
+    [Export] public float MinScale = 0.1f;
 
     [Export] public bool Debug = false;
 
@@ -74,11 +82,11 @@ public class Light : KinematicBody2D
 
     [Signal] public delegate void extinguished();
 
+    private Timer _timer;
+    
     private int _speedMultiplier = 100;
 
     private float _timeRemaining;
-
-    private Timer _timer;
 
     private Light2D _lightSource;
 
@@ -105,6 +113,9 @@ public class Light : KinematicBody2D
         _lightSource = GetNode<Light2D>("Light2D");
         _particles = GetNode<Particles2D>("Particles2D");
         _timeRemaining = Duration;
+
+        _scaleLimits = Tuple.Create(MinScale, MaxScale);
+        _energyLimits = Tuple.Create(MinEnergy, MaxEnergy);
 
         _lightStrength = new LightStrength(_energyLimits, _scaleLimits);
         _lightStrength.Apply(_lightSource);
@@ -147,15 +158,24 @@ public class Light : KinematicBody2D
             particlesMaterial.ScaleRandom = LinearModel(_particleScaleRandomnessLimits, percentTimeRemaining);
             particlesMaterial.EmissionSphereRadius = LinearModel(_particlesEmissionSphereRadiusLimits, percentTimeRemaining);
             particlesMaterial.LinearAccel = LinearModel(_particleLinearAccelerationLimits, percentTimeRemaining);
+            _lightStrength.Apply(_lightSource);
+            
+            if (_timeRemaining <= 0)
+            {
+                _timer.Stop();
+
+                EmitSignal(nameof(extinguished));
+            }
         }
+    }
 
-        _lightStrength.Apply(_lightSource);
+    public void AddTimeToTimer(float time)
+    {
+        _timeRemaining = Mathf.Min(time + _timeRemaining, 60);
+    }
 
-        if (_timeRemaining == 0)
-        {
-            _timer.Stop();
-
-            EmitSignal(nameof(extinguished));
-        }
+    public void RemoveTimeFromTimer(float time)
+    {
+        _timeRemaining -= time;
     }
 }

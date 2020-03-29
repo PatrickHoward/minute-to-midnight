@@ -1,4 +1,3 @@
-using System;
 using Godot;
 
 public enum PlayerAnimationState
@@ -138,10 +137,12 @@ public class PlayerController : KinematicBody2D
                 break;
 
             case PlayerState.Jumping:
-                if (_animationState != PlayerAnimationState.JumpStart && _animationState != PlayerAnimationState.JumpLoop)
+                if (_animationState != PlayerAnimationState.JumpStart &&
+                    _animationState != PlayerAnimationState.JumpLoop)
                 {
                     _animationState = PlayerAnimationState.JumpStart;
                 }
+
                 break;
         }
     }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1-Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ambiance/castlebg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ambiance/Foreground.tscn" type="PackedScene" id=4]
+[ext_resource path="res://prefabs/Brazier.tscn" type="PackedScene" id=5]
 
 [node name="Scene" type="Node2D"]
 
@@ -25,4 +26,24 @@ position = Vector2( -1.16632, 110.804 )
 color = Color( 0, 0, 0, 1 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 88.2347, 264.041 )
+position = Vector2( 107.023, 282.115 )
+
+[node name="Powerups" type="Node2D" parent="."]
+
+[node name="bazier" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 370.225, 337.971 )
+
+[node name="bazier2" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 664.167, 290.724 )
+
+[node name="bazier3" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 792.899, 291.746 )
+
+[node name="bazier4" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 968.629, 306.731 )
+
+[node name="bazier5" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 1092.93, 290.384 )
+
+[node name="bazier6" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 1256.4, 290.725 )
