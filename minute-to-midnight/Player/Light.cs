@@ -56,7 +56,6 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.0f, 1.0f);
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
     private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 50.0f);
-    private readonly Tuple<int, int> _particleAmountLimits = Tuple.Create(100, 500);
     private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 10.0f);
     private readonly Tuple<float, float> _particleScaleRandomnessLimits = Tuple.Create(0.0f, 1.0f);
     private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 13.0f);
@@ -147,6 +146,13 @@ public class Light : KinematicBody2D
 
             _lightStrength.Energy = LinearModel(_energyLimits, percentTimeRemaining);
             _lightStrength.Scale = LinearModel(_scaleLimits, percentTimeRemaining);
+
+            var particlesMaterial = _particles.ProcessMaterial as ParticlesMaterial;
+            particlesMaterial.InitialVelocity = LinearModel(_particleInitialVelocityLimits, percentTimeRemaining);
+            particlesMaterial.Scale = LinearModel(_particleScaleLimits, percentTimeRemaining);
+            particlesMaterial.ScaleRandom = LinearModel(_particleScaleRandomnessLimits, percentTimeRemaining);
+            particlesMaterial.EmissionSphereRadius = LinearModel(_particlesEmissionSphereRadiusLimits, percentTimeRemaining);
+            particlesMaterial.LinearAccel = LinearModel(_particleLinearAccelerationLimits, percentTimeRemaining);
 
             // NOTE: Remove after debugging
             GD.Print(percentTimeRemaining);

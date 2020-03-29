@@ -8,5 +8,7 @@
 [node name="Level1" parent="." instance=ExtResource( 1 )]
 
 [node name="Light" parent="." instance=ExtResource( 2 )]
+position = Vector2( 488.301, 473.101 )
 Debug = true
-Duration = 10.0
+MaxSpeed = 1
+Duration = 60.0
