@@ -30,5 +30,7 @@ zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 smoothing_speed = 8.0
 
-[node name="Light" parent="." instance=ExtResource( 3 )]
+[node name="Light" parent="Camera2D" instance=ExtResource( 3 )]
+position = Vector2( 0, -32.3535 )
+DisableDimming = true
 [connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
