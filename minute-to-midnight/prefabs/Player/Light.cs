@@ -88,7 +88,6 @@ public class Light : KinematicBody2D
 
     private float _timeRemaining;
 
-
     private Light2D _lightSource;
 
     private LightStrength _lightStrength;
@@ -159,15 +158,14 @@ public class Light : KinematicBody2D
             particlesMaterial.ScaleRandom = LinearModel(_particleScaleRandomnessLimits, percentTimeRemaining);
             particlesMaterial.EmissionSphereRadius = LinearModel(_particlesEmissionSphereRadiusLimits, percentTimeRemaining);
             particlesMaterial.LinearAccel = LinearModel(_particleLinearAccelerationLimits, percentTimeRemaining);
-        }
+            _lightStrength.Apply(_lightSource);
+            
+            if (_timeRemaining <= 0)
+            {
+                _timer.Stop();
 
-        _lightStrength.Apply(_lightSource);
-
-        if (_timeRemaining <= 0)
-        {
-            _timer.Stop();
-
-            EmitSignal(nameof(extinguished));
+                EmitSignal(nameof(extinguished));
+            }
         }
     }
 

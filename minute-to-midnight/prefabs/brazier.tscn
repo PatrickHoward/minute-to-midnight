@@ -9,14 +9,14 @@ extents = Vector2( 5.36131, 7.77531 )
 
 [node name="Brazier" type="Node2D"]
 script = ExtResource( 4 )
+time = 10.0
 
 [node name="Light" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0.069294, 2.06194 )
 scale = Vector2( 0.319999, 0.2 )
-MaxEnergy = 0.5
+MaxEnergy = 0.8
 MinEnergy = 0.1
 MaxScale = 0.4
-MaxSpeed = 5
 DisableDimming = true
 
 [node name="sprite" type="Sprite" parent="."]
