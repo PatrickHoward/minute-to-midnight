@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://prefabs/Player/PlayerController.cs" type="Script" id=1]
 [ext_resource path="res://resources/knight_a/knight_a_anim.tres" type="SpriteFrames" id=2]
@@ -90,6 +90,47 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "jump_start"
+length = 4.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCollider/Display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 154, 155, 156, 157 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCollider/Display/Light:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -20.9979, -9.73711 ), Vector2( -20.7597, -7.7128 ), Vector2( -18.6164, -7.95095 ), Vector2( -19.569, -7.95095 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerCollider/Display/Light:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "run"
 length = 8.0
@@ -155,10 +196,10 @@ shape = SubResource( 1 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
-frame = 51
+frame = 157
 
 [node name="Light" parent="PlayerCollider/Display" instance=ExtResource( 3 )]
-position = Vector2( -15.6394, 30.7492 )
+position = Vector2( -19.569, -7.95095 )
 DisableDimming = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -171,5 +212,6 @@ smoothing_speed = 8.0
 playback_speed = 5.5
 anims/death = SubResource( 4 )
 anims/idle = SubResource( 2 )
+anims/jump_start = SubResource( 5 )
 anims/run = SubResource( 3 )
 [connection signal="animation_finished" from="SpriteDISABLED" to="." method="_on_Sprite_animation_finished"]
