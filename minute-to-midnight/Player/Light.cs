@@ -4,7 +4,7 @@ public class Light : KinematicBody2D
 {
     private readonly float _maxScale = 1.0f;
     private readonly float _minScale = 0.1f;
-    private readonly float _maxEnergy = 2.0f;
+    private readonly float _maxEnergy = 1.0f;
     private readonly float _minEnergy = 0.0f;
     private readonly float _maxTime = 60;
 
