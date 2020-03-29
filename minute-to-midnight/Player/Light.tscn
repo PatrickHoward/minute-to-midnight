@@ -12,7 +12,10 @@ debug = true
 texture = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 0, -0.237823 )
+position = Vector2( -67.5428, -34.9605 )
 texture = ExtResource( 3 )
 color = Color( 0.913725, 0.807843, 0.682353, 1 )
 shadow_enabled = true
+shadow_gradient_length = 1.3
+shadow_filter = 3
+shadow_filter_smooth = 11.1
