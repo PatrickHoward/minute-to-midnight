@@ -53,8 +53,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="prefabs\Player\Light.cs" />
+    <Compile Include="prefabs\Player\PlayerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="scenes\levels\Level1\PlayerController.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
