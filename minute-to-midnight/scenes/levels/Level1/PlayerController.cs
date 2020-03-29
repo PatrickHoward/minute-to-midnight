@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class PlayerController : KinematicBody2D
 {
@@ -61,5 +60,10 @@ public class PlayerController : KinematicBody2D
 		Movement.y += Gravity;
 		
 		Movement = MoveAndSlide(Movement, Floor);
+	}
+
+	private void UpdateAnimation()
+	{
+		
 	}
 }
