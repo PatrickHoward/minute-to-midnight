@@ -114,7 +114,7 @@ public class Light : KinematicBody2D
         _particles = GetNode<Particles2D>("Particles2D");
         _timeRemaining = Duration;
 
-        _scaleLimits = Tuple.Create(0.1f, 1.0f);
+        _scaleLimits = Tuple.Create(MinScale, MaxScale);
         _energyLimits = Tuple.Create(MinEnergy, MaxEnergy);
 
         _lightStrength = new LightStrength(_energyLimits, _scaleLimits);
