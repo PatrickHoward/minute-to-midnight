@@ -1,13 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1-Platforms.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/levels/Level1/PlayerController.cs" type="Script" id=2]
+[ext_resource path="res://prefabs/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ambiance/castlebg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ambiance/Foreground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://resources/knight_a/idle/frame0000.png" type="Texture" id=5]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.8453, 21.0104 )
 
 [node name="Scene" type="Node2D"]
 
@@ -28,13 +24,8 @@ transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0.223529, 0.168627, 0.168627, 1 )
 
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2( 111.395, 264.371 )
-script = ExtResource( 2 )
-
-[node name="Sprite" type="Sprite" parent="Player"]
-texture = ExtResource( 5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( -13.0694, 9.90817 )
-shape = SubResource( 1 )
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 81.5679, 281.824 )
+JumpHeight = 250.0
+Speed = 100.0
+Gravity = 9.0
