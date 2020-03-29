@@ -3,7 +3,7 @@
 [ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/powerups/32x32_brazier_lit.png" type="Texture" id=2]
 [ext_resource path="res://resources/powerups/32x32_brazier_unlit.png" type="Texture" id=3]
-[ext_resource path="res://prefabs/brazier.cs" type="Script" id=4]
+[ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -51,7 +51,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 5.36131, 7.77531 )
 
-[node name="bazier" type="Node2D"]
+[node name="Brazier" type="Node2D"]
 script = ExtResource( 4 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -59,7 +59,6 @@ position = Vector2( 0.0638499, 0.0633364 )
 scale = Vector2( 0.522231, 0.478797 )
 frames = SubResource( 7 )
 animation = "lit"
-frame = 4
 speed_scale = 1.309
 playing = true
 

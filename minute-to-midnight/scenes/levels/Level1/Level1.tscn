@@ -4,7 +4,7 @@
 [ext_resource path="res://prefabs/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ambiance/castlebg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ambiance/Foreground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://prefabs/brazier.tscn" type="PackedScene" id=5]
+[ext_resource path="res://prefabs/Brazier.tscn" type="PackedScene" id=5]
 
 [node name="Scene" type="Node2D"]
 
@@ -29,4 +29,4 @@ color = Color( 0, 0, 0, 1 )
 position = Vector2( 107.023, 282.115 )
 
 [node name="bazier" parent="." instance=ExtResource( 5 )]
-position = Vector2( 425.947, 258.302 )
+position = Vector2( 370.225, 337.971 )
