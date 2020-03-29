@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Light.cs" type="Script" id=2]
 [ext_resource path="res://resources/light/light-rays.png" type="Texture" id=3]
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Light" type="KinematicBody2D"]
 script = ExtResource( 2 )
 debug = true
 
@@ -15,3 +15,4 @@ texture = ExtResource( 1 )
 position = Vector2( 0, -0.237823 )
 texture = ExtResource( 3 )
 color = Color( 0.913725, 0.807843, 0.682353, 1 )
+shadow_enabled = true
