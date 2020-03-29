@@ -62,23 +62,17 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 25.0f);
     private readonly float _maxTime = 60;
 
-    [Export]
-    public bool Debug = false;
+    [Export] public bool Debug = false;
 
-    [Export]
-    public int MaxSpeed = 10;
+    [Export] public int MaxSpeed = 10;
 
-    [Export]
-    public float Duration = 60.0f;
+    [Export] public float Duration = 60.0f;
 
-    [Export]
-    public bool DisableDimming = false;
+    [Export] public bool DisableDimming = false;
 
-    [Export]
-    public bool Flicker = true;
+    [Export] public bool Flicker = true;
 
-    [Signal]
-    public delegate void extinguished();
+    [Signal] public delegate void extinguished();
 
     private int _speedMultiplier = 100;
 
