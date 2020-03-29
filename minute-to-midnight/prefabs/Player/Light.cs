@@ -62,6 +62,8 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 25.0f);
     private readonly float _maxTime = 60;
 
+    [Export] public float MaxEnergy = 1.0f;
+    
     [Export] public bool Debug = false;
 
     [Export] public int MaxSpeed = 10;
