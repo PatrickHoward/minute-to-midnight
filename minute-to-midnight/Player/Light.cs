@@ -26,6 +26,9 @@ public class Light : KinematicBody2D
     [Export]
     public bool Flicker = true;
 
+    [Signal]
+    public delegate void extinguished();
+
     private int _speedMultiplier = 100;
 
     private float _timeRemaining;
@@ -89,6 +92,7 @@ public class Light : KinematicBody2D
         if (_timeRemaining == 0)
         {
             _timer.Stop();
+            EmitSignal(nameof(extinguished));
         }
     }
 }
