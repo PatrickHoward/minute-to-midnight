@@ -188,11 +188,11 @@ public class PlayerController : Node2D
                 break;
 
             case PlayerAnimationState.JumpStart:
-                _animations.Animation = "jump_start";
+                _animationPlayer.Play("jump_start");
                 break;
 
             case PlayerAnimationState.JumpLoop:
-                _animations.Animation = "jump_loop";
+                _animationPlayer.Play("jump_loop");
                 break;
 
             case PlayerAnimationState.Attack1:
