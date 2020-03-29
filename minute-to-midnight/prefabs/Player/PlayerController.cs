@@ -180,7 +180,7 @@ public class PlayerController : Node2D
                 break;
 
             case PlayerAnimationState.Run:
-                _animations.Animation = "run";
+                _animationPlayer.Play("run");
                 break;
 
             case PlayerAnimationState.Death:
