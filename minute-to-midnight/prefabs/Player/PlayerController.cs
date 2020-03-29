@@ -184,7 +184,7 @@ public class PlayerController : Node2D
                 break;
 
             case PlayerAnimationState.Death:
-                _animations.Animation = "death";
+                _animationPlayer.Play("death");
                 break;
 
             case PlayerAnimationState.JumpStart:

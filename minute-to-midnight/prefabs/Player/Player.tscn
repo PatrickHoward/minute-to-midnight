@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://prefabs/Player/PlayerController.cs" type="Script" id=1]
 [ext_resource path="res://resources/knight_a/knight_a_anim.tres" type="SpriteFrames" id=2]
@@ -7,6 +7,47 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "death"
+length = 10.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("PlayerCollider/Display/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 42, 43, 44, 45, 46, 47, 48, 49, 50, 51 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("PlayerCollider/Display/Light:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -28.6818, -8.02785 ), Vector2( -27.8065, -7.94031 ), Vector2( -35.5094, -7.59018 ), Vector2( -35.5094, -6.97745 ), Vector2( -30.8701, -7.94031 ), Vector2( -31.6579, 0.375317 ), Vector2( -27.6314, 13.5053 ), Vector2( -19.7535, 21.6458 ), Vector2( -15.6394, 30.7492 ), Vector2( -15.6394, 30.7492 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerCollider/Display/Light:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -114,10 +155,10 @@ shape = SubResource( 1 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
-frame = 161
+frame = 51
 
 [node name="Light" parent="PlayerCollider/Display" instance=ExtResource( 3 )]
-position = Vector2( -19.4909, -7.85278 )
+position = Vector2( -15.6394, 30.7492 )
 DisableDimming = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -128,6 +169,7 @@ smoothing_speed = 8.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 5.5
+anims/death = SubResource( 4 )
 anims/idle = SubResource( 2 )
 anims/run = SubResource( 3 )
 [connection signal="animation_finished" from="SpriteDISABLED" to="." method="_on_Sprite_animation_finished"]
