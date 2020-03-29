@@ -4,7 +4,6 @@
 [ext_resource path="res://prefabs/Player/Light.cs" type="Script" id=2]
 [ext_resource path="res://resources/light/light-rays.png" type="Texture" id=3]
 
-
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.143519, 0.734375, 0.902344 )
 colors = PoolColorArray( 1, 1, 1, 1, 0.907715, 0.677085, 0.294298, 0.666667, 0.956863, 0.0627451, 0.0627451, 0.4, 0.164063, 0.164063, 0.164063, 0.825 )
@@ -20,7 +19,7 @@ curve = SubResource( 3 )
 
 [sub_resource type="ParticlesMaterial" id=5]
 emission_shape = 1
-emission_sphere_radius = 13.0
+emission_sphere_radius = 8.0
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
@@ -31,7 +30,7 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 25.0
 angle = 45.0
-scale = 10.0
+scale = 5.0
 scale_random = 1.0
 scale_curve = SubResource( 4 )
 color_ramp = SubResource( 2 )

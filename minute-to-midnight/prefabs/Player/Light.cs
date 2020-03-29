@@ -56,9 +56,9 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.5f, 1.0f);
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
     private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 50.0f);
-    private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 10.0f);
+    private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 5.0f);
     private readonly Tuple<float, float> _particleScaleRandomnessLimits = Tuple.Create(0.0f, 1.0f);
-    private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 13.0f);
+    private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 8.0f);
     private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 25.0f);
     private readonly float _maxTime = 60;
 
