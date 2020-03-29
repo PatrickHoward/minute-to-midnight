@@ -2,17 +2,17 @@ using Godot;
 
 public class PlayerController : KinematicBody2D
 {
-	public float JumpHeight = 250;
-	public float Speed = 75;
-	public float Gravity = 9.8f;
+	[Export] public float JumpHeight = 250;
+	[Export] public float Speed = 75;
+	[Export] public float Gravity = 9.8f;
 	
-	private bool OnGround = false;
-	private Vector2 Movement;
-	private Vector2 Floor = new Vector2(0,-1);
+	private bool _onground = false;
+	private Vector2 _movement;
+	private Vector2 _floor = new Vector2(0,-1);
 	
 	public override void _Ready()
 	{
-		Movement = new Vector2();
+		_movement = new Vector2();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,23 +21,23 @@ public class PlayerController : KinematicBody2D
 		//Left and Right Movement
 		if(Input.IsActionPressed("Move-Left"))
 		{
-			Movement.x = -Speed;
+			_movement.x = -Speed;
 		}
 		else if(Input.IsActionPressed("Move-Right"))
 		{
-			Movement.x = Speed;
+			_movement.x = Speed;
 		}
 		else
 		{
-			Movement.x = 0;
+			_movement.x = 0;
 		}
 		
 		//Jump Action
 		if(Input.IsActionPressed("Jump"))
 		{
-			if(OnGround)
+			if(_onground)
 			{
-				Movement.y = -JumpHeight;
+				_movement.y = -JumpHeight;
 			}
 		}
 		
@@ -49,17 +49,17 @@ public class PlayerController : KinematicBody2D
 		//Check if on Floor
 		if(IsOnFloor())
 		{
-			OnGround = true;
+			_onground = true;
 		}
 		else
 		{
-			OnGround = false;
+			_onground = false;
 		}
 
 		//Constant weight of gravity pushes down on us all
-		Movement.y += Gravity;
+		_movement.y += Gravity;
 		
-		Movement = MoveAndSlide(Movement, Floor);
+		_movement = MoveAndSlide(_movement, _floor);
 	}
 
 	private void UpdateAnimation()
