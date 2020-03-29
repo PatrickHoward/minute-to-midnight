@@ -55,6 +55,12 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _scaleLimits = Tuple.Create(0.1f, 1.0f);
     private readonly Tuple<float, float> _energyLimits = Tuple.Create(0.0f, 1.0f);
     private readonly Tuple<float, float> _flickerLimits = Tuple.Create(1.0f, 1.1f);
+    private readonly Tuple<float, float> _particleInitialVelocityLimits = Tuple.Create(1.0f, 50.0f);
+    private readonly Tuple<int, int> _particleAmountLimits = Tuple.Create(100, 500);
+    private readonly Tuple<float, float> _particleScaleLimits = Tuple.Create(0.0f, 10.0f);
+    private readonly Tuple<float, float> _particleScaleRandomnessLimits = Tuple.Create(0.0f, 1.0f);
+    private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 13.0f);
+    private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 25.0f);
     private readonly float _maxTime = 60;
 
     [Export]
@@ -85,6 +91,8 @@ public class Light : KinematicBody2D
 
     private LightStrength _lightStrength;
 
+    private Particles2D _particles;
+
     private Vector2 GetInput()
     {
         return new Vector2(
@@ -93,10 +101,16 @@ public class Light : KinematicBody2D
         ).Normalized();
     }
 
+    public static float LinearModel(Tuple<float, float> limits, float percent)
+    {
+        return percent * (limits.Item2 - limits.Item1) + limits.Item1;
+    }
+
     public override void _Ready()
     {
         _timer = GetNode<Timer>("Timer");
         _lightSource = GetNode<Light2D>("Light2D");
+        _particles = GetNode<Particles2D>("Particles2D");
         _timeRemaining = Duration;
 
         _lightStrength = new LightStrength(_energyLimits, _scaleLimits);
@@ -128,13 +142,13 @@ public class Light : KinematicBody2D
 
         if (!DisableDimming)
         {
-            GD.Print("DIMMING");
             _timeRemaining = Mathf.Max(_timeRemaining - _timer.WaitTime, 0);
             var percentTimeRemaining = _timeRemaining / Duration;
 
-            _lightStrength.Energy = percentTimeRemaining * (_energyLimits.Item2 - _energyLimits.Item1) + _energyLimits.Item1;
-            _lightStrength.Scale = percentTimeRemaining * (_scaleLimits.Item2 - _scaleLimits.Item1) + _scaleLimits.Item1;
+            _lightStrength.Energy = LinearModel(_energyLimits, percentTimeRemaining);
+            _lightStrength.Scale = LinearModel(_scaleLimits, percentTimeRemaining);
 
+            // NOTE: Remove after debugging
             GD.Print(percentTimeRemaining);
         }
 
