@@ -271,9 +271,11 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
+frame = 51
 
 [node name="Light" parent="Display" instance=ExtResource( 3 )]
-position = Vector2( -14.5198, -19.4765 )
+position = Vector2( 2.60567, 16.2555 )
+>>>>>>> master
 Duration = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -284,4 +286,5 @@ anims/idle = SubResource( 4 )
 anims/jump_loop = SubResource( 5 )
 anims/jump_start = SubResource( 6 )
 anims/run = SubResource( 7 )
+
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]
