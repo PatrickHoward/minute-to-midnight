@@ -57,6 +57,7 @@
     <Compile Include="prefabs\Player\Light.cs" />
     <Compile Include="prefabs\Player\PlayerController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="scenes\menu\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\ambiance" />
