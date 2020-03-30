@@ -21,10 +21,6 @@ follow_viewport_enable = true
 scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2( -1.16632, 110.804 )
-color = Color( 0, 0, 0, 1 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 107.023, 282.115 )
 
@@ -56,3 +52,7 @@ position = Vector2( 1092.93, 290.384 )
 
 [node name="bazier6" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1463.36, 276.135 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2( -1.16632, 110.804 )
+color = Color( 0, 0, 0, 1 )

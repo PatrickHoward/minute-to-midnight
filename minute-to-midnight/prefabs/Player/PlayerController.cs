@@ -42,8 +42,12 @@ public class PlayerController : KinematicBody2D
 
     private Node2D _display;
 
+    private PackedScene _gameOverScreen;
+    
     public override void _Ready()
     {
+        _gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
+
         _movement = new Vector2();
 
         _display = GetNode<Node2D>("Display");
@@ -239,5 +243,7 @@ public class PlayerController : KinematicBody2D
         _animationState = PlayerAnimationState.Death;
         UpdatePlayerState();
         UpdateAnimation();
+        
+        AddChild(_gameOverScreen.Instance());
     }
 }

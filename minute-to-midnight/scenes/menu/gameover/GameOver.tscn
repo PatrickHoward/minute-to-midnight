@@ -1,0 +1,134 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scenes/menu/gameover/ContinueButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://scenes/menu/gameover/MainMenuButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/menu/gameover/GameOver.cs" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 18
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Show_Game_Over"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Header/Continue Buttion:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 4.4, 5.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Header/MainMenuButton:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 5.1, 5.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Header/Label:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2.9, 3.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Header/Label2:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3.6, 4.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="GameOverMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="Header"]
+self_modulate = Color( 1, 1, 1, 0 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -328.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.611765, 0, 0, 1 )
+text = "Game Over"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Header"]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.013
+margin_left = 264.0
+margin_top = 168.0
+margin_right = -256.0
+margin_bottom = -375.8
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "The light has been extinguished"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Continue Buttion" parent="Header" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 352.0
+margin_right = -448.0
+margin_bottom = -216.0
+
+[node name="MainMenuButton" parent="Header" instance=ExtResource( 3 )]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = 400.0
+margin_right = -448.0
+margin_bottom = -168.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Show_Game_Over = SubResource( 1 )
+[connection signal="tree_entered" from="." to="." method="_on_GameOverMenu_tree_entered"]
+[connection signal="pressed" from="Header/Continue Buttion" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Header/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
