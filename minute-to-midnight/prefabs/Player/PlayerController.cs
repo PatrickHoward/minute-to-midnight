@@ -71,7 +71,11 @@ public class PlayerController : KinematicBody2D
     {
         if (_state == PlayerState.Dead)
         {
-            ApplyGravity();
+            if (!IsOnFloor())
+            {
+                ApplyGravity();
+            }
+            
             return;
         }
         
@@ -142,7 +146,6 @@ public class PlayerController : KinematicBody2D
     private void ApplyGravity()
     {
         _movement.y += Gravity;
-
         _movement = MoveAndSlide(_movement, _floor);
     }
 
@@ -152,22 +155,18 @@ public class PlayerController : KinematicBody2D
         {
             case PlayerState.Idle:
                 _animationState = PlayerAnimationState.Idle;
-                Console.WriteLine("Change to Idiling");
                 break;
 
             case PlayerState.Falling:
                 _animationState = PlayerAnimationState.FallLoop;
-                Console.WriteLine("Change to Falling");
                 break;
 
             case PlayerState.Attacking:
                 _animationState = PlayerAnimationState.Attack1;
-                Console.WriteLine("Change to attacking");
                 break;
 
             case PlayerState.Runnning:
                 _animationState = PlayerAnimationState.Run;
-                Console.WriteLine("Change to Running");
                 break;
 
             case PlayerState.Jumping:
@@ -176,7 +175,6 @@ public class PlayerController : KinematicBody2D
                 {
                     _animationState = PlayerAnimationState.JumpStart;
                 }
-                Console.WriteLine("Change to Jumping");
                 break;
         }
     }
