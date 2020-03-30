@@ -22,6 +22,9 @@
       </e>
       <e p="scenes" t="Include">
         <e p="ambiance" t="Include" />
+        <e p="menu" t="Include">
+          <e p="MainMenu.cs" t="Include" />
+        </e>
       </e>
     </e>
   </component>
