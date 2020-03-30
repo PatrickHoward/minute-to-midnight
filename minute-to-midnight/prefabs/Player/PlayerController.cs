@@ -22,6 +22,7 @@ public enum PlayerState
     Jumping,
     Falling,
     Attacking,
+    Dead
 }
 
 public class PlayerController : KinematicBody2D
@@ -56,6 +57,11 @@ public class PlayerController : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        if (_state == PlayerState.Dead)
+        {
+            return;
+        }
+        
         UpdatePlayerState();
         UpdateAnimation();
     }
@@ -63,6 +69,12 @@ public class PlayerController : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
+        if (_state == PlayerState.Dead)
+        {
+            ApplyGravity();
+            return;
+        }
+        
         //Left and Right Movement
         if (Input.IsActionPressed("Move-Left"))
         {
@@ -109,9 +121,7 @@ public class PlayerController : KinematicBody2D
         }
         
         //Constant weight of gravity pushes down on us all
-        _movement.y += Gravity;
-
-        _movement = MoveAndSlide(_movement, _floor);
+        ApplyGravity();
 
         if (_movement == Vector2.Zero && _state != PlayerState.Attacking)
         {
@@ -127,6 +137,13 @@ public class PlayerController : KinematicBody2D
             _state = PlayerState.Idle;
         }
 
+    }
+
+    private void ApplyGravity()
+    {
+        _movement.y += Gravity;
+
+        _movement = MoveAndSlide(_movement, _floor);
     }
 
     private void UpdatePlayerState()
@@ -219,5 +236,13 @@ public class PlayerController : KinematicBody2D
         {
             _animationState = PlayerAnimationState.JumpLoop;
         }
+    }
+
+    public void _on_Light_extinguished()
+    {
+        _state = PlayerState.Dead;
+        _animationState = PlayerAnimationState.Death;
+        UpdatePlayerState();
+        UpdateAnimation();
     }
 }
