@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://prefabs/Player/PlayerController.cs" type="Script" id=1]
+[ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resources/player/knight_a.png" type="Texture" id=4]
 

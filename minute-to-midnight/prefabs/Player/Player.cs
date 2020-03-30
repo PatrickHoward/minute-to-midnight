@@ -25,12 +25,12 @@ public enum PlayerState
     Dead
 }
 
-public class PlayerController : KinematicBody2D
+public class Player : KinematicBody2D
 {
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
-    
+
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
 
@@ -43,7 +43,7 @@ public class PlayerController : KinematicBody2D
     private Node2D _display;
 
     private PackedScene _gameOverScreen;
-    
+
     public override void _Ready()
     {
         _gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
@@ -62,7 +62,7 @@ public class PlayerController : KinematicBody2D
         {
             return;
         }
-        
+
         UpdatePlayerState();
         UpdateAnimation();
     }
@@ -76,10 +76,10 @@ public class PlayerController : KinematicBody2D
             {
                 ApplyGravity();
             }
-            
+
             return;
         }
-        
+
         //Left and Right Movement
         if (Input.IsActionPressed("Move-Left"))
         {
@@ -124,7 +124,7 @@ public class PlayerController : KinematicBody2D
         {
             _state = PlayerState.Idle;
         }
-        
+
         //Constant weight of gravity pushes down on us all
         ApplyGravity();
 
@@ -243,7 +243,7 @@ public class PlayerController : KinematicBody2D
         _animationState = PlayerAnimationState.Death;
         UpdatePlayerState();
         UpdateAnimation();
-        
+
         AddChild(_gameOverScreen.Instance());
     }
 }
