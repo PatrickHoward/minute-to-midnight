@@ -33,14 +33,8 @@ position = Vector2( 107.023, 282.115 )
 [node name="bazier" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 370.225, 337.971 )
 
-[node name="bazier2" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 664.167, 290.724 )
-
 [node name="bazier3" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 792.899, 291.746 )
-
-[node name="bazier4" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 968.629, 306.731 )
 
 [node name="bazier5" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1092.93, 290.384 )

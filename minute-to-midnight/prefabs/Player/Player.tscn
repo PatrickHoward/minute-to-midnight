@@ -9,16 +9,16 @@ extents = Vector2( 19.8453, 21.0104 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack_1"
-length = 14.0
-step = 0.25
+length = 2.85
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Display/Sprite:frame")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 1.35, 1.65, 1.95, 2.1, 2.25, 2.4, 2.55, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
@@ -26,23 +26,23 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/path = NodePath("Display/Light:position")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 5.25, 5.5, 5.75, 6, 8, 11, 12, 13 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.95, 2.4, 2.55, 2.7, 2.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2.21914, 1 ),
 "update": 0,
-"values": [ Vector2( -28.5653, -8.05217 ), Vector2( -29.9228, -10.9934 ), Vector2( -32.7509, -13.1427 ), Vector2( -35.0133, -14.6133 ), Vector2( -35.6921, -15.9708 ), Vector2( -28.4521, -22.0795 ), Vector2( -2.20747, -27.3963 ), Vector2( 17.2498, -16.8758 ), Vector2( 25.8472, -4.54533 ), Vector2( 28.6753, 11.9707 ), Vector2( 27.3178, 14.7988 ), Vector2( 24.8574, 14.0069 ), Vector2( 15.8923, 11.1789 ), Vector2( -4.35682, 0.318985 ) ]
+"values": [ Vector2( -14.5198, -19.4765 ), Vector2( -15.4291, -21.7358 ), Vector2( -18.7687, -26.1018 ), Vector2( -21.0311, -27.2314 ), Vector2( -22.0509, -28.4184 ), Vector2( -6.79674, -33.504 ), Vector2( 10.7516, -32.6822 ), Vector2( 27.9922, -16.5348 ), Vector2( 34.5435, -4.03379 ), Vector2( 40.9524, -1.32944 ), Vector2( 39.0833, 4.05638 ), Vector2( 39.0101, 3.09396 ), Vector2( 29.3629, 1.28904 ), Vector2( 9.96641, -9.74138 ), Vector2( -20.5557, -18.9492 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Display/Light:rotation_degrees")
 tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/loop_wrap = false
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 5.5, 6, 6.5, 7, 7.5, 8, 9, 10, 11, 12, 13 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45, 0.6, 0.75, 1.05, 1.35, 1.5, 1.65, 1.8, 1.95, 2.1, 2.25, 2.4, 2.55, 2.7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
@@ -74,7 +74,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -28.6818, -8.02785 ), Vector2( -27.8065, -7.94031 ), Vector2( -35.5094, -7.59018 ), Vector2( -35.5094, -6.97745 ), Vector2( -30.8701, -7.94031 ), Vector2( -31.6579, 0.375317 ), Vector2( -27.6314, 13.5053 ), Vector2( -19.7535, 21.6458 ), Vector2( -15.6394, 30.7492 ), Vector2( -15.6394, 30.7492 ) ]
+"values": [ Vector2( -14.8701, -20.8165 ), Vector2( -14.6769, -23.2866 ), Vector2( -21.3567, -21.5724 ), Vector2( -22.1916, -20.2128 ), Vector2( -15.3297, -18.956 ), Vector2( -17.8998, -11.5921 ), Vector2( -15.8659, 3.44494 ), Vector2( -8.32901, 12.2675 ), Vector2( -7.28418, 18.1311 ), Vector2( 2.60567, 16.2555 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Display/Light:rotation_degrees")
@@ -102,7 +102,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1, 2, 3, 4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -28.8405, -7.74532 ), Vector2( -28.6143, -8.31093 ), Vector2( -35.7977, -8.70686 ), Vector2( -36.005, -7.25511 ), Vector2( -33.6672, -6.14273 ) ]
+"values": [ Vector2( -20.3148, -19.5108 ), Vector2( -13.7795, -22.4636 ), Vector2( -22.164, -19.2928 ), Vector2( -21.095, -20.0499 ), Vector2( -20.7049, -19.7804 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Display/Sprite:frame")
@@ -155,7 +155,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -21.2419, -8.98047 ), Vector2( -19.955, -8.20833 ) ]
+"values": [ Vector2( -7.94175, -20.2344 ), Vector2( -6.91867, -20.5755 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Display/Light:rotation_degrees")
@@ -195,7 +195,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 1, 2, 3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -20.9979, -9.73711 ), Vector2( -20.7597, -7.7128 ), Vector2( -18.6164, -7.95095 ), Vector2( -19.569, -7.95095 ) ]
+"values": [ Vector2( -7.52724, -21.5026 ), Vector2( -7.11853, -19.3078 ), Vector2( -5.84111, -23.3487 ), Vector2( -6.95091, -24.1498 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Display/Light:rotation_degrees")
@@ -231,10 +231,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 2, 3, 3.98, 5, 6.02, 7.01 ),
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -21.3178, -9.7872 ), Vector2( -19.8133, -8.92746 ), Vector2( -18.6311, -8.92746 ), Vector2( -20.2431, -8.60505 ), Vector2( -19.3834, -8.81999 ), Vector2( -20.2431, -7.74532 ), Vector2( -18.9535, -8.28265 ), Vector2( -19.4909, -7.85278 ) ]
+"values": [ Vector2( -6.09039, -22.7578 ), Vector2( -6.7156, -19.5748 ), Vector2( -5.63568, -22.7862 ), Vector2( -5.63568, -22.7862 ), Vector2( -8.87546, -21.2515 ), Vector2( -7.34083, -21.2515 ), Vector2( -5.29465, -21.081 ), Vector2( -5.29465, -21.081 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("Display/Light:rotation_degrees")
@@ -262,25 +262,27 @@ smoothing_enabled = true
 smoothing_speed = 8.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -13.0694, 9.90817 )
 shape = SubResource( 1 )
 
 [node name="Display" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Display"]
+position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
+frame = 161
 
 [node name="Light" parent="Display" instance=ExtResource( 3 )]
-position = Vector2( -28.5653, -8.05217 )
+position = Vector2( -5.29465, -21.081 )
 Duration = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 5.5
+playback_speed = 7.0
 anims/attack_1 = SubResource( 2 )
 anims/death = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/jump_loop = SubResource( 5 )
 anims/jump_start = SubResource( 6 )
 anims/run = SubResource( 7 )
+[connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]

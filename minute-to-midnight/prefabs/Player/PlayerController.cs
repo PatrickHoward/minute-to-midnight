@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Godot;
 
 public enum PlayerAnimationState
@@ -20,6 +22,7 @@ public enum PlayerState
     Jumping,
     Falling,
     Attacking,
+    Dead
 }
 
 public class PlayerController : KinematicBody2D
@@ -27,9 +30,7 @@ public class PlayerController : KinematicBody2D
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
-
-    private bool _attacking = false;
-
+    
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
 
@@ -53,6 +54,11 @@ public class PlayerController : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        if (_state == PlayerState.Dead)
+        {
+            return;
+        }
+        
         UpdatePlayerState();
         UpdateAnimation();
     }
@@ -60,10 +66,20 @@ public class PlayerController : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
+        if (_state == PlayerState.Dead)
+        {
+            if (!IsOnFloor())
+            {
+                ApplyGravity();
+            }
+            
+            return;
+        }
+        
         //Left and Right Movement
         if (Input.IsActionPressed("Move-Left"))
         {
-            if (IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state != PlayerState.Attacking)
             {
                 _state = PlayerState.Runnning;
             }
@@ -72,7 +88,7 @@ public class PlayerController : KinematicBody2D
         }
         else if (Input.IsActionPressed("Move-Right"))
         {
-            if (IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state != PlayerState.Attacking)
             {
                 _state = PlayerState.Runnning;
             }
@@ -100,10 +116,13 @@ public class PlayerController : KinematicBody2D
             //Action button 
         }
 
+        if (IsOnFloor() && _state == PlayerState.Jumping)
+        {
+            _state = PlayerState.Idle;
+        }
+        
         //Constant weight of gravity pushes down on us all
-        _movement.y += Gravity;
-
-        _movement = MoveAndSlide(_movement, _floor);
+        ApplyGravity();
 
         if (_movement == Vector2.Zero && _state != PlayerState.Attacking)
         {
@@ -114,6 +133,17 @@ public class PlayerController : KinematicBody2D
             _state = PlayerState.Falling;
         }
 
+        if (_animationPlayer.CurrentAnimation == "" && _state == PlayerState.Attacking)
+        {
+            _state = PlayerState.Idle;
+        }
+
+    }
+
+    private void ApplyGravity()
+    {
+        _movement.y += Gravity;
+        _movement = MoveAndSlide(_movement, _floor);
     }
 
     private void UpdatePlayerState()
@@ -142,7 +172,6 @@ public class PlayerController : KinematicBody2D
                 {
                     _animationState = PlayerAnimationState.JumpStart;
                 }
-
                 break;
         }
     }
@@ -160,7 +189,7 @@ public class PlayerController : KinematicBody2D
 
         if (_animationState == PlayerAnimationState.JumpLoop && IsOnFloor())
         {
-            _animationState = PlayerAnimationState.Run;
+            _animationState = PlayerAnimationState.Idle;
         }
 
         switch (_animationState)
@@ -181,11 +210,16 @@ public class PlayerController : KinematicBody2D
                 _animationPlayer.Play("jump_start");
                 break;
 
+            case PlayerAnimationState.FallLoop:
             case PlayerAnimationState.JumpLoop:
                 _animationPlayer.Play("jump_loop");
                 break;
 
             case PlayerAnimationState.Attack1:
+                if (_animationPlayer.AssignedAnimation == "attack_1")
+                {
+                    break;
+                }
                 _animationPlayer.Play("attack_1");
                 break;
         }
@@ -193,18 +227,17 @@ public class PlayerController : KinematicBody2D
 
     public void _on_Sprite_animation_finished()
     {
-        if (_movement == Vector2.Zero && IsOnFloor())
-        {
-            _state = PlayerState.Idle;
-        }
-        else if (IsOnFloor())
-        {
-            _state = PlayerState.Runnning;
-        }
-
         if (_state == PlayerState.Jumping && _animationState == PlayerAnimationState.JumpStart)
         {
             _animationState = PlayerAnimationState.JumpLoop;
         }
+    }
+
+    public void _on_Light_extinguished()
+    {
+        _state = PlayerState.Dead;
+        _animationState = PlayerAnimationState.Death;
+        UpdatePlayerState();
+        UpdateAnimation();
     }
 }
