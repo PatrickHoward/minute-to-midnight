@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://prefabs/Player/PlayerController.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=3]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 15.3534, 21.3073 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack_1"
@@ -46,6 +49,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.75 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "PerformMeleeAttack"
+} ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -271,12 +288,16 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 4 )
 vframes = 12
 hframes = 14
-frame = 51
+frame = 5
 
 [node name="Light" parent="Display" instance=ExtResource( 3 )]
-position = Vector2( 2.60567, 16.2555 )
->>>>>>> master
-Duration = 15.0
+position = Vector2( -6.79674, -33.504 )
+
+[node name="DamageArea" type="Area2D" parent="Display"]
+
+[node name="DamageAreaShape" type="CollisionShape2D" parent="Display/DamageArea"]
+position = Vector2( 35.1261, -0.34103 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 7.0
@@ -286,5 +307,4 @@ anims/idle = SubResource( 4 )
 anims/jump_loop = SubResource( 5 )
 anims/jump_start = SubResource( 6 )
 anims/run = SubResource( 7 )
-
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]

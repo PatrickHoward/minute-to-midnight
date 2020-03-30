@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Godot;
+using Godot.Collections;
 
 public enum PlayerAnimationState
 {
@@ -41,6 +42,7 @@ public class PlayerController : KinematicBody2D
     private AnimationPlayer _animationPlayer;
 
     private Node2D _display;
+    private Area2D _damageArea;
 
     private PackedScene _gameOverScreen;
     
@@ -51,7 +53,7 @@ public class PlayerController : KinematicBody2D
         _movement = new Vector2();
 
         _display = GetNode<Node2D>("Display");
-
+        _damageArea = GetNode<Area2D>("Display/DamageArea");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("idle");
     }
@@ -63,6 +65,11 @@ public class PlayerController : KinematicBody2D
             return;
         }
         
+        // if (_state == PlayerState.Attacking)
+        // {
+        //     //PerformMeleeAttack();    
+        // }
+
         UpdatePlayerState();
         UpdateAnimation();
     }
@@ -226,6 +233,22 @@ public class PlayerController : KinematicBody2D
                 }
                 _animationPlayer.Play("attack_1");
                 break;
+        }
+    }
+
+    public void PerformMeleeAttack()
+    {
+        var bodies = _damageArea.GetOverlappingBodies();
+        
+        if (bodies.Count == 0)
+        {
+            return;
+        }
+        
+        foreach (var body in bodies)
+        {
+            var bodyAsNode = (Node2D) body;
+            bodyAsNode.Call("DealDamageToEnemy");
         }
     }
 

@@ -2,7 +2,7 @@ using System;
 using Godot;
 using Array = Godot.Collections.Array;
 
-public enum EnemyAnimationState
+public enum GhostAnimationState
 {
 	Idle,
 	Walk,
@@ -10,7 +10,7 @@ public enum EnemyAnimationState
 	Attack1
 }
 
-public enum EnemyState
+public enum GhostState
 {
 	Idle,
 	Walking,
@@ -18,7 +18,7 @@ public enum EnemyState
 	Dead
 }
 
-public class EnemyBehavior00 : KinematicBody2D
+public class GhostBehavior : KinematicBody2D
 {
 	[Export] public float Speed = 50;
 	[Export] public float AttackSpeed = 100;
@@ -27,23 +27,20 @@ public class EnemyBehavior00 : KinematicBody2D
 	[Export] public int HitsToDestroy = 1;
 	
 	private int _changedirection = -1;
-	
-	private bool _attacking = false;
-	private bool _hitwall = false;
-	
+
 	private Vector2 _movement;
 	private Vector2 _floor = new Vector2(0,-1);
 
-	private EnemyState _state;
+	private GhostState _state;
 	
-	private EnemyAnimationState _animationState;
+	private GhostAnimationState _animationState;
 	private AnimatedSprite _animations;
 	private Node2D _display;
 	
 	private RayCast2D _groundCheck;
 	private RayCast2D _attackCheck;
-	private Area2D _damageArea;
-	
+	private RayCast2D _behindCheck;
+
 	public override void _Ready()
 	{
 		_movement = new Vector2();
@@ -52,15 +49,19 @@ public class EnemyBehavior00 : KinematicBody2D
 		_display = GetNode<Node2D>("Display");
 		
 		_groundCheck = GetNode<RayCast2D>("GroundCheck");
+		
 		_attackCheck = GetNode<RayCast2D>("Display/AttackCheck");
-		_damageArea = GetNode<Area2D>("DamageArea");
+		_behindCheck = GetNode<RayCast2D>("Display/BehindCheck");
 	}
 
 	public override void _Process(float delta)
 	{
 		if (HitsToDestroy <= 0)
 		{
-			_state = EnemyState.Dead;
+			_state = GhostState.Dead;
+			
+			GetNodeOrNull<CollisionShape2D>("AreaShape2D")?.QueueFree();
+			GetNodeOrNull<Area2D>("DamageArea")?.QueueFree();
 		}
 		
 		UpdatePlayerState();
@@ -70,61 +71,72 @@ public class EnemyBehavior00 : KinematicBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
-		if (_state == EnemyState.Idle)
-		{
-			_state = EnemyState.Walking;
-		}
-
-		if (_state == EnemyState.Dead)
+		if (_state == GhostState.Dead)
 		{
 			return;
 		}
-		
-		if(IsOnWall() || !_groundCheck.IsColliding())
+
+		if (_attackCheck.IsColliding()) // If the player is in front of the ghost.
 		{
-			Speed *= _changedirection;
-			_groundCheck.Position *= new Vector2(-1,1);
+			var body = _attackCheck.GetCollider();
+			if (body != null)
+			{
+				var bodyAsNode = (Node2D) body;
+				if (bodyAsNode.Name == "Player")
+				{
+					_state = GhostState.Attacking;
+				}
+			}
+		}
+		else if (_behindCheck.IsColliding()) // If the player is behind the ghost.
+		{
+			var body = _behindCheck.GetCollider();
+			if (body != null)
+			{
+				var bodyAsNode = (Node2D) body;
+				if (bodyAsNode.Name == "Player")
+				{
+					_display.Scale = new Vector2(-1, 1);
+					_state = GhostState.Attacking;
+					
+					Speed *= _changedirection;
+					AttackSpeed *= _changedirection;
+					
+					_groundCheck.Position *= new Vector2(-1, 1);
+
+				}
+			}
 		}
 
-		if (_attackCheck.IsColliding())
+		if (IsOnWall() || !_groundCheck.IsColliding())
 		{
-			var body = _attackCheck.GetCollider().GetClass();
+			Speed *= _changedirection;
+			AttackSpeed *= _changedirection;
+			
+			_groundCheck.Position *= new Vector2(-1, 1);
 		}
-		
-		
-		_movement.x = _attacking ? AttackSpeed : Speed;
+
+		_movement.x = (_state == GhostState.Attacking) ? AttackSpeed : Speed;
 		
 		_movement.y = Gravity;
 		
 		_movement = MoveAndSlide(_movement, _floor);
-
-		if (_movement == Vector2.Zero && _state != EnemyState.Attacking)
-		{
-			_state = EnemyState.Idle;
-		}		
 	}
 	
 	private void UpdatePlayerState()
 	{
 		switch (_state)
 		{
-			case EnemyState.Idle:
-				_animationState = EnemyAnimationState.Idle;
-				_attacking = false;
+			case GhostState.Attacking:
+				_animationState = GhostAnimationState.Attack1;
 				break;
 			
-			case EnemyState.Attacking:
-				_animationState = EnemyAnimationState.Attack1;
-				_attacking = true;
+			case GhostState.Walking:
+				_animationState = GhostAnimationState.Walk;
 				break;
 			
-			case EnemyState.Walking:
-				_animationState = EnemyAnimationState.Walk;
-				_attacking = false;
-				break;
-			
-			case EnemyState.Dead :
-				_animationState = EnemyAnimationState.Death;
+			case GhostState.Dead :
+				_animationState = GhostAnimationState.Death;
 				break;
 		}
 	}
@@ -142,19 +154,15 @@ public class EnemyBehavior00 : KinematicBody2D
 
 		switch (_animationState)
 		{
-			case EnemyAnimationState.Idle:
-				_animations.Animation = "idle";
-				break;
-			
-			case EnemyAnimationState.Death:
+			case GhostAnimationState.Death:
 				_animations.Animation = "death";
 				break;
 			
-			case EnemyAnimationState.Attack1:
+			case GhostAnimationState.Attack1:
 				_animations.Animation = "attack_1";
 				break;
 				
-			case EnemyAnimationState.Walk:
+			case GhostAnimationState.Walk:
 				_animations.Animation = "walking";
 				break;
 		}
@@ -162,7 +170,6 @@ public class EnemyBehavior00 : KinematicBody2D
 
 	public void DealDamageToEnemy()
 	{
-		Console.WriteLine("Dealt damage!");
 		--HitsToDestroy;
 	}
 
@@ -170,19 +177,22 @@ public class EnemyBehavior00 : KinematicBody2D
 	{
 		if (_movement == Vector2.Zero && IsOnFloor())
 		{
-			_state = EnemyState.Idle;
+			_state = GhostState.Walking;
 		}
-		
 		else if (IsOnFloor())
 		{
-			_state = EnemyState.Walking;
+			_state = GhostState.Walking;
 		}
 
-		if (_state == EnemyState.Dead || _animationState == EnemyAnimationState.Death)
+		if (_state == GhostState.Attacking)
+		{
+			_state = GhostState.Walking;
+		}
+
+		if (_state == GhostState.Dead || _animationState == GhostAnimationState.Death)
 		{
 			QueueFree();
 		}
-		
 	}
 
 	public void _on_DamageArea_body_entered(Node body)
