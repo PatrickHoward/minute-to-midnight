@@ -347,10 +347,10 @@ __meta__ = {
 }
 
 [node name="Exit Game Label" type="Label" parent="Text"]
-margin_left = 262.0
-margin_top = 230.0
-margin_right = 378.024
-margin_bottom = 259.916
+margin_left = 254.0
+margin_top = 227.389
+margin_right = 370.024
+margin_bottom = 257.305
 custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 0.631373, 0.631373, 0.631373, 1 )
 text = "Exit Game"
