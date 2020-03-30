@@ -60,7 +60,7 @@ public class Light : KinematicBody2D
     private readonly Tuple<float, float> _particleScaleRandomnessLimits = Tuple.Create(0.0f, 1.0f);
     private readonly Tuple<float, float> _particlesEmissionSphereRadiusLimits = Tuple.Create(1.0f, 3.0f);
     private readonly Tuple<float, float> _particleLinearAccelerationLimits = Tuple.Create(0.0f, 20.0f);
-    private readonly float _maxTime = 60;
+    private const float Maxtime = 60;
 
     [Export] public float MaxEnergy = 1.0f;
     
@@ -173,7 +173,7 @@ public class Light : KinematicBody2D
     {
         if (!DisableDimming)
         {
-            _timeRemaining = Mathf.Min(time + _timeRemaining, 60);
+            _timeRemaining = Mathf.Min(time + _timeRemaining, Maxtime);
         }
     }
 
@@ -181,7 +181,7 @@ public class Light : KinematicBody2D
     {
         if (!DisableDimming)
         {
-            _timeRemaining -= time;
+            _timeRemaining -= Mathf.Clamp(time, 0, Maxtime);
         }
     }
 }

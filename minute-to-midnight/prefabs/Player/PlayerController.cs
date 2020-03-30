@@ -30,13 +30,10 @@ public class PlayerController : KinematicBody2D
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
-
-    private bool _attacking = false;
-
+    
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
 
-    private PlayerState _previousState;
     private PlayerState _state;
 
     private PlayerAnimationState _animationState;
