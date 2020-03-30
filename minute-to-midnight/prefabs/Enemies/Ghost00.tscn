@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://prefabs/Enemies/Ghost.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://prefabs/Enemies/EnemyBehavior00.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Enemy00" type="KinematicBody2D"]
+position = Vector2( 185.388, 192.755 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Display" type="Node2D" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Display"]
+frames = ExtResource( 1 )
+animation = "walking"
+frame = 5
+playing = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 9.87627, -8.17346 )
+enabled = true
+cast_to = Vector2( 0, 20 )
