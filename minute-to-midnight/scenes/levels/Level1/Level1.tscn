@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/ambiance/castlebg.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ambiance/Foreground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://prefabs/Brazier.tscn" type="PackedScene" id=5]
-[ext_resource path="res://prefabs/Enemies/Ghost00.tscn" type="PackedScene" id=6]
+[ext_resource path="res://prefabs/Enemies/Ghost.tscn" type="PackedScene" id=6]
 
 [node name="Scene" type="Node2D"]
 

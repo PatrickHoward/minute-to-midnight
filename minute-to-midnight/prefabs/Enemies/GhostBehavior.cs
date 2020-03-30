@@ -18,39 +18,39 @@ public enum EnemyState
 	Dead
 }
 
-public class EnemyBehavior00 : KinematicBody2D
+public class GhostBehavior : KinematicBody2D
 {
 	[Export] public float Speed = 50;
 	[Export] public float AttackSpeed = 100;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 5f;
 	[Export] public int HitsToDestroy = 1;
-	
+
 	private int _changedirection = -1;
-	
+
 	private bool _attacking = false;
 	private bool _hitwall = false;
-	
+
 	private Vector2 _movement;
-	private Vector2 _floor = new Vector2(0,-1);
+	private Vector2 _floor = new Vector2(0, -1);
 
 	private EnemyState _state;
-	
+
 	private EnemyAnimationState _animationState;
 	private AnimatedSprite _animations;
 	private Node2D _display;
-	
+
 	private RayCast2D _groundCheck;
 	private RayCast2D _attackCheck;
 	private Area2D _damageArea;
-	
+
 	public override void _Ready()
 	{
 		_movement = new Vector2();
 		_animations = GetNode<AnimatedSprite>("Display/AnimatedSprite");
 
 		_display = GetNode<Node2D>("Display");
-		
+
 		_groundCheck = GetNode<RayCast2D>("GroundCheck");
 		_attackCheck = GetNode<RayCast2D>("Display/AttackCheck");
 		_damageArea = GetNode<Area2D>("DamageArea");
@@ -62,11 +62,11 @@ public class EnemyBehavior00 : KinematicBody2D
 		{
 			_state = EnemyState.Dead;
 		}
-		
+
 		UpdatePlayerState();
 		UpdateAnimation();
 	}
-	
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
@@ -79,31 +79,30 @@ public class EnemyBehavior00 : KinematicBody2D
 		{
 			return;
 		}
-		
-		if(IsOnWall() || !_groundCheck.IsColliding())
+
+		if (IsOnWall() || !_groundCheck.IsColliding())
 		{
 			Speed *= _changedirection;
-			_groundCheck.Position *= new Vector2(-1,1);
+			_groundCheck.Position *= new Vector2(-1, 1);
 		}
 
 		if (_attackCheck.IsColliding())
 		{
 			var body = _attackCheck.GetCollider().GetClass();
 		}
-		
-		
+
 		_movement.x = _attacking ? AttackSpeed : Speed;
-		
+
 		_movement.y = Gravity;
-		
+
 		_movement = MoveAndSlide(_movement, _floor);
 
 		if (_movement == Vector2.Zero && _state != EnemyState.Attacking)
 		{
 			_state = EnemyState.Idle;
-		}		
+		}
 	}
-	
+
 	private void UpdatePlayerState()
 	{
 		switch (_state)
@@ -112,18 +111,18 @@ public class EnemyBehavior00 : KinematicBody2D
 				_animationState = EnemyAnimationState.Idle;
 				_attacking = false;
 				break;
-			
+
 			case EnemyState.Attacking:
 				_animationState = EnemyAnimationState.Attack1;
 				_attacking = true;
 				break;
-			
+
 			case EnemyState.Walking:
 				_animationState = EnemyAnimationState.Walk;
 				_attacking = false;
 				break;
-			
-			case EnemyState.Dead :
+
+			case EnemyState.Dead:
 				_animationState = EnemyAnimationState.Death;
 				break;
 		}
@@ -145,15 +144,15 @@ public class EnemyBehavior00 : KinematicBody2D
 			case EnemyAnimationState.Idle:
 				_animations.Animation = "idle";
 				break;
-			
+
 			case EnemyAnimationState.Death:
 				_animations.Animation = "death";
 				break;
-			
+
 			case EnemyAnimationState.Attack1:
 				_animations.Animation = "attack_1";
 				break;
-				
+
 			case EnemyAnimationState.Walk:
 				_animations.Animation = "walking";
 				break;
@@ -172,7 +171,7 @@ public class EnemyBehavior00 : KinematicBody2D
 		{
 			_state = EnemyState.Idle;
 		}
-		
+
 		else if (IsOnFloor())
 		{
 			_state = EnemyState.Walking;
@@ -182,14 +181,14 @@ public class EnemyBehavior00 : KinematicBody2D
 		{
 			QueueFree();
 		}
-		
+
 	}
 
 	public void _on_DamageArea_body_entered(Node body)
 	{
 		if (body.Name == "Player")
 		{
-			float[] timeArg = {Damage};
+			float[] timeArg = { Damage };
 			body.PropagateCall(nameof(Light.RemoveTimeFromTimer), new Array(timeArg));
 		}
 	}
