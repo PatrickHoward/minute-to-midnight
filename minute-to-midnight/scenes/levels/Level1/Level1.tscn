@@ -22,14 +22,6 @@ follow_viewport_enable = true
 scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
-<<<<<<< HEAD
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-position = Vector2( -1.16632, 110.804 )
-color = Color( 0, 0, 0, 1 )
-
-=======
->>>>>>> master
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 107.023, 282.115 )
 
@@ -68,4 +60,3 @@ position = Vector2( 342.526, 249.603 )
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0, 0, 0, 1 )
->>>>>>> master
