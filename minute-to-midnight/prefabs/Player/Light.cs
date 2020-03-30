@@ -171,11 +171,17 @@ public class Light : KinematicBody2D
 
     public void AddTimeToTimer(float time)
     {
-        _timeRemaining = Mathf.Min(time + _timeRemaining, 60);
+        if (!DisableDimming)
+        {
+            _timeRemaining = Mathf.Min(time + _timeRemaining, 60);
+        }
     }
 
     public void RemoveTimeFromTimer(float time)
     {
-        _timeRemaining -= time;
+        if (!DisableDimming)
+        {
+            _timeRemaining -= time;
+        }
     }
 }

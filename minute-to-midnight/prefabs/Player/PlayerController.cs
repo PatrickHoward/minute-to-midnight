@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Godot;
 
 public enum PlayerAnimationState
@@ -33,6 +35,7 @@ public class PlayerController : KinematicBody2D
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
 
+    private PlayerState _previousState;
     private PlayerState _state;
 
     private PlayerAnimationState _animationState;
@@ -63,7 +66,7 @@ public class PlayerController : KinematicBody2D
         //Left and Right Movement
         if (Input.IsActionPressed("Move-Left"))
         {
-            if (IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state != PlayerState.Attacking)
             {
                 _state = PlayerState.Runnning;
             }
@@ -72,7 +75,7 @@ public class PlayerController : KinematicBody2D
         }
         else if (Input.IsActionPressed("Move-Right"))
         {
-            if (IsOnFloor() && _state == PlayerState.Idle)
+            if (IsOnFloor() && _state != PlayerState.Attacking)
             {
                 _state = PlayerState.Runnning;
             }
@@ -100,6 +103,11 @@ public class PlayerController : KinematicBody2D
             //Action button 
         }
 
+        if (IsOnFloor() && _state == PlayerState.Jumping)
+        {
+            _state = PlayerState.Idle;
+        }
+        
         //Constant weight of gravity pushes down on us all
         _movement.y += Gravity;
 
@@ -114,6 +122,11 @@ public class PlayerController : KinematicBody2D
             _state = PlayerState.Falling;
         }
 
+        if (_animationPlayer.CurrentAnimation == "" && _state == PlayerState.Attacking)
+        {
+            _state = PlayerState.Idle;
+        }
+
     }
 
     private void UpdatePlayerState()
@@ -122,18 +135,22 @@ public class PlayerController : KinematicBody2D
         {
             case PlayerState.Idle:
                 _animationState = PlayerAnimationState.Idle;
+                Console.WriteLine("Change to Idiling");
                 break;
 
             case PlayerState.Falling:
                 _animationState = PlayerAnimationState.FallLoop;
+                Console.WriteLine("Change to Falling");
                 break;
 
             case PlayerState.Attacking:
                 _animationState = PlayerAnimationState.Attack1;
+                Console.WriteLine("Change to attacking");
                 break;
 
             case PlayerState.Runnning:
                 _animationState = PlayerAnimationState.Run;
+                Console.WriteLine("Change to Running");
                 break;
 
             case PlayerState.Jumping:
@@ -142,7 +159,7 @@ public class PlayerController : KinematicBody2D
                 {
                     _animationState = PlayerAnimationState.JumpStart;
                 }
-
+                Console.WriteLine("Change to Jumping");
                 break;
         }
     }
@@ -160,7 +177,7 @@ public class PlayerController : KinematicBody2D
 
         if (_animationState == PlayerAnimationState.JumpLoop && IsOnFloor())
         {
-            _animationState = PlayerAnimationState.Run;
+            _animationState = PlayerAnimationState.Idle;
         }
 
         switch (_animationState)
@@ -181,11 +198,16 @@ public class PlayerController : KinematicBody2D
                 _animationPlayer.Play("jump_start");
                 break;
 
+            case PlayerAnimationState.FallLoop:
             case PlayerAnimationState.JumpLoop:
                 _animationPlayer.Play("jump_loop");
                 break;
 
             case PlayerAnimationState.Attack1:
+                if (_animationPlayer.AssignedAnimation == "attack_1")
+                {
+                    break;
+                }
                 _animationPlayer.Play("attack_1");
                 break;
         }
@@ -193,15 +215,6 @@ public class PlayerController : KinematicBody2D
 
     public void _on_Sprite_animation_finished()
     {
-        if (_movement == Vector2.Zero && IsOnFloor())
-        {
-            _state = PlayerState.Idle;
-        }
-        else if (IsOnFloor())
-        {
-            _state = PlayerState.Runnning;
-        }
-
         if (_state == PlayerState.Jumping && _animationState == PlayerAnimationState.JumpStart)
         {
             _animationState = PlayerAnimationState.JumpLoop;
