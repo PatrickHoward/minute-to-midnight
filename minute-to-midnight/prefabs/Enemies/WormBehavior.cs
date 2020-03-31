@@ -20,7 +20,7 @@ public enum WormState
 public class WormBehavior : KinematicBody2D
 {
 	[Signal] public delegate void WormKilled();
-	
+
 	[Export] public float Speed = 50;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 1f;
@@ -35,13 +35,17 @@ public class WormBehavior : KinematicBody2D
 	private float _painDuration = -1f;
 	
 	private WormState _state;
-	
+
 	private WormAnimationState _animationState;
 	private AnimatedSprite _animations;
 	private Node2D _display;
 
 	private RayCast2D _groundCheck;
 	private RayCast2D _behindCheck;
+
+	private AudioStreamPlayer2D _deathSound;
+
+	private bool deathAnimationHasPlayed = false;
 
 	public override void _Ready()
 	{
@@ -51,8 +55,10 @@ public class WormBehavior : KinematicBody2D
 		_display = GetNode<Node2D>("Display");
 
 		_groundCheck = GetNode<RayCast2D>("GroundCheck");
-		
+
 		_behindCheck = GetNode<RayCast2D>("Display/BehindCheck");
+
+		_deathSound = GetNode<AudioStreamPlayer2D>("DeathSound");
 	}
 
 	public override void _Process(float delta)
@@ -71,7 +77,7 @@ public class WormBehavior : KinematicBody2D
 		if (HitsToDestroy <= 0)
 		{
 			_state = WormState.Dead;
-			
+
 			GetNodeOrNull<CollisionShape2D>("CollisionShape2D")?.QueueFree();
 			GetNodeOrNull<Area2D>("DamageArea")?.QueueFree();
 		}
@@ -88,19 +94,19 @@ public class WormBehavior : KinematicBody2D
 			return;
 		}
 
-		 if (_behindCheck.IsColliding()) // If the player is behind the ghost.
+		if (_behindCheck.IsColliding()) // If the player is behind the ghost.
 		{
 			var body = _behindCheck.GetCollider();
 			if (body != null)
 			{
-				var bodyAsNode = (Node2D) body;
+				var bodyAsNode = (Node2D)body;
 				if (bodyAsNode.Name == "Player")
 				{
 					_display.Scale = new Vector2(-1, 1);
 					_state = WormState.Attacking;
-					
+
 					Speed *= ChangeDirection;
-					
+
 					_groundCheck.Position *= new Vector2(-1, 1);
 
 				}
@@ -110,12 +116,12 @@ public class WormBehavior : KinematicBody2D
 		if (IsOnWall() || !_groundCheck.IsColliding())
 		{
 			Speed *= ChangeDirection;
-			
+
 			_groundCheck.Position *= new Vector2(-1, 1);
 		}
 
 		_movement.x = Speed;
-		
+
 		_movement.y = Gravity;
 
 		_movement = MoveAndSlide(_movement, _floor);
@@ -129,13 +135,18 @@ public class WormBehavior : KinematicBody2D
 			case WormState.Attacking:
 				_animationState = WormAnimationState.Attack1;
 				break;
-			
-			case WormState.Walking: 
+
+			case WormState.Walking:
 				_animationState = WormAnimationState.Walk;
 				break;
-			
-			case WormState.Dead :
+
+			case WormState.Dead:
 				_animationState = WormAnimationState.Death;
+				if (!_deathSound.Playing && !deathAnimationHasPlayed)
+				{
+					_deathSound.Playing = true;
+					deathAnimationHasPlayed = true;
+				}
 				break;
 		}
 	}
@@ -156,11 +167,11 @@ public class WormBehavior : KinematicBody2D
 			case WormAnimationState.Death:
 				_animations.Animation = "death";
 				break;
-			
+
 			case WormAnimationState.Attack1:
 				_animations.Animation = "attack_1";
 				break;
-				
+
 			case WormAnimationState.Walk:
 				_animations.Animation = "walking";
 				break;
@@ -193,7 +204,7 @@ public class WormBehavior : KinematicBody2D
 		if (_state == WormState.Dead || _animationState == WormAnimationState.Death)
 		{
 			EmitSignal(nameof(WormKilled));
-			
+
 			QueueFree();
 		}
 	}
@@ -201,7 +212,7 @@ public class WormBehavior : KinematicBody2D
 	public void _on_DamageArea_body_entered(Node body)
 	{
 		_state = WormState.Attacking;
-		
+
 		if (body.Name == "Player")
 		{
 			float[] timeArg = { Damage };

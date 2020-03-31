@@ -2,15 +2,15 @@
 
 public enum PlayerAnimationState
 {
-	Idle,
-	Run,
-	JumpStart,
-	JumpLoop,
-	FallLoop,
-	Death,
-	Attack1,
-	Attack2,
-	Attack3
+    Idle,
+    Run,
+    JumpStart,
+    JumpLoop,
+    FallLoop,
+    Death,
+    Attack1,
+    Attack2,
+    Attack3
 }
 
 public enum PlayerState
@@ -47,6 +47,8 @@ public class Player : KinematicBody2D
     private Node2D _display;
     private Area2D _damageArea;
 
+    private AudioStreamPlayer2D _audioPlayer;
+
     private float _painDuration = -1f;
     
     private PackedScene _gameOverScreen;
@@ -66,6 +68,8 @@ public class Player : KinematicBody2D
         _sprite = GetNode<Sprite>("Display/Sprite");    
         _animationPlayer.Play("idle");
 
+        _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        
         GetNode<Light>("Display/Light").DisableDimming = DisableDimming;
     }
 
@@ -257,19 +261,19 @@ public class Player : KinematicBody2D
     {
         HasKey = true;
     }
-    
+
     public void PerformMeleeAttack()
     {
         var bodies = _damageArea.GetOverlappingBodies();
-        
+
         if (bodies.Count == 0)
         {
             return;
         }
-        
+
         foreach (var body in bodies)
         {
-            var bodyAsNode = (Node2D) body;
+            var bodyAsNode = (Node2D)body;
             bodyAsNode.Call("DealDamageToEnemy");
         }
     }

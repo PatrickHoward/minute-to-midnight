@@ -13,21 +13,15 @@ public class Brazier : Node2D
     {
         if (body.Name == "Player" && !used)
         {
-            var flame = GetNode<Node2D>(new NodePath("Flame"));
-            flame.QueueFree();
-
-            float[] timeArg = {time};
+            float[] timeArg = { time };
             body.PropagateCall(nameof(Light.AddTimeToTimer), new Array(timeArg));
 
             EmitSignal(nameof(_On_Collected), time);
 
             used = true;
 
-            var burst = GetNode<Node2D>("Burst").GetChildren();
-            foreach (Particles2D particle in burst)
-            {
-                particle.Emitting = true;
-            }
+            var animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+            animationPlayer.Play("burst");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using Godot;
 using Array = Godot.Collections.Array;
+using System.Collections.Generic;
 
 public enum MinotaurAnimationState
 {
@@ -26,16 +27,17 @@ public class MinotaurBehavior : KinematicBody2D
 	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 15;
 	[Export] public float IdleTimeout = 30f;
-	
+	[Export] public float PassiveSoundChance = 1.0f;
+
 	private const int ChangeDirection = -1;
 
 	private float _timeoutDuration;
-	
+
 	private Vector2 _movement;
 	private readonly Vector2 _floor = new Vector2(0, -1);
 
 	private MinotaurState _state;
-	
+
 	private MinotaurAnimationState _animationState;
 	private AnimationPlayer _animations;
 	private Sprite _sprite;
@@ -47,6 +49,12 @@ public class MinotaurBehavior : KinematicBody2D
 
 	private Area2D _damageArea;
 
+	private AudioStreamPlayer2D _audioStreamPlayer2D;
+
+	private static Dictionary<string, AudioStreamSample> _soundEffects = new Dictionary<string, AudioStreamSample>
+	{ { "passive", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/minotaur/passive.wav") }
+	};
+
 	private float _painDuration;
 
 	public override void _Ready()
@@ -54,7 +62,7 @@ public class MinotaurBehavior : KinematicBody2D
 		_state = MinotaurState.Walking;
 
 		_timeoutDuration = IdleTimeout;
-		
+
 		_movement = new Vector2();
 		_animations = GetNode<AnimationPlayer>("AnimationPlayer");
 		_sprite = GetNode<Sprite>("Display/Sprite");
@@ -64,6 +72,8 @@ public class MinotaurBehavior : KinematicBody2D
 		_behindCheck = GetNode<RayCast2D>("Display/BehindCheck");
 
 		_damageArea = GetNode<Area2D>("Display/DamageArea");
+
+		_audioStreamPlayer2D = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 	}
 
 	public override void _Process(float delta)
@@ -82,13 +92,15 @@ public class MinotaurBehavior : KinematicBody2D
 		if (HitsToDestroy <= 0)
 		{
 			_state = MinotaurState.Dead;
-			
+
 			GetNodeOrNull<CollisionShape2D>("AreaShape2D")?.QueueFree();
 			GetNodeOrNull<Area2D>("DamageArea")?.QueueFree();
 		}
 
 		UpdatePlayerState();
 		UpdateAnimation();
+
+		PlayPassiveSoundEffect();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -116,7 +128,7 @@ public class MinotaurBehavior : KinematicBody2D
 			var body = _behindCheck.GetCollider();
 			if (body != null)
 			{
-				var bodyAsNode = (Node2D) body;
+				var bodyAsNode = (Node2D)body;
 				if (bodyAsNode.Name == "Player")
 				{
 					_display.Scale = new Vector2(-1, 1);
@@ -161,15 +173,15 @@ public class MinotaurBehavior : KinematicBody2D
 			case MinotaurState.Attacking:
 				_animationState = MinotaurAnimationState.Attack1;
 				break;
-			
+
 			case MinotaurState.Walking:
 				_animationState = MinotaurAnimationState.Walk;
 				break;
-			
+
 			case MinotaurState.Dead:
 				_animationState = MinotaurAnimationState.Death;
 				break;
-			
+
 			case MinotaurState.Idle:
 				_animationState = MinotaurAnimationState.Idle;
 				break;
@@ -192,15 +204,15 @@ public class MinotaurBehavior : KinematicBody2D
 			case MinotaurAnimationState.Death:
 				_animations.Play("death");
 				break;
-			
+
 			case MinotaurAnimationState.Attack1:
 				_animations.Play("attack_1");
 				break;
-				
+
 			case MinotaurAnimationState.Walk:
 				_animations.Play("walk");
 				break;
-			
+
 			case MinotaurAnimationState.Idle:
 				_animations.Play("idle");
 				break;
@@ -216,15 +228,15 @@ public class MinotaurBehavior : KinematicBody2D
 	public void AttemptDamage()
 	{
 		var bodies = _damageArea.GetOverlappingBodies();
-        
+
 		if (bodies.Count == 0)
 		{
 			return;
 		}
-        
+
 		foreach (var body in bodies)
 		{
-			var bodyAsNode = (Node2D) body;
+			var bodyAsNode = (Node2D)body;
 			if (bodyAsNode.Name == "Player")
 			{
 				float[] timeArg = { Damage };
@@ -232,7 +244,21 @@ public class MinotaurBehavior : KinematicBody2D
 			}
 		}
 	}
-	
+
+	private void PlayPassiveSoundEffect()
+	{
+		if (!_audioStreamPlayer2D.Playing && (_state == MinotaurState.Walking || _state == MinotaurState.Idle))
+		{
+			var rng = new RandomNumberGenerator();
+			rng.Randomize();
+			if (rng.Randf() < PassiveSoundChance)
+			{
+				_audioStreamPlayer2D.Stream = _soundEffects["passive"];
+				_audioStreamPlayer2D.Playing = true;
+			}
+		}
+	}
+
 	public void _on_AnimationPlayer_animation_finished(String anim_name)
 	{
 		if (_state == MinotaurState.Attacking)
@@ -256,6 +282,6 @@ public class MinotaurBehavior : KinematicBody2D
 
 	public void _on_MinotaurDamageArea_body_exited(Node body)
 	{
-		
+
 	}
 }
