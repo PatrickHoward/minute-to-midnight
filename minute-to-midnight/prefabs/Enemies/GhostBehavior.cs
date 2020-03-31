@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Array = Godot.Collections.Array;
 
 public enum GhostAnimationState
