@@ -131,6 +131,7 @@ __meta__ = {
 
 [node name="Player" parent="World" instance=ExtResource( 1 )]
 position = Vector2( 485.284, 260.381 )
+DisableDimming = true
 
 [node name="TileMap" type="TileMap" parent="World"]
 tile_set = ExtResource( 2 )
