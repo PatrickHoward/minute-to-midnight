@@ -13,8 +13,8 @@ public class Brazier : Node2D
     {
         if (body.Name == "Player" && !used)
         {
-            var light = GetNode<Node2D>(new NodePath("Light"));
-            light.QueueFree();
+            var flame = GetNode<Node2D>(new NodePath("Flame"));
+            flame.QueueFree();
 
             float[] timeArg = {time};
             body.PropagateCall(nameof(Light.AddTimeToTimer), new Array(timeArg));
