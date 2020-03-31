@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/player/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/levels/Level1/Hints.cs" type="Script" id=9]
 [ext_resource path="res://prefabs/Key.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/Memoraphile - Spooky Dungeon.ogg" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -237,6 +238,9 @@ shape = SubResource( 5 )
 
 [node name="Key" parent="." instance=ExtResource( 10 )]
 position = Vector2( 109.857, 476.955 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
 [connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
