@@ -90,6 +90,7 @@ __meta__ = {
 [node name="Header" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="Header"]
+self_modulate = Color( 1, 1, 1, 0 )
 show_behind_parent = true
 light_mask = 129
 anchor_right = 1.0
@@ -106,6 +107,7 @@ __meta__ = {
 }
 
 [node name="Label2" type="Label" parent="Header"]
+self_modulate = Color( 1, 1, 1, 0 )
 light_mask = 129
 anchor_right = 1.0
 anchor_bottom = 1.013
@@ -124,6 +126,7 @@ __meta__ = {
 }
 
 [node name="Continue Buttion" parent="Header" instance=ExtResource( 1 )]
+self_modulate = Color( 1, 1, 1, 0 )
 light_mask = 129
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -133,6 +136,7 @@ margin_right = -448.0
 margin_bottom = -216.0
 
 [node name="MainMenuButton" parent="Header" instance=ExtResource( 3 )]
+self_modulate = Color( 1, 1, 1, 0 )
 light_mask = 129
 anchor_right = 1.0
 anchor_bottom = 1.0
