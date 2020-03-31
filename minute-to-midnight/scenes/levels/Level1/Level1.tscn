@@ -99,16 +99,16 @@ JumpHeight = 250.0
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="bazier" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 370.225, 337.971 )
+position = Vector2( 370.225, 330.971 )
 
 [node name="bazier3" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 792.899, 291.746 )
+position = Vector2( 792.899, 282.746 )
 
 [node name="bazier4" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 865.308, 451.153 )
+position = Vector2( 865.308, 443.153 )
 
 [node name="bazier7" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 488.675, 483.034 )
+position = Vector2( 488.675, 475.034 )
 
 [node name="bazier11" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 307.561, 483.034 )
@@ -117,19 +117,19 @@ position = Vector2( 307.561, 483.034 )
 position = Vector2( 156.53, 291.489 )
 
 [node name="bazier8" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 1224.11, 467.364 )
+position = Vector2( 1224.11, 459.364 )
 
 [node name="bazier9" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 1570.48, 484.115 )
+position = Vector2( 1570.48, 475.115 )
 
 [node name="bazier10" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 1897.4, 371.179 )
+position = Vector2( 1897.4, 363.179 )
 
 [node name="bazier5" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1094.33, 290.384 )
 
 [node name="bazier6" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 1463.36, 276.135 )
+position = Vector2( 1463.36, 267.135 )
 
 [node name="Enemies" type="Node2D" parent="."]
 

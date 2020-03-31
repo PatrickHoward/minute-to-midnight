@@ -1,87 +1,66 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://resources/powerups/brazier_unlit.png" type="Texture" id=1]
-[ext_resource path="res://resources/light/light_rays.png" type="Texture" id=2]
+[ext_resource path="res://resources/light/light_rays.png" type="Texture" id=1]
+[ext_resource path="res://prefabs/Light.tres" type="Texture" id=2]
+[ext_resource path="res://resources/powerups/brazier_unlit.png" type="Texture" id=3]
 [ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
-[ext_resource path="res://prefabs/Player/Light.cs" type="Script" id=5]
+[ext_resource path="res://effects/Burst.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Gradient" id=1]
-offsets = PoolRealArray( 0, 0.143519, 0.734375, 0.902344 )
-colors = PoolColorArray( 1, 1, 1, 1, 0.907715, 0.677085, 0.294298, 0.666667, 0.956863, 0.0627451, 0.0627451, 0.4, 0.164063, 0.164063, 0.164063, 0.825 )
+[sub_resource type="CurveTexture" id=2]
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
-
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0.238494, 0.809091 ), 0.0, 0.0, 0, 0, Vector2( 0.995816, 0.0181818 ), 0.0, 0.0, 0, 0 ]
-
-[sub_resource type="CurveTexture" id=4]
-curve = SubResource( 3 )
-
-[sub_resource type="ParticlesMaterial" id=5]
-emission_shape = 1
-emission_sphere_radius = 3.0
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 4, 1 )
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 10.0
-angular_velocity_random = 1.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 20.0
+damping_curve = SubResource( 2 )
 angle = 45.0
-scale = 3.0
 scale_random = 1.0
-scale_curve = SubResource( 4 )
-color_ramp = SubResource( 2 )
+color_ramp = ExtResource( 2 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.36131, 7.77531 )
 
 [node name="Brazier" type="Node2D"]
+position = Vector2( 0, -16 )
+scale = Vector2( 2, 2 )
 script = ExtResource( 4 )
+time = 10.0
 
-[node name="Light" type="KinematicBody2D" parent="."]
-position = Vector2( 0.0694466, 2.15273 )
-script = ExtResource( 5 )
-MaxEnergy = 0.4
-MinEnergy = 0.0
-MaxScale = 0.3
-DisableDimming = true
+[node name="Flame" type="Node2D" parent="."]
 
-[node name="Particles2D" type="Particles2D" parent="Light"]
+[node name="Particles2D" type="Particles2D" parent="Flame"]
+position = Vector2( 0, 3 )
 rotation = -1.5708
-scale = Vector2( 0.75, 0.5 )
-amount = 251
-lifetime = 0.5
-local_coords = false
-process_material = SubResource( 5 )
+amount = 150
+lifetime = 0.7
+process_material = SubResource( 3 )
 
-[node name="Light2D" type="Light2D" parent="Light"]
-texture = ExtResource( 2 )
-offset = Vector2( 10, 0 )
-texture_scale = 0.3
+[node name="Light2D" type="Light2D" parent="Flame"]
+position = Vector2( 1, 0 )
+scale = Vector2( 0.154746, 0.154746 )
+texture = ExtResource( 1 )
 color = Color( 0.913725, 0.494118, 0.32549, 1 )
-energy = 0.5
 range_layer_min = -101
-shadow_enabled = true
-shadow_gradient_length = 40.0
-shadow_filter = 3
-shadow_filter_smooth = 8.2
-
-[node name="Timer" type="Timer" parent="Light"]
-wait_time = 0.1
 
 [node name="sprite" type="Sprite" parent="."]
 position = Vector2( 0.0638499, 0.0633364 )
 scale = Vector2( 0.522231, 0.478797 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="Burst" parent="." instance=ExtResource( 5 )]
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 priority = 10.0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 6 )
-[connection signal="timeout" from="Light/Timer" to="Light" method="_on_Timer_timeout"]
+shape = SubResource( 1 )
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
