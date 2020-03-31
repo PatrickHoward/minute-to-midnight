@@ -2,15 +2,15 @@
 
 public enum PlayerAnimationState
 {
-	Idle,
-	Run,
-	JumpStart,
-	JumpLoop,
-	FallLoop,
-	Death,
-	Attack1,
-	Attack2,
-	Attack3
+    Idle,
+    Run,
+    JumpStart,
+    JumpLoop,
+    FallLoop,
+    Death,
+    Attack1,
+    Attack2,
+    Attack3
 }
 
 public enum PlayerState
@@ -237,19 +237,19 @@ public class Player : KinematicBody2D
     {
         HasKey = true;
     }
-    
+
     public void PerformMeleeAttack()
     {
         var bodies = _damageArea.GetOverlappingBodies();
-        
+
         if (bodies.Count == 0)
         {
             return;
         }
-        
+
         foreach (var body in bodies)
         {
-            var bodyAsNode = (Node2D) body;
+            var bodyAsNode = (Node2D)body;
             bodyAsNode.Call("DealDamageToEnemy");
         }
     }

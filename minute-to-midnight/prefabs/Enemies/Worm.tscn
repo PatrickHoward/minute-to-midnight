@@ -190,7 +190,7 @@ cast_to = Vector2( 25, 0 )
 position = Vector2( 0, -21.347 )
 frames = SubResource( 28 )
 animation = "walking"
-frame = 2
+frame = 4
 playing = true
 
 [node name="GroundCheck" type="RayCast2D" parent="."]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/swing_3.wav-766fefbfc725844c556da87ce5ca1a42.sample"
+
+[deps]
+
+source_file="res://resources/audio/player/swing_3.wav"
+dest_files=[ "res://.import/swing_3.wav-766fefbfc725844c556da87ce5ca1a42.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
