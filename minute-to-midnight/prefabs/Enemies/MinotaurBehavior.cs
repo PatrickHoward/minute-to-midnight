@@ -23,7 +23,7 @@ public class MinotaurBehavior : KinematicBody2D
 	[Export] public float Speed = 10f;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 25f;
-	[Export] public float Pain = 1f;
+	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 15;
 	[Export] public float IdleTimeout = 30f;
 	

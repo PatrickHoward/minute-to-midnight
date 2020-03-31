@@ -31,7 +31,7 @@ public class MainMenu : Control
     public void _on_Exit_Game_Trigger_body_entered(Node body)
     {
         if (body.Name == "Player")
-        {
+        {    
             _animationPlayer.Play("Fade_Exit");
         }
     }

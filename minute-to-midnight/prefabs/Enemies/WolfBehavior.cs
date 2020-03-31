@@ -24,7 +24,7 @@ public class WolfBehavior : KinematicBody2D
 	[Export] public float Speed = 50;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 5f;
-	[Export] public float Pain = 1f;
+	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 1;
 
 	private const int ChangeDirection = -1;
