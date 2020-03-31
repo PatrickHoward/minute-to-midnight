@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/backgrounds/castle/castle_trees_2.png" type="Texture" id=1]
+[ext_resource path="res://resources/backgrounds/castle/castle_trees.png" type="Texture" id=2]
+[ext_resource path="res://resources/backgrounds/castle/castle_trees_3.png" type="Texture" id=3]
+[ext_resource path="res://resources/backgrounds/castle/outside.png" type="Texture" id=4]
+[ext_resource path="res://resources/backgrounds/castle/castle_windows.png" type="Texture" id=5]
+[ext_resource path="res://resources/backgrounds/castle/castle_clouds.png" type="Texture" id=6]
+
+[node name="CastleBackground" type="ParallaxBackground"]
+
+[node name="Landscape" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 0.5, 0 )
+motion_mirroring = Vector2( 692, 0 )
+
+[node name="Sprite" type="Sprite" parent="Landscape"]
+position = Vector2( 347.61, 255.084 )
+scale = Vector2( 0.337783, 0.389066 )
+texture = ExtResource( 4 )
+
+[node name="Clouds" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.8, 1 )
+motion_offset = Vector2( 3, 1 )
+motion_mirroring = Vector2( 696.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="Clouds"]
+position = Vector2( 350.145, 301.573 )
+scale = Vector2( 0.340444, 0.38941 )
+texture = ExtResource( 6 )
+
+[node name="Trees3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.5, 1 )
+motion_offset = Vector2( 4, 1 )
+motion_mirroring = Vector2( 696.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="Trees3"]
+position = Vector2( 350.145, 301.573 )
+scale = Vector2( 0.340444, 0.38941 )
+texture = ExtResource( 3 )
+
+[node name="Trees2" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( 2.5, 1 )
+motion_mirroring = Vector2( 696.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="Trees2"]
+position = Vector2( 350.145, 301.573 )
+scale = Vector2( 0.340444, 0.38941 )
+texture = ExtResource( 1 )
+
+[node name="Trees1" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 1.1, 1 )
+motion_offset = Vector2( -0.679, 0 )
+motion_mirroring = Vector2( 696.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="Trees1"]
+position = Vector2( 350.145, 301.573 )
+scale = Vector2( 0.340444, 0.38941 )
+texture = ExtResource( 2 )
+
+[node name="Windows" type="ParallaxLayer" parent="."]
+motion_offset = Vector2( -1, 0 )
+motion_mirroring = Vector2( 696.5, 0 )
+
+[node name="Sprite" type="Sprite" parent="Windows"]
+position = Vector2( 350.145, 301.573 )
+scale = Vector2( 0.340444, 0.38941 )
+texture = ExtResource( 5 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.27451, 0.211765, 0.211765, 1 )
