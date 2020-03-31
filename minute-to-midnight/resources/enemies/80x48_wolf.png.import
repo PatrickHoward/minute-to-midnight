@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Mockup.png-c8099ac850a98a1587d7e17c8a73e9df.stex"
+path="res://.import/80x48_wolf.png-2a948b1e7974f6b5e2b7239041b67b29.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/CastleDungeonPack/Mockup.png"
-dest_files=[ "res://.import/Mockup.png-c8099ac850a98a1587d7e17c8a73e9df.stex" ]
+source_file="res://resources/enemies/80x48_wolf.png"
+dest_files=[ "res://.import/80x48_wolf.png-2a948b1e7974f6b5e2b7239041b67b29.stex" ]
 
 [params]
 

@@ -9,6 +9,7 @@
 [ext_resource path="res://prefabs/Enemies/Minotaur.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/levels/Level1/Hints.cs" type="Script" id=9]
+[ext_resource path="res://prefabs/Key.tscn" type="PackedScene" id=10]
 [ext_resource path="res://resources/Memoraphile - Spooky Dungeon.ogg" type="AudioStream" id=10]
 
 [sub_resource type="DynamicFont" id=1]
@@ -17,7 +18,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "ShowHint1"
-length = 3.5
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("LightHint:self_modulate")
 tracks/0/interp = 1
@@ -25,7 +26,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 2, 3.5 ),
+"times": PoolRealArray( 1, 2.5, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -76,7 +77,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 57.1028, 9.18048 )
+extents = Vector2( 41.2078, 48.04 )
 
 [node name="Scene" type="Node2D"]
 
@@ -106,10 +107,10 @@ position = Vector2( 661.361, 282.746 )
 position = Vector2( 865.308, 443.153 )
 
 [node name="bazier7" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 488.675, 475.034 )
+position = Vector2( 376.052, 474.465 )
 
-[node name="bazier11" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 272.96, 473.377 )
+[node name="bazier13" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 86.6657, 474.966 )
 
 [node name="bazier12" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 160.022, 282.411 )
@@ -234,6 +235,9 @@ position = Vector2( 53.969, 256.92 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HintTrigger1"]
 position = Vector2( 29.0022, 29.3607 )
 shape = SubResource( 5 )
+
+[node name="Key" parent="." instance=ExtResource( 10 )]
+position = Vector2( 109.857, 476.955 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )

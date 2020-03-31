@@ -2,25 +2,25 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/slime.png-db41dcff937baa6fd886cee4a3c00307.stex"
+path="res://.import/buttons.png-5546bc855d76ef76181ed6507e9e5a07.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/slime.png"
-dest_files=[ "res://.import/slime.png-db41dcff937baa6fd886cee4a3c00307.stex" ]
+source_file="res://resources/buttons.png"
+dest_files=[ "res://.import/buttons.png-5546bc855d76ef76181ed6507e9e5a07.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
