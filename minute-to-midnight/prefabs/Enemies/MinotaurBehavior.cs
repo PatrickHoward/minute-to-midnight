@@ -132,8 +132,12 @@ public class MinotaurBehavior : KinematicBody2D
 				_animationState = MinotaurAnimationState.Walk;
 				break;
 			
-			case MinotaurState.Dead :
+			case MinotaurState.Dead:
 				_animationState = MinotaurAnimationState.Death;
+				break;
+			
+			case MinotaurState.Idle:
+				_animationState = MinotaurAnimationState.Idle;
 				break;
 		}
 	}
@@ -162,6 +166,9 @@ public class MinotaurBehavior : KinematicBody2D
 			case MinotaurAnimationState.Walk:
 				_animations.Play("walking");
 				break;
+			
+			case MinotaurAnimationState.Idle:
+				_animations.Play("idle");
 		}
 	}
 
@@ -170,7 +177,7 @@ public class MinotaurBehavior : KinematicBody2D
 		--HitsToDestroy;
 	}
 
-	public void _on_AnimatedSprite_animation_finished()
+	public void _on_AnimationPlayer_animation_finished()
 	{
 		if (_movement == Vector2.Zero && IsOnFloor())
 		{
@@ -193,7 +200,7 @@ public class MinotaurBehavior : KinematicBody2D
 		}
 	}
 
-	public void _on_DamageArea_body_entered(Node body)
+	public void _on_MinotaurDamageArea_body_entered(Node body)
 	{
 		if (body.Name == "Player")
 		{
