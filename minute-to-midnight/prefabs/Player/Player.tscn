@@ -273,7 +273,7 @@ vframes = 12
 hframes = 14
 
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
-position = Vector2( 2.60567, 16.2555 )
+position = Vector2( -14.9574, -19.3822 )
 Duration = 15.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
