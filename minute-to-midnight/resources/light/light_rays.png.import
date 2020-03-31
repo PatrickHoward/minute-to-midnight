@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/castle_trees_2.png-9dc70a19cafc308e4b246ab785133ae6.stex"
+path="res://.import/light_rays.png-a6540492a0acc714382e357d752cc3aa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/backgrounds/castle/castle_trees_2.png"
-dest_files=[ "res://.import/castle_trees_2.png-9dc70a19cafc308e4b246ab785133ae6.stex" ]
+source_file="res://resources/light/light_rays.png"
+dest_files=[ "res://.import/light_rays.png-a6540492a0acc714382e357d752cc3aa.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
