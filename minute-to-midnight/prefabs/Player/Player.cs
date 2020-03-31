@@ -16,7 +16,7 @@ public enum PlayerAnimationState
 public enum PlayerState
 {
     Idle,
-    Runnning,
+    Running,
     Jumping,
     Falling,
     Attacking,
@@ -86,7 +86,7 @@ public class Player : KinematicBody2D
         {
             if (IsOnFloor() && _state != PlayerState.Attacking)
             {
-                _state = PlayerState.Runnning;
+                _state = PlayerState.Running;
             }
 
             _movement.x = -Speed;
@@ -95,7 +95,7 @@ public class Player : KinematicBody2D
         {
             if (IsOnFloor() && _state != PlayerState.Attacking)
             {
-                _state = PlayerState.Runnning;
+                _state = PlayerState.Running;
             }
 
             _movement.x = Speed;
@@ -167,7 +167,7 @@ public class Player : KinematicBody2D
                 _animationState = PlayerAnimationState.Attack1;
                 break;
 
-            case PlayerState.Runnning:
+            case PlayerState.Running:
                 _animationState = PlayerAnimationState.Run;
                 break;
 
