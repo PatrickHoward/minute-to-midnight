@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ambient.wav-b9e5ac3105bac4c667c59240188ef27c.sample"
+
+[deps]
+
+source_file="res://resources/audio/brazier/ambient.wav"
+dest_files=[ "res://.import/ambient.wav-b9e5ac3105bac4c667c59240188ef27c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
