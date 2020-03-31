@@ -17,7 +17,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "ShowHint1"
-length = 3.5
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("LightHint:self_modulate")
 tracks/0/interp = 1
@@ -25,7 +25,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0.5, 2, 3.5 ),
+"times": PoolRealArray( 1, 2.5, 4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
