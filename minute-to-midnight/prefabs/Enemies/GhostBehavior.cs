@@ -197,6 +197,7 @@ public class GhostBehavior : KinematicBody2D
 			rng.Randomize();
 			if (rng.Randf() < PassiveSoundChance)
 			{
+				_soundEffects["passive"].Stereo = true;
 				_audioStreamPlayer2D.Stream = _soundEffects["passive"];
 				_audioStreamPlayer2D.Playing = true;
 			}
@@ -208,6 +209,7 @@ public class GhostBehavior : KinematicBody2D
 		var rng = new RandomNumberGenerator();
 		rng.Randomize();
 		var randomSoundEffect = rng.RandiRange(0, soundEffectNames.Length - 1);
+		_soundEffects[soundEffectNames[randomSoundEffect]].Stereo = true;
 		_audioStreamPlayer2D.Stream = _soundEffects[soundEffectNames[randomSoundEffect]];
 		_audioStreamPlayer2D.Playing = true;
 	}
