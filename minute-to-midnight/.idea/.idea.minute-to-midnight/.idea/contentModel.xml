@@ -12,10 +12,14 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="prefabs" t="Include">
         <e p="brazier.cs" t="Include" />
+        <e p="Door.cs" t="Include" />
         <e p="Enemies" t="Include">
           <e p="GhostBehavior.cs" t="Include" />
           <e p="MinotaurBehavior.cs" t="Include" />
+          <e p="WolfBehavior.cs" t="Include" />
+          <e p="WormBehavior.cs" t="Include" />
         </e>
+        <e p="Key.cs" t="Include" />
         <e p="Player" t="Include">
           <e p="Light.cs" t="Include" />
           <e p="Player.cs" t="Include" />

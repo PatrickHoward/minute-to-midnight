@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.IO.Compression;
 
 public class Hints : Control
 {
@@ -8,6 +9,7 @@ public class Hints : Control
     private bool _hint1Played = false;
     private bool _hint2Played = false;
     private bool _monstHint1Played = false;
+    private bool _keyHintPlayed = false;
     
     public override void _Ready()
     {
@@ -42,6 +44,15 @@ public class Hints : Control
         {
             _animationPlayer.Play("ShowMonstHint1");
             _monstHint1Played = true;
+        }
+    }
+
+    public void _on_Door_PlayerDoesNotHaveKey()
+    {
+        if (!_keyHintPlayed)
+        {
+            _animationPlayer.Play("ShowKeyHint1");
+            _keyHintPlayed = true;
         }
     }
 }
