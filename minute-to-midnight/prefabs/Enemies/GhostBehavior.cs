@@ -1,4 +1,4 @@
-using Godot;
+﻿using Godot;
 using Array = Godot.Collections.Array;
 using System.Collections.Generic;
 
@@ -46,6 +46,7 @@ public class GhostBehavior : KinematicBody2D
 
 	private GhostAnimationState _animationState;
 	private AnimationPlayer _animationPlayer;
+	private AnimatedSprite _animations;
 
 	private AudioStreamPlayer2D _audioStreamPlayer2D;
 	private Node2D _display;
@@ -65,6 +66,8 @@ public class GhostBehavior : KinematicBody2D
 
 		_attackCheck = GetNode<RayCast2D>("Display/AttackCheck");
 		_behindCheck = GetNode<RayCast2D>("Display/BehindCheck");
+
+		_animations = GetNode<AnimatedSprite>("Display/AnimatedSprite");
 
 		_audioStreamPlayer2D = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
