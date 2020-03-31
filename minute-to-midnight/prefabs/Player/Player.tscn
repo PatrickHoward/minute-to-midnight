@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/player/knight_a.png" type="Texture" id=3]
-[ext_resource path="res://resources/audio/player/swing_1.wav" type="AudioStream" id=4]
-[ext_resource path="res://resources/audio/player/step.wav" type="AudioStream" id=5]
+
+[ext_resource path="res://resources/audio/player/jump.wav" type="AudioStream" id=4]
+[ext_resource path="res://resources/audio/player/swing.wav" type="AudioStream" id=5]
+[ext_resource path="res://resources/audio/player/thud.wav" type="AudioStream" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
@@ -66,7 +68,7 @@ tracks/3/keys = {
 } ]
 }
 tracks/4/type = "audio"
-tracks/4/path = NodePath("SwordSwing")
+tracks/4/path = NodePath("AudioStreamPlayer2D")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -75,9 +77,9 @@ tracks/4/keys = {
 "clips": [ {
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource( 4 )
+"stream": ExtResource( 5 )
 } ],
-"times": PoolRealArray( 0.3 )
+"times": PoolRealArray( 0.6 )
 }
 
 [sub_resource type="Animation" id=4]
@@ -118,6 +120,20 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 6 )
+} ],
+"times": PoolRealArray( 6 )
 }
 
 [sub_resource type="Animation" id=5]
@@ -239,6 +255,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 4 )
+} ],
+"times": PoolRealArray( 0 )
+}
 
 [sub_resource type="Animation" id=8]
 length = 8.0
@@ -320,10 +350,11 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 161
+frame = 42
 
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
-position = Vector2( -5.29465, -21.081 )
+position = Vector2( -14.8701, -20.8165 )
+
 
 [node name="DamageArea" type="Area2D" parent="Display"]
 position = Vector2( 34.785, 6.47956 )
@@ -341,7 +372,7 @@ anims/jump_loop = SubResource( 6 )
 anims/jump_start = SubResource( 7 )
 anims/run = SubResource( 8 )
 
-[node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 
 [node name="Step" type="AudioStreamPlayer2D" parent="."]

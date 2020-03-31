@@ -43,7 +43,8 @@ public class Player : KinematicBody2D
 
     private Node2D _display;
     private Area2D _damageArea;
-
+    private AudioStreamPlayer2D _audioPlayer;
+    
     private PackedScene _gameOverScreen;
 
     public override void _Ready()
@@ -57,6 +58,8 @@ public class Player : KinematicBody2D
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("idle");
 
+        _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
+        
         GetNode<Light>("Display/Light").DisableDimming = DisableDimming;
     }
 
