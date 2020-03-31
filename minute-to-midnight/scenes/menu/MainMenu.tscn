@@ -514,6 +514,7 @@ anims/Fade_Into_Game = SubResource( 14 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
+volume_db = -10.0
 autoplay = true
 [connection signal="extinguished" from="World/Player/Display/Light" to="World/Player" method="_on_Light_extinguished"]
 [connection signal="body_entered" from="World/Exit Game Trigger" to="." method="_on_Exit_Game_Trigger_body_entered"]

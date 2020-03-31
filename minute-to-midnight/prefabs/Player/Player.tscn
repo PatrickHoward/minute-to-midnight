@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/player/knight_a.png" type="Texture" id=3]
 [ext_resource path="res://resources/audio/player/swing_1.wav" type="AudioStream" id=4]
+[ext_resource path="res://resources/audio/player/step.wav" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
@@ -277,6 +278,24 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
+tracks/3/type = "audio"
+tracks/3/path = NodePath("Step")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource( 5 )
+} ],
+"times": PoolRealArray( 0.8, 4.8 )
+}
 
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -301,10 +320,10 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 13
+frame = 161
 
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
-position = Vector2( -20.5557, -18.9492 )
+position = Vector2( -5.29465, -21.081 )
 
 [node name="DamageArea" type="Area2D" parent="Display"]
 position = Vector2( 34.785, 6.47956 )
@@ -324,4 +343,9 @@ anims/run = SubResource( 8 )
 
 [node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
+
+[node name="Step" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
+volume_db = -3.0
+pitch_scale = 0.72
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]

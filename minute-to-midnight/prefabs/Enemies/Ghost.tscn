@@ -118,7 +118,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Display"]
 frames = ExtResource( 1 )
 animation = "death"
-frame = 1
+frame = 4
 playing = true
 
 [node name="AttackCheck" type="RayCast2D" parent="Display"]
