@@ -37,7 +37,10 @@ public class GhostBehavior : KinematicBody2D
 	private GhostState _state;
 
 	private static Dictionary<string, AudioStreamSample> _soundEffects = new Dictionary<string, AudioStreamSample>
-	{ { "passive", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/ghost/passive.wav") }
+	{ { "passive", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/ghost/passive.wav") },
+		{ "attack_1", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/ghost/attack_1.wav") },
+		{ "attack_2", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/ghost/attack_2.wav") },
+		{ "attack_3", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/ghost/attack_3.wav") }
 	};
 
 	private GhostAnimationState _animationState;
@@ -198,6 +201,15 @@ public class GhostBehavior : KinematicBody2D
 				_audioStreamPlayer2D.Playing = true;
 			}
 		}
+	}
+
+	private void PlayRandomSoundEffect(string[] soundEffectNames)
+	{
+		var rng = new RandomNumberGenerator();
+		rng.Randomize();
+		var randomSoundEffect = rng.RandiRange(0, soundEffectNames.Length - 1);
+		_audioStreamPlayer2D.Stream = _soundEffects[soundEffectNames[randomSoundEffect]];
+		_audioStreamPlayer2D.Playing = true;
 	}
 
 	public void _on_AnimatedSprite_animation_finished()
