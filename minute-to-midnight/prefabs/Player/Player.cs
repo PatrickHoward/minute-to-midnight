@@ -20,7 +20,8 @@ public enum PlayerState
     Jumping,
     Falling,
     Attacking,
-    Dead
+    Dead,
+    Escaped
 }
 
 public class Player : KinematicBody2D
@@ -28,6 +29,7 @@ public class Player : KinematicBody2D
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
+    [Export] public float Pain = 0.06f;
     [Export] public bool DisableDimming = false;
 
     [Export] public bool HasKey = false;
@@ -40,22 +42,30 @@ public class Player : KinematicBody2D
     private PlayerAnimationState _animationState;
 
     private AnimationPlayer _animationPlayer;
+    private Sprite _sprite;
 
     private Node2D _display;
     private Area2D _damageArea;
+
     private AudioStreamPlayer2D _audioPlayer;
+
+    private float _painDuration = -1f;
     
     private PackedScene _gameOverScreen;
+    private PackedScene _youWinScreen;
 
     public override void _Ready()
     {
         _gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
+        _youWinScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/youwin/YouWin.tscn");
 
         _movement = new Vector2();
 
         _display = GetNode<Node2D>("Display");
         _damageArea = GetNode<Area2D>("Display/DamageArea");
+
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _sprite = GetNode<Sprite>("Display/Sprite");    
         _animationPlayer.Play("idle");
 
         _audioPlayer = GetNode<AudioStreamPlayer2D>("AudioStreamPlayer2D");
@@ -65,7 +75,18 @@ public class Player : KinematicBody2D
 
     public override void _Process(float delta)
     {
-        if (_state == PlayerState.Dead)
+        // This is garbage, dont do this.
+        if (_painDuration > 0)
+        {
+            _painDuration -= delta;
+            _sprite.SelfModulate = Color.Color8(255, 65, 65);
+        }
+        else
+        {
+            _sprite.SelfModulate = Color.Color8(255, 255, 255);
+        }
+        
+        if (_state == PlayerState.Dead || _state == PlayerState.Escaped)
         {
             return;
         }
@@ -77,7 +98,7 @@ public class Player : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
-        if (_state == PlayerState.Dead)
+        if (_state == PlayerState.Dead || _state == PlayerState.Escaped)
         {
             if (!IsOnFloor())
             {
@@ -257,6 +278,11 @@ public class Player : KinematicBody2D
         }
     }
 
+    public void _on_Light_LightDimmedByHit()
+    {
+        _painDuration = Pain;
+    }
+
     public void _on_Sprite_animation_finished()
     {
         if (_state == PlayerState.Jumping && _animationState == PlayerAnimationState.JumpStart)
@@ -274,4 +300,14 @@ public class Player : KinematicBody2D
 
         AddChild(_gameOverScreen.Instance());
     }
+
+    public void _on_Player_Escaped(Node body)
+    {
+        if (body.Name == "Player")
+        {
+            _state = PlayerState.Escaped;
+            AddChild(_youWinScreen.Instance());
+        }
+    }
+    
 }

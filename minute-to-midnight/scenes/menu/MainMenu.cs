@@ -3,17 +3,17 @@ using System;
 
 public class MainMenu : Control
 {
-    private AnimationPlayer _animationPlayer;
-    
-    public override void _Ready()
-    {
-        _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-    }
+	private AnimationPlayer _animationPlayer;
+	
+	public override void _Ready()
+	{
+		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+	}
 
-    public void Quit()
-    {
-        GetTree().Quit();
-    }
+	public void Quit()
+	{
+		GetTree().Quit();
+	}
 
     public void StartGame()
     {
@@ -37,7 +37,6 @@ public class MainMenu : Control
         {
             var music = GetNodeOrNull<AudioStreamPlayer>("AudioStreamPlayer");
             music?.Stop();
-
             _animationPlayer.Play("Fade_Exit");
         }
     }

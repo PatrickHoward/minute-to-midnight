@@ -379,4 +379,6 @@ stream = ExtResource( 4 )
 stream = ExtResource( 5 )
 volume_db = -3.0
 pitch_scale = 0.72
+
+[connection signal="LightDimmedByHit" from="Display/Light" to="." method="_on_Light_LightDimmedByHit"]
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]
