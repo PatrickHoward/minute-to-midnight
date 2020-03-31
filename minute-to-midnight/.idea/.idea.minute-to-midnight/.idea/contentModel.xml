@@ -41,6 +41,9 @@
             <e p="GameOver.cs" t="Include" />
           </e>
           <e p="MainMenu.cs" t="Include" />
+          <e p="youwin" t="Include">
+            <e p="YouWin.cs" t="Include" />
+          </e>
         </e>
       </e>
     </e>

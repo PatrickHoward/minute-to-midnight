@@ -67,6 +67,7 @@
     <Compile Include="scenes\levels\Level1\Pit.cs" />
     <Compile Include="scenes\menu\gameover\GameOver.cs" />
     <Compile Include="scenes\menu\MainMenu.cs" />
+    <Compile Include="scenes\menu\youwin\YouWin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\ambiance" />
