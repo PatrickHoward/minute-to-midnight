@@ -97,7 +97,7 @@ scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 67.2562, 204.836 )
+position = Vector2( 70.082, 193.001 )
 JumpHeight = 250.0
 
 [node name="Powerups" type="Node2D" parent="."]
@@ -135,25 +135,22 @@ position = Vector2( 1463.36, 267.135 )
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Wolf" parent="Enemies" instance=ExtResource( 13 )]
-position = Vector2( 298.147, 329.482 )
+position = Vector2( 848.724, 440.871 )
 
 [node name="Ghost" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 324.814, 250.433 )
+position = Vector2( 493.772, 335.655 )
 
 [node name="Ghost6" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 419.414, 479.774 )
 
 [node name="Ghost2" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 419.414, 252.462 )
+position = Vector2( 312.924, 255.322 )
 
 [node name="Minotaur" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 1130.9, 275.152 )
 
 [node name="Minotaur2" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 151.191, 466.106 )
-
-[node name="Ghost3" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 737.739, 441.834 )
 
 [node name="Ghost4" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 1361.07, 524.897 )
@@ -177,7 +174,6 @@ position = Vector2( 1607.75, 310.687 )
 position = Vector2( 1052.94, 487.191 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0, 0, 0, 1 )
 
@@ -267,7 +263,7 @@ position = Vector2( 29.0022, 29.3607 )
 shape = SubResource( 5 )
 
 [node name="Key" parent="." instance=ExtResource( 10 )]
-position = Vector2( 109.857, 476.955 )
+position = Vector2( 103.505, 481.803 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )

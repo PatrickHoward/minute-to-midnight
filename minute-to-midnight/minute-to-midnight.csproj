@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="prefabs\Brazier.cs" />
+    <Compile Include="prefabs\Door.cs" />
     <Compile Include="prefabs\Enemies\GhostBehavior.cs" />
     <Compile Include="prefabs\Enemies\MinotaurBehavior.cs" />
     <Compile Include="prefabs\Enemies\WolfBehavior.cs" />
