@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/swing_1.wav-c16c885c518e501b000cc697eef57b34.sample"
+path="res://.import/thud.wav-7e065148fa514c34f90bb77b34199af9.sample"
 
 [deps]
 
-source_file="res://resources/audio/player/swing_1.wav"
-dest_files=[ "res://.import/swing_1.wav-c16c885c518e501b000cc697eef57b34.sample" ]
+source_file="res://resources/audio/player/thud.wav"
+dest_files=[ "res://.import/thud.wav-7e065148fa514c34f90bb77b34199af9.sample" ]
 
 [params]
 
