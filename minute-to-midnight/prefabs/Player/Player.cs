@@ -1,5 +1,3 @@
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Godot;
 
 public enum PlayerAnimationState
@@ -30,6 +28,7 @@ public class Player : KinematicBody2D
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
+    [Export] public bool DisableDimming = false;
 
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
@@ -54,6 +53,8 @@ public class Player : KinematicBody2D
 
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("idle");
+
+        GetNode<Light>("Display/Light").DisableDimming = DisableDimming;
     }
 
     public override void _Process(float delta)
