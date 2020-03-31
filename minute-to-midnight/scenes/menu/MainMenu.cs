@@ -19,7 +19,7 @@ public class MainMenu : Control
     {
         GetTree().ChangeScene("res://scenes/levels/Level1/Level1.tscn");
     }
-
+    
     public void _on_Start_Game_Trigger_body_entered(Node body)
     {
         if (body.Name == "Player")
