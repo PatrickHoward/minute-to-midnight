@@ -1,11 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/light/light_rays.png" type="Texture" id=1]
+[ext_resource path="res://prefabs/Light.tres" type="Texture" id=2]
 [ext_resource path="res://resources/powerups/brazier_unlit.png" type="Texture" id=3]
 [ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
+[ext_resource path="res://effects/Burst.tscn" type="PackedScene" id=5]
 
+[sub_resource type="CurveTexture" id=2]
 
-
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 4, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 10.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 20.0
+damping_curve = SubResource( 2 )
+angle = 45.0
+scale_random = 1.0
+color_ramp = ExtResource( 2 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.36131, 7.77531 )
@@ -14,20 +30,31 @@ extents = Vector2( 5.36131, 7.77531 )
 script = ExtResource( 4 )
 time = 10.0
 
-[node name="Light" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0.069294, 2.06194 )
-scale = Vector2( 0.319999, 0.2 )
-MaxEnergy = 0.8
-MinEnergy = 0.1
-MaxScale = 0.4
-DisableDimming = true
+[node name="Flame" type="Node2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="Flame"]
+position = Vector2( 0, 3 )
+rotation = -1.5708
+amount = 150
+lifetime = 0.7
+process_material = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="Flame"]
+position = Vector2( 1, 0 )
+scale = Vector2( 0.154746, 0.154746 )
+texture = ExtResource( 1 )
+color = Color( 0.913725, 0.494118, 0.32549, 1 )
+range_layer_min = -101
 
 [node name="sprite" type="Sprite" parent="."]
 position = Vector2( 0.0638499, 0.0633364 )
 scale = Vector2( 0.522231, 0.478797 )
 texture = ExtResource( 3 )
 
+[node name="Burst" parent="." instance=ExtResource( 5 )]
+
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 priority = 10.0
 monitorable = false
 
