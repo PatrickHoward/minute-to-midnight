@@ -21,6 +21,12 @@ public class Brazier : Node2D
             body.PropagateCall(nameof(Light.AddTimeToTimer), new Array(timeArg));
 
             used = true;
+
+            var burst = GetNode<Node2D>("Burst").GetChildren();
+            foreach (Particles2D particle in burst)
+            {
+                particle.Emitting = true;
+            }
         }
     }
 }
