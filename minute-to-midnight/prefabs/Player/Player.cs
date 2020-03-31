@@ -29,6 +29,7 @@ public class Player : KinematicBody2D
     [Export] public float JumpHeight = 250;
     [Export] public float Speed = 75;
     [Export] public float Gravity = 9.8f;
+    [Export] public float Pain = 0.06f;
     [Export] public bool DisableDimming = false;
 
     [Export] public bool HasKey = false;
@@ -41,10 +42,13 @@ public class Player : KinematicBody2D
     private PlayerAnimationState _animationState;
 
     private AnimationPlayer _animationPlayer;
+    private Sprite _sprite;
 
     private Node2D _display;
     private Area2D _damageArea;
 
+    private float _painDuration = -1f;
+    
     private PackedScene _gameOverScreen;
     private PackedScene _youWinScreen;
 
@@ -57,7 +61,9 @@ public class Player : KinematicBody2D
 
         _display = GetNode<Node2D>("Display");
         _damageArea = GetNode<Area2D>("Display/DamageArea");
+
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _sprite = GetNode<Sprite>("Display/Sprite");    
         _animationPlayer.Play("idle");
 
         GetNode<Light>("Display/Light").DisableDimming = DisableDimming;
@@ -65,6 +71,17 @@ public class Player : KinematicBody2D
 
     public override void _Process(float delta)
     {
+        // This is garbage, dont do this.
+        if (_painDuration > 0)
+        {
+            _painDuration -= delta;
+            _sprite.SelfModulate = Color.Color8(255, 65, 65);
+        }
+        else
+        {
+            _sprite.SelfModulate = Color.Color8(255, 255, 255);
+        }
+        
         if (_state == PlayerState.Dead || _state == PlayerState.Escaped)
         {
             return;
@@ -255,6 +272,11 @@ public class Player : KinematicBody2D
             var bodyAsNode = (Node2D) body;
             bodyAsNode.Call("DealDamageToEnemy");
         }
+    }
+
+    public void _on_Light_LightDimmedByHit()
+    {
+        _painDuration = Pain;
     }
 
     public void _on_Sprite_animation_finished()

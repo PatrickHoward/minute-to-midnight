@@ -23,7 +23,8 @@ public class WormBehavior : KinematicBody2D
 	
 	[Export] public float Speed = 50;
 	[Export] public float Gravity = 9.8f;
-	[Export] public float Damage = 5f;
+	[Export] public float Damage = 1f;
+	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 1;
 
 	private const int ChangeDirection = -1;
@@ -31,6 +32,8 @@ public class WormBehavior : KinematicBody2D
 	private Vector2 _movement;
 	private readonly Vector2 _floor = new Vector2(0, -1);
 
+	private float _painDuration = -1f;
+	
 	private WormState _state;
 	
 	private WormAnimationState _animationState;
@@ -54,6 +57,17 @@ public class WormBehavior : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+		// This is garbage, dont do this.
+		if (_painDuration > 0)
+		{
+			_painDuration -= delta;
+			_animations.SelfModulate = Color.Color8(255, 65, 65);
+		}
+		else
+		{
+			_animations.SelfModulate = Color.Color8(255, 255, 255);
+		}
+		
 		if (HitsToDestroy <= 0)
 		{
 			_state = WormState.Dead;
@@ -156,6 +170,7 @@ public class WormBehavior : KinematicBody2D
 	public void DealDamageToEnemy()
 	{
 		--HitsToDestroy;
+		_painDuration = Pain;
 	}
 
 	public void _on_AnimatedSprite_animation_finished()

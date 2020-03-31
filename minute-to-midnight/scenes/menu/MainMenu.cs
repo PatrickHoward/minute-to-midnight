@@ -15,24 +15,24 @@ public class MainMenu : Control
 		GetTree().Quit();
 	}
 
-	public void StartGame()
-	{
-		GetTree().ChangeScene("res://scenes/levels/Level1/Level1.tscn");
-	}
-	
-	public void _on_Start_Game_Trigger_body_entered(Node body)
-	{
-		if (body.Name == "Player")
-		{
-			_animationPlayer.Play("Fade_Into_Game");
-		}
-	}
-	
-	public void _on_Exit_Game_Trigger_body_entered(Node body)
-	{
-		if (body.Name == "Player")
-		{
-			_animationPlayer.Play("Fade_Exit");
-		}
-	}
+    public void StartGame()
+    {
+        GetTree().ChangeScene("res://scenes/levels/Level1/Level1.tscn");
+    }
+    
+    public void _on_Start_Game_Trigger_body_entered(Node body)
+    {
+        if (body.Name == "Player")
+        {
+            _animationPlayer.Play("Fade_Into_Game");
+        }
+    }
+    
+    public void _on_Exit_Game_Trigger_body_entered(Node body)
+    {
+        if (body.Name == "Player")
+        {    
+            _animationPlayer.Play("Fade_Exit");
+        }
+    }
 }

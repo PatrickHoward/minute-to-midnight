@@ -7,11 +7,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 10, 20.9663 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "attack_1"
+[sub_resource type="Animation" id=3]
 length = 2.85
 step = 0.15
 tracks/0/type = "value"
@@ -65,8 +64,7 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "death"
+[sub_resource type="Animation" id=4]
 length = 10.0
 step = 1.0
 tracks/0/type = "value"
@@ -106,7 +104,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -146,8 +144,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "jump_loop"
+[sub_resource type="Animation" id=6]
 length = 2.0
 step = 1.0
 tracks/0/type = "value"
@@ -187,7 +184,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 4.0
 step = 1.0
 tracks/0/type = "value"
@@ -227,7 +224,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Display/Sprite:frame")
@@ -299,14 +296,15 @@ position = Vector2( 34.785, 6.47956 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Display/DamageArea"]
 position = Vector2( -4.60389, -6.47956 )
-shape = SubResource( 8 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 7.0
-anims/attack_1 = SubResource( 2 )
-anims/death = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/jump_loop = SubResource( 5 )
-anims/jump_start = SubResource( 6 )
-anims/run = SubResource( 7 )
+anims/attack_1 = SubResource( 3 )
+anims/death = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/jump_loop = SubResource( 6 )
+anims/jump_start = SubResource( 7 )
+anims/run = SubResource( 8 )
+[connection signal="LightDimmedByHit" from="Display/Light" to="." method="_on_Light_LightDimmedByHit"]
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]

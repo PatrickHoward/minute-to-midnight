@@ -3,10 +3,10 @@
 [ext_resource path="res://prefabs/Enemies/Ghost.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://prefabs/Enemies/GhostBehavior.cs" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=29]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.0498, 11.683 )
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 21.9642, 8.16039 )
 
 [node name="Ghost" type="KinematicBody2D"]
@@ -14,20 +14,19 @@ script = ExtResource( 2 )
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.135277, 2.02914 )
-shape = SubResource( 29 )
+shape = SubResource( 1 )
 
 [node name="DamageArea" type="Area2D" parent="."]
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2( 0.135277, 2.02914 )
-shape = SubResource( 28 )
+shape = SubResource( 2 )
 
 [node name="Display" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Display"]
 frames = ExtResource( 1 )
-animation = "attack_1"
-frame = 1
+animation = "idle"
 playing = true
 
 [node name="AttackCheck" type="RayCast2D" parent="Display"]
