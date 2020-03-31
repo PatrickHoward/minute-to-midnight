@@ -81,6 +81,7 @@ public class Light : Node2D
     [Export] public bool Flicker = true;
 
     [Signal] public delegate void extinguished();
+    [Signal] public delegate void LightDimmedByHit();
 
     private Timer _timer;
     
@@ -163,5 +164,7 @@ public class Light : Node2D
         {
             _timeRemaining -= Mathf.Clamp(time, 0, Maxtime);
         }
+
+        EmitSignal(nameof(LightDimmedByHit));
     }
 }

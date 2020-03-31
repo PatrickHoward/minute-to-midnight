@@ -24,6 +24,7 @@ public class MinotaurBehavior : KinematicBody2D
 	[Export] public float Speed = 10f;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 25f;
+	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 15;
 	[Export] public float IdleTimeout = 30f;
 	[Export] public float PassiveSoundChance = 1.0f;
@@ -39,6 +40,8 @@ public class MinotaurBehavior : KinematicBody2D
 
 	private MinotaurAnimationState _animationState;
 	private AnimationPlayer _animations;
+	private Sprite _sprite;
+	
 	private Node2D _display;
 
 	private RayCast2D _groundCheck;
@@ -52,6 +55,8 @@ public class MinotaurBehavior : KinematicBody2D
 	{ { "passive", ResourceLoader.Load<AudioStreamSample>("res://resources/audio/minotaur/passive.wav") }
 	};
 
+	private float _painDuration;
+
 	public override void _Ready()
 	{
 		_state = MinotaurState.Walking;
@@ -60,7 +65,7 @@ public class MinotaurBehavior : KinematicBody2D
 
 		_movement = new Vector2();
 		_animations = GetNode<AnimationPlayer>("AnimationPlayer");
-
+		_sprite = GetNode<Sprite>("Display/Sprite");
 		_display = GetNode<Node2D>("Display");
 
 		_groundCheck = GetNode<RayCast2D>("GroundCheck");
@@ -73,6 +78,17 @@ public class MinotaurBehavior : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+		// This is garbage, dont do this.
+		if (_painDuration > 0)
+		{
+			_painDuration -= delta;
+			_sprite.SelfModulate = Color.Color8(255, 65, 65);
+		}
+		else
+		{
+			_sprite.SelfModulate = Color.Color8(255, 255, 255);
+		}
+		
 		if (HitsToDestroy <= 0)
 		{
 			_state = MinotaurState.Dead;
@@ -206,6 +222,7 @@ public class MinotaurBehavior : KinematicBody2D
 	public void DealDamageToEnemy()
 	{
 		--HitsToDestroy;
+		_painDuration = Pain;
 	}
 
 	public void AttemptDamage()
