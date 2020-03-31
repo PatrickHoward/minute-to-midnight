@@ -30,6 +30,8 @@ public class Player : KinematicBody2D
     [Export] public float Gravity = 9.8f;
     [Export] public bool DisableDimming = false;
 
+    public bool HasKey = false;
+
     private Vector2 _movement;
     private Vector2 _floor = new Vector2(0, -1);
 
@@ -231,6 +233,11 @@ public class Player : KinematicBody2D
         }
     }
 
+    public void CollectKey()
+    {
+        HasKey = true;
+    }
+    
     public void PerformMeleeAttack()
     {
         var bodies = _damageArea.GetOverlappingBodies();

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://prefabs/Enemies/Minotaur.tscn" type="PackedScene" id=7]
 [ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://scenes/levels/Level1/Hints.cs" type="Script" id=9]
+[ext_resource path="res://prefabs/Key.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -105,10 +106,10 @@ position = Vector2( 661.361, 282.746 )
 position = Vector2( 865.308, 443.153 )
 
 [node name="bazier7" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 488.675, 475.034 )
+position = Vector2( 376.052, 474.465 )
 
-[node name="bazier11" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 272.96, 473.377 )
+[node name="bazier13" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 86.6657, 474.966 )
 
 [node name="bazier12" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 160.022, 282.411 )
@@ -233,6 +234,9 @@ position = Vector2( 53.969, 256.92 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HintTrigger1"]
 position = Vector2( 29.0022, 29.3607 )
 shape = SubResource( 5 )
+
+[node name="Key" parent="." instance=ExtResource( 10 )]
+position = Vector2( 109.857, 476.955 )
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
 [connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
