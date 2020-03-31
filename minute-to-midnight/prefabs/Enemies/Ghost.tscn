@@ -1,33 +1,94 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://prefabs/Enemies/Ghost.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://prefabs/Enemies/GhostBehavior.cs" type="Script" id=2]
+[ext_resource path="res://resources/audio/ghost/passive.wav" type="AudioStream" id=3]
 
-[sub_resource type="RectangleShape2D" id=29]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.0498, 11.683 )
 
-[sub_resource type="RectangleShape2D" id=28]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 21.9642, 8.16039 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "attack_1"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Display/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack_1" ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Display/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "death" ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Display/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "idle" ]
+}
+
+[sub_resource type="Animation" id=6]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Display/AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "walking" ]
+}
 
 [node name="Ghost" type="KinematicBody2D"]
 script = ExtResource( 2 )
+PassiveSoundChance = 0.005
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.135277, 2.02914 )
-shape = SubResource( 29 )
+shape = SubResource( 1 )
 
 [node name="DamageArea" type="Area2D" parent="."]
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="DamageArea"]
 position = Vector2( 0.135277, 2.02914 )
-shape = SubResource( 28 )
+shape = SubResource( 2 )
 
 [node name="Display" type="Node2D" parent="."]
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Display"]
 frames = ExtResource( 1 )
 animation = "attack_1"
-frame = 1
+frame = 2
 playing = true
 
 [node name="AttackCheck" type="RayCast2D" parent="Display"]
@@ -45,5 +106,15 @@ cast_to = Vector2( 25, 0 )
 position = Vector2( 7.8983, 9.87517 )
 enabled = true
 cast_to = Vector2( 0, 20 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+max_distance = 250.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack_1 = SubResource( 3 )
+anims/death = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/walking = SubResource( 6 )
 [connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
 [connection signal="animation_finished" from="Display/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
