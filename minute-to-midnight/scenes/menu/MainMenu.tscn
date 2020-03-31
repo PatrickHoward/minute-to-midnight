@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/tilesets/castle_tileset.tres" type="TileSet" id=2]
@@ -7,6 +7,24 @@
 [ext_resource path="res://resources/fonts/Title.tres" type="DynamicFont" id=5]
 [ext_resource path="res://resources/fonts/Labels.tres" type="DynamicFont" id=6]
 [ext_resource path="res://scenes/menu/MainMenu.cs" type="Script" id=7]
+[ext_resource path="res://resources/buttons.png" type="Texture" id=8]
+[ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="DynamicFont" id=11]
+size = 8
+font_data = ExtResource( 9 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 8 )
+region = Rect2( 1, 266, 31, 22 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 240, 32, 16 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 8 )
+region = Rect2( 32, 224, 32, 16 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
@@ -359,6 +377,60 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Movement" type="Label" parent="Text"]
+margin_left = 353.582
+margin_top = 159.389
+margin_right = 469.606
+margin_bottom = 189.305
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0.631373, 0.631373, 0.631373, 1 )
+text = "Movement"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Text/Movement"]
+position = Vector2( 8.64392, 14.4216 )
+texture = SubResource( 12 )
+
+[node name="Action" type="Label" parent="Text"]
+margin_left = 465.582
+margin_top = 159.389
+margin_right = 581.606
+margin_bottom = 189.305
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0.631373, 0.631373, 0.631373, 1 )
+text = "Attack"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Text/Action"]
+position = Vector2( 12.5786, 14.4216 )
+texture = SubResource( 13 )
+
+[node name="Jump" type="Label" parent="Text"]
+margin_left = 565.818
+margin_top = 159.389
+margin_right = 681.842
+margin_bottom = 189.305
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 0.631373, 0.631373, 0.631373, 1 )
+text = "Jump"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Text/Jump"]
+position = Vector2( 12.5786, 14.4216 )
+texture = SubResource( 14 )
 
 [node name="Enter" type="Label" parent="Text"]
 margin_left = 630.0

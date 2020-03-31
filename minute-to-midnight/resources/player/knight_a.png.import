@@ -14,7 +14,7 @@ dest_files=[ "res://.import/knight_a.png-9d7f97246439face3bf5e463dbe95fc1.stex" 
 
 [params]
 
-compress/mode=0
+compress/mode=3
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0

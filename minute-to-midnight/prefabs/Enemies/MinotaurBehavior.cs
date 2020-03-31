@@ -103,8 +103,6 @@ public class MinotaurBehavior : KinematicBody2D
 				var bodyAsNode = (Node2D) body;
 				if (bodyAsNode.Name == "Player")
 				{
-					Console.WriteLine("BOO!");
-					
 					_display.Scale = new Vector2(-1, 1);
 					_state = MinotaurState.Attacking;
 

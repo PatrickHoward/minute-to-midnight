@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/fantasy-512-x-216_full.png-28d7c64d881445f710742fffd629e61a.stex"
+path="res://.import/48x48_worm.png-0918e91f73f08870f24f067ac44c8a87.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/castle_background/512 x 256/fantasy-512-x-216_full.png"
-dest_files=[ "res://.import/fantasy-512-x-216_full.png-28d7c64d881445f710742fffd629e61a.stex" ]
+source_file="res://resources/enemies/48x48_worm.png"
+dest_files=[ "res://.import/48x48_worm.png-0918e91f73f08870f24f067ac44c8a87.stex" ]
 
 [params]
 
