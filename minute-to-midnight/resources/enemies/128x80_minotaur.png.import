@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/32x32_ghost.png-43408b19ac5a8cb8fc1d2291506c8510.stex"
+path="res://.import/128x80_minotaur.png-5bea4a5189fa23a2f9cdd8300c7cf3be.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies/32x32_ghost.png"
-dest_files=[ "res://.import/32x32_ghost.png-43408b19ac5a8cb8fc1d2291506c8510.stex" ]
+source_file="res://resources/enemies/128x80_minotaur.png"
+dest_files=[ "res://.import/128x80_minotaur.png-5bea4a5189fa23a2f9cdd8300c7cf3be.stex" ]
 
 [params]
 

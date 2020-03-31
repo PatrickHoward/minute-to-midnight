@@ -1,16 +1,16 @@
-using Godot;
+﻿using Godot;
 
 public enum PlayerAnimationState
 {
-    Idle,
-    Run,
-    JumpStart,
-    JumpLoop,
-    FallLoop,
-    Death,
-    Attack1,
-    Attack2,
-    Attack3
+	Idle,
+	Run,
+	JumpStart,
+	JumpLoop,
+	FallLoop,
+	Death,
+	Attack1,
+	Attack2,
+	Attack3
 }
 
 public enum PlayerState
@@ -40,6 +40,7 @@ public class Player : KinematicBody2D
     private AnimationPlayer _animationPlayer;
 
     private Node2D _display;
+    private Area2D _damageArea;
 
     private PackedScene _gameOverScreen;
 
@@ -50,7 +51,7 @@ public class Player : KinematicBody2D
         _movement = new Vector2();
 
         _display = GetNode<Node2D>("Display");
-
+        _damageArea = GetNode<Area2D>("Display/DamageArea");
         _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animationPlayer.Play("idle");
 
@@ -227,6 +228,22 @@ public class Player : KinematicBody2D
                 }
                 _animationPlayer.Play("attack_1");
                 break;
+        }
+    }
+
+    public void PerformMeleeAttack()
+    {
+        var bodies = _damageArea.GetOverlappingBodies();
+        
+        if (bodies.Count == 0)
+        {
+            return;
+        }
+        
+        foreach (var body in bodies)
+        {
+            var bodyAsNode = (Node2D) body;
+            bodyAsNode.Call("DealDamageToEnemy");
         }
     }
 

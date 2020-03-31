@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Godot;
 
 public class LightStrength
@@ -50,7 +50,7 @@ public class LightStrength
     }
 }
 
-public class Light : KinematicBody2D
+public class Light : Node2D
 {
     private Tuple<float, float> _scaleLimits;
     private Tuple<float, float> _energyLimits;
@@ -84,8 +84,6 @@ public class Light : KinematicBody2D
 
     private Timer _timer;
     
-    private int _speedMultiplier = 100;
-
     private float _timeRemaining;
 
     private Light2D _lightSource;
@@ -93,14 +91,6 @@ public class Light : KinematicBody2D
     private LightStrength _lightStrength;
 
     private Particles2D _particles;
-
-    private Vector2 GetInput()
-    {
-        return new Vector2(
-            Input.GetActionStrength("move_light_right") - Input.GetActionStrength("move_light_left"),
-            Input.GetActionStrength("move_light_down") - Input.GetActionStrength("move_light_up")
-        ).Normalized();
-    }
 
     public static float LinearModel(Tuple<float, float> limits, float percent)
     {
@@ -125,17 +115,7 @@ public class Light : KinematicBody2D
             _timer.Start();
         }
     }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(float delta)
-    {
-        if (Debug)
-        {
-            var velocity = GetInput() * _speedMultiplier * MaxSpeed * delta;
-            Position += velocity;
-        }
-    }
-
+    
     public void _on_Timer_timeout()
     {
         if (Flicker)

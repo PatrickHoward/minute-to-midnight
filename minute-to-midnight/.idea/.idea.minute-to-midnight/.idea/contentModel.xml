@@ -12,9 +12,13 @@
       <e p="packages" t="ExcludeRecursive" />
       <e p="prefabs" t="Include">
         <e p="brazier.cs" t="Include" />
+        <e p="Enemies" t="Include">
+          <e p="GhostBehavior.cs" t="Include" />
+          <e p="MinotaurBehavior.cs" t="Include" />
+        </e>
         <e p="Player" t="Include">
           <e p="Light.cs" t="Include" />
-          <e p="PlayerController.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
         </e>
       </e>
       <e p="Properties" t="Include">
@@ -22,6 +26,12 @@
       </e>
       <e p="scenes" t="Include">
         <e p="ambiance" t="Include" />
+        <e p="levels" t="Include">
+          <e p="Level1" t="Include">
+            <e p="Hints.cs" t="Include" />
+            <e p="Pit.cs" t="Include" />
+          </e>
+        </e>
         <e p="menu" t="Include">
           <e p="gameover" t="Include">
             <e p="GameOver.cs" t="Include" />
