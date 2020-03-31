@@ -7,12 +7,11 @@
 extents = Vector2( 18.0885, 21.4677 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 12.8312, 21.4677 )
+extents = Vector2( 27.6537, 21.4677 )
 
 [sub_resource type="Animation" id=3]
 resource_name = "attack_1"
-length = 2.45
-loop = true
+length = 2.8
 step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Display/Sprite:frame")
@@ -33,46 +32,48 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.05, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.05, 1.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( -1.36678, 1.7788 ), Vector2( -1.36678, 1.7788 ), Vector2( 16.9084, 1.52845 ) ]
+"values": [ Vector2( -1.36678, 1.7788 ), Vector2( -1.36678, 1.7788 ), Vector2( 16.9084, 1.52845 ), Vector2( 0.1341, 2.47539 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("DamageArea:position")
+tracks/2/path = NodePath("Display/DamageArea:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/keys = {
-"times": PoolRealArray( 0, 1.05, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.05, 1.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 29.4772, 1.75242 ), Vector2( 29.4772, 1.75242 ), Vector2( 47.7524, 1.50207 ) ]
+"values": [ Vector2( 29.4772, 1.75242 ), Vector2( 29.4772, 1.75242 ), Vector2( 47.7524, 1.50207 ), Vector2( 29.6253, 2.58428 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Display/AttackCheck:position")
+tracks/3/path = NodePath("Display/BehindCheck:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.05, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PoolRealArray( 0, 1.05, 1.2, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 43.2022, -0.193781 ), Vector2( 43.2022, -0.193781 ), Vector2( 60.476, 0.0565624 ) ]
+"values": [ Vector2( -20.671, 9 ), Vector2( -20.671, 9 ), Vector2( -0.644, 9 ), Vector2( -20.671, 9 ) ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("Display/BehindCheck:position")
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0, 1.05, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -20.6713, 0.0569924 ), Vector2( -20.6713, 0.0569924 ), Vector2( -0.643703, 0.0569924 ) ]
+"times": PoolRealArray( 1.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "AttemptDamage"
+} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -127,16 +128,14 @@ tracks/0/keys = {
 
 [node name="Minotaur" type="KinematicBody2D"]
 script = ExtResource( 2 )
+Damage = 30.0
+HitsToDestroy = 10
+IdleTimeout = 0.5
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -1.36677, 1.7788 )
+position = Vector2( -1.36678, 1.7788 )
+scale = Vector2( 0.92, 1 )
 shape = SubResource( 1 )
-
-[node name="DamageArea" type="Area2D" parent="."]
-position = Vector2( 29.4772, 1.75242 )
-
-[node name="AreaShape2D2" type="CollisionShape2D" parent="DamageArea"]
-shape = SubResource( 2 )
 
 [node name="Display" type="Node2D" parent="."]
 
@@ -145,21 +144,23 @@ position = Vector2( 15.5214, -16.5228 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
-frame = 6
-
-[node name="AttackCheck" type="RayCast2D" parent="Display"]
-position = Vector2( 43.2022, -0.193781 )
-enabled = true
-cast_to = Vector2( 12.831, 0 )
+frame = 8
 
 [node name="BehindCheck" type="RayCast2D" parent="Display"]
-position = Vector2( -20.6713, 0.0569924 )
+position = Vector2( -20.671, 9 )
 scale = Vector2( -1, 1 )
 enabled = true
 cast_to = Vector2( 12.831, 0 )
 
+[node name="DamageArea" type="Area2D" parent="Display"]
+position = Vector2( 31.5064, 2.4288 )
+
+[node name="AreaShape2D2" type="CollisionShape2D" parent="Display/DamageArea"]
+position = Vector2( 4.32886, -0.270552 )
+shape = SubResource( 2 )
+
 [node name="GroundCheck" type="RayCast2D" parent="."]
-position = Vector2( 33.9342, 7.12137 )
+position = Vector2( 8.53849, 5.46513 )
 enabled = true
 cast_to = Vector2( 0, 20 )
 
@@ -168,4 +169,6 @@ anims/attack_1 = SubResource( 3 )
 anims/death = SubResource( 4 )
 anims/idle = SubResource( 5 )
 anims/walk = SubResource( 6 )
-[connection signal="body_entered" from="DamageArea" to="." method="_on_DamageArea_body_entered"]
+[connection signal="body_entered" from="Display/DamageArea" to="." method="_on_MinotaurDamageArea_body_entered"]
+[connection signal="body_exited" from="Display/DamageArea" to="." method="_on_MinotaurDamageArea_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

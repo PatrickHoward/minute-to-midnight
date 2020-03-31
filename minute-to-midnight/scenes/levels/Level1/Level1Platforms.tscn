@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/tilesets/castle_tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/levels/Level1/Pit.cs" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4140.85, 17.8167 )
 
 [node name="Level" type="Node2D"]
 
@@ -19,3 +23,12 @@ collision_layer = 0
 collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 393241, 536870915, 0, 393242, 536870916, 0, 852016, 6, 0, 852036, 536870918, 0, 983042, 536870917, 0, 1310722, 1610612741, 0, 1507343, 536870918, 0, 1572881, 536870918, 0 )
+
+[node name="Pit" type="Area2D" parent="."]
+position = Vector2( 125.208, 545.153 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pit"]
+position = Vector2( 3883.87, 383.249 )
+shape = SubResource( 1 )
+[connection signal="body_entered" from="Pit" to="Pit" method="_on_Pit_body_entered"]

@@ -19,6 +19,8 @@ public enum GhostState
 
 public class GhostBehavior : KinematicBody2D
 {
+	[Signal] public delegate void GhostKilled();
+	
 	[Export] public float Speed = 50;
 	[Export] public float AttackSpeed = 100;
 	[Export] public float Gravity = 9.8f;
@@ -192,6 +194,8 @@ public class GhostBehavior : KinematicBody2D
 
 		if (_state == GhostState.Dead || _animationState == GhostAnimationState.Death)
 		{
+			EmitSignal(nameof(GhostKilled));
+			
 			QueueFree();
 		}
 	}

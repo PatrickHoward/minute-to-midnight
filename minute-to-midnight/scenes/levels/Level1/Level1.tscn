@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/player/Player.tscn" type="PackedScene" id=2]
@@ -7,14 +7,75 @@
 [ext_resource path="res://prefabs/Brazier.tscn" type="PackedScene" id=5]
 [ext_resource path="res://prefabs/Enemies/Ghost.tscn" type="PackedScene" id=6]
 [ext_resource path="res://prefabs/Enemies/Minotaur.tscn" type="PackedScene" id=7]
+[ext_resource path="res://resources/fonts/Gold Box 8x8.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scenes/levels/Level1/Hints.cs" type="Script" id=9]
 
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 8 )
 
+[sub_resource type="Animation" id=2]
+resource_name = "ShowHint1"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightHint:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
+[sub_resource type="Animation" id=3]
+resource_name = "ShowHint2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("LightHint2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2.18675e-06, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
+[sub_resource type="Animation" id=4]
+resource_name = "ShowMonstHint1"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("MonsterHint:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("MonsterHint2:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3, 4.5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
 
-
-
-
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 57.1028, 9.18048 )
 
 [node name="Scene" type="Node2D"]
 
@@ -32,7 +93,8 @@ scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 107.023, 282.115 )
+position = Vector2( 67.2562, 204.836 )
+JumpHeight = 250.0
 
 [node name="Powerups" type="Node2D" parent="."]
 
@@ -48,6 +110,12 @@ position = Vector2( 865.308, 451.153 )
 [node name="bazier7" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 488.675, 483.034 )
 
+[node name="bazier11" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 307.561, 483.034 )
+
+[node name="bazier12" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 156.53, 291.489 )
+
 [node name="bazier8" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1224.11, 467.364 )
 
@@ -58,7 +126,7 @@ position = Vector2( 1570.48, 484.115 )
 position = Vector2( 1897.4, 371.179 )
 
 [node name="bazier5" parent="Powerups" instance=ExtResource( 5 )]
-position = Vector2( 1092.93, 290.384 )
+position = Vector2( 1094.33, 290.384 )
 
 [node name="bazier6" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1463.36, 276.135 )
@@ -74,7 +142,100 @@ position = Vector2( 279.921, 330.536 )
 [node name="Minotaur" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 1130.9, 275.152 )
 
+[node name="Ghost" parent="Enemies/Minotaur" instance=ExtResource( 6 )]
+position = Vector2( -393.161, 166.682 )
+
+[node name="Minotaur2" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 151.191, 466.106 )
+
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0, 0, 0, 1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+follow_viewport_enable = true
+
+[node name="Hints" type="Control" parent="CanvasLayer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightHint" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 38.049
+margin_top = 322.135
+margin_right = 229.049
+margin_bottom = 341.135
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Your light won't last long."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LightHint2" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 29.7016
+margin_top = 322.568
+margin_right = 233.702
+margin_bottom = 341.568
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Replenish from light sources."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterHint" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 312.924
+margin_top = 358.848
+margin_right = 462.924
+margin_bottom = 377.848
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Be wary of the dark."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterHint2" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 290.908
+margin_top = 358.698
+margin_right = 490.908
+margin_bottom = 377.698
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Terrible souls dwell there..."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Hints"]
+playback_speed = 1.2
+anims/ShowHint1 = SubResource( 2 )
+anims/ShowHint2 = SubResource( 3 )
+anims/ShowMonstHint1 = SubResource( 4 )
+
+[node name="HintTrigger1" type="Area2D" parent="."]
+position = Vector2( 53.969, 256.92 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HintTrigger1"]
+position = Vector2( 29.0022, 29.3607 )
+shape = SubResource( 5 )
+[connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
+[connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
+[connection signal="body_entered" from="HintTrigger1" to="CanvasLayer/Hints" method="_on_HintTrigger1_body_entered"]

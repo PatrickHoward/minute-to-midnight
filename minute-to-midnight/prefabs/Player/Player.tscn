@@ -1,16 +1,17 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://prefabs/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=2]
 [ext_resource path="res://resources/player/knight_a.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
 
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 15.3534, 21.3073 )
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 10, 20.9663 )
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
+resource_name = "attack_1"
 length = 2.85
 step = 0.15
 tracks/0/type = "value"
@@ -64,7 +65,8 @@ tracks/3/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=3]
+resource_name = "death"
 length = 10.0
 step = 1.0
 tracks/0/type = "value"
@@ -104,7 +106,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 length = 5.0
 loop = true
 tracks/0/type = "value"
@@ -144,7 +146,8 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=5]
+resource_name = "jump_loop"
 length = 2.0
 step = 1.0
 tracks/0/type = "value"
@@ -184,7 +187,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=6]
 length = 4.0
 step = 1.0
 tracks/0/type = "value"
@@ -224,7 +227,7 @@ tracks/2/keys = {
 "values": [ 0.0, 0.0, 0.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 8.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Display/Sprite:frame")
@@ -266,6 +269,7 @@ tracks/2/keys = {
 [node name="Player" type="KinematicBody2D"]
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
+JumpHeight = 300.0
 Speed = 100.0
 Gravity = 9.0
 
@@ -287,21 +291,22 @@ vframes = 12
 hframes = 14
 frame = 5
 
-[node name="Light" parent="Display" instance=ExtResource( 3 )]
+[node name="Light" parent="Display" instance=ExtResource( 2 )]
 position = Vector2( -6.79674, -33.504 )
 
 [node name="DamageArea" type="Area2D" parent="Display"]
+position = Vector2( 34.785, 6.47956 )
 
-[node name="DamageAreaShape" type="CollisionShape2D" parent="Display/DamageArea"]
-position = Vector2( 35.1261, -0.34103 )
-shape = SubResource( 9 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Display/DamageArea"]
+position = Vector2( -4.60389, -6.47956 )
+shape = SubResource( 8 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 7.0
-anims/attack_1 = SubResource( 10 )
-anims/death = SubResource( 11 )
-anims/idle = SubResource( 12 )
-anims/jump_loop = SubResource( 13 )
-anims/jump_start = SubResource( 14 )
-anims/run = SubResource( 8 )
+anims/attack_1 = SubResource( 2 )
+anims/death = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/jump_loop = SubResource( 5 )
+anims/jump_start = SubResource( 6 )
+anims/run = SubResource( 7 )
 [connection signal="extinguished" from="Display/Light" to="." method="_on_Light_extinguished"]

@@ -380,6 +380,8 @@ __meta__ = {
 position = Vector2( 485.545, 262 )
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
+Speed = 100.0
+DisableDimming = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
 shape = SubResource( 1 )
@@ -393,7 +395,7 @@ vframes = 12
 hframes = 14
 
 [node name="Light" parent="World/Player/Display" instance=ExtResource( 1 )]
-position = Vector2( -15.09, -19.586 )
+position = Vector2( -14.5198, -19.4765 )
 Duration = 15.0
 DisableDimming = true
 
