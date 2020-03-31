@@ -505,7 +505,6 @@ position = Vector2( 44.9051, 88.0142 )
 shape = SubResource( 12 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
-visible = false
 color = Color( 0.290196, 0.270588, 0.270588, 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
