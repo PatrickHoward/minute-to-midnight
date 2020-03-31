@@ -15,6 +15,7 @@
         <e p="Enemies" t="Include">
           <e p="GhostBehavior.cs" t="Include" />
           <e p="MinotaurBehavior.cs" t="Include" />
+          <e p="WolfBehavior.cs" t="Include" />
           <e p="WormBehavior.cs" t="Include" />
         </e>
         <e p="Key.cs" t="Include" />

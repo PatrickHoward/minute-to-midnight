@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Array = Godot.Collections.Array;
 
-public enum WormAnimationState
+public enum WolfAnimationState
 {
 	Idle,
 	Walk,
@@ -9,7 +9,7 @@ public enum WormAnimationState
 	Attack1
 }
 
-public enum WormState
+public enum WolfState
 {
 	Idle,
 	Walking,
@@ -17,9 +17,9 @@ public enum WormState
 	Dead
 }
 
-public class WormBehavior : KinematicBody2D
+public class WolfBehavior : KinematicBody2D
 {
-	[Signal] public delegate void WormKilled();
+	[Signal] public delegate void WolfKilled();
 	
 	[Export] public float Speed = 50;
 	[Export] public float Gravity = 9.8f;
@@ -31,9 +31,9 @@ public class WormBehavior : KinematicBody2D
 	private Vector2 _movement;
 	private readonly Vector2 _floor = new Vector2(0, -1);
 
-	private WormState _state;
+	private WolfState _state;
 	
-	private WormAnimationState _animationState;
+	private WolfAnimationState _animationState;
 	private AnimatedSprite _animations;
 	private Node2D _display;
 
@@ -48,7 +48,7 @@ public class WormBehavior : KinematicBody2D
 		_display = GetNode<Node2D>("Display");
 
 		_groundCheck = GetNode<RayCast2D>("GroundCheck");
-		
+			
 		_behindCheck = GetNode<RayCast2D>("Display/BehindCheck");
 	}
 
@@ -56,9 +56,9 @@ public class WormBehavior : KinematicBody2D
 	{
 		if (HitsToDestroy <= 0)
 		{
-			_state = WormState.Dead;
+			_state = WolfState.Dead;
 			
-			GetNodeOrNull<CollisionShape2D>("CollisionShape2D")?.QueueFree();
+			GetNodeOrNull<CollisionShape2D>("AreaShape2D")?.QueueFree();
 			GetNodeOrNull<Area2D>("DamageArea")?.QueueFree();
 		}
 
@@ -69,12 +69,12 @@ public class WormBehavior : KinematicBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
-		if (_state == WormState.Dead)
+		if (_state == WolfState.Dead)
 		{
 			return;
 		}
 
-		 if (_behindCheck.IsColliding()) // If the player is behind the ghost.
+		if (_behindCheck.IsColliding()) // If the player is behind the ghost.
 		{
 			var body = _behindCheck.GetCollider();
 			if (body != null)
@@ -83,8 +83,7 @@ public class WormBehavior : KinematicBody2D
 				if (bodyAsNode.Name == "Player")
 				{
 					_display.Scale = new Vector2(-1, 1);
-					_state = WormState.Attacking;
-					
+
 					Speed *= ChangeDirection;
 					
 					_groundCheck.Position *= new Vector2(-1, 1);
@@ -112,16 +111,16 @@ public class WormBehavior : KinematicBody2D
 	{
 		switch (_state)
 		{
-			case WormState.Attacking:
-				_animationState = WormAnimationState.Attack1;
+			case WolfState.Attacking:
+				_animationState = WolfAnimationState.Attack1;
 				break;
 			
-			case WormState.Walking: 
-				_animationState = WormAnimationState.Walk;
+			case WolfState.Walking:
+				_animationState = WolfAnimationState.Walk;
 				break;
 			
-			case WormState.Dead :
-				_animationState = WormAnimationState.Death;
+			case WolfState.Dead:
+				_animationState = WolfAnimationState.Death;
 				break;
 		}
 	}
@@ -139,15 +138,15 @@ public class WormBehavior : KinematicBody2D
 
 		switch (_animationState)
 		{
-			case WormAnimationState.Death:
+			case WolfAnimationState.Death:
 				_animations.Animation = "death";
 				break;
 			
-			case WormAnimationState.Attack1:
-				_animations.Animation = "attack_1";
+			case WolfAnimationState.Attack1:
+				_animations.Animation = "attack_2";
 				break;
 				
-			case WormAnimationState.Walk:
+			case WolfAnimationState.Walk:
 				_animations.Animation = "walking";
 				break;
 		}
@@ -162,22 +161,22 @@ public class WormBehavior : KinematicBody2D
 	{
 		if (_movement == Vector2.Zero && IsOnFloor())
 		{
-			_state = WormState.Walking;
+			_state = WolfState.Walking;
 		}
 
 		else if (IsOnFloor())
 		{
-			_state = WormState.Walking;
+			_state = WolfState.Walking;
 		}
 
-		if (_state == WormState.Attacking)
+		if (_state == WolfState.Attacking)
 		{
-			_state = WormState.Walking;
+			_state = WolfState.Walking;
 		}
 
-		if (_state == WormState.Dead || _animationState == WormAnimationState.Death)
+		if (_state == WolfState.Dead || _animationState == WolfAnimationState.Death)
 		{
-			EmitSignal(nameof(WormKilled));
+			EmitSignal(nameof(WolfKilled));
 			
 			QueueFree();
 		}
@@ -185,7 +184,7 @@ public class WormBehavior : KinematicBody2D
 
 	public void _on_DamageArea_body_entered(Node body)
 	{
-		_state = WormState.Attacking;
+		_state = WolfState.Attacking;
 		
 		if (body.Name == "Player")
 		{
