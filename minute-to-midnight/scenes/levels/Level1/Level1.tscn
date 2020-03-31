@@ -76,7 +76,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 57.1028, 9.18048 )
+extents = Vector2( 41.2078, 48.04 )
 
 [node name="Scene" type="Node2D"]
 
