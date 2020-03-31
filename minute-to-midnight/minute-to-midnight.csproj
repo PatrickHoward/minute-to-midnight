@@ -55,8 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="prefabs\Brazier.cs" />
-    <Compile Include="prefabs\Player\Light.cs" />
-    <Compile Include="prefabs\Player\Player.cs" />
+    <Compile Include="prefabs\player\Light.cs" />
+    <Compile Include="prefabs\player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="scenes\menu\gameover\GameOver.cs" />
     <Compile Include="scenes\menu\MainMenu.cs" />

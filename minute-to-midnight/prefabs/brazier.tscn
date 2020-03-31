@@ -1,8 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=1]
+[ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/powerups/32x32_brazier_unlit.png" type="Texture" id=3]
 [ext_resource path="res://prefabs/Brazier.cs" type="Script" id=4]
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.36131, 7.77531 )

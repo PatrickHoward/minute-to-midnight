@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
-[ext_resource path="res://prefabs/Player/Light.tscn" type="PackedScene" id=3]
-[ext_resource path="res://resources/player/knight_a.png" type="Texture" id=4]
+[ext_resource path="res://prefabs/player/Player.cs" type="Script" id=1]
+[ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/player/knight_a.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
@@ -268,11 +268,11 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="Display"]
 position = Vector2( 13.9822, -10.0604 )
-texture = ExtResource( 4 )
+texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
 
-[node name="Light" parent="Display" instance=ExtResource( 3 )]
+[node name="Light" parent="Display" instance=ExtResource( 2 )]
 position = Vector2( 2.60567, 16.2555 )
 Duration = 15.0
 
