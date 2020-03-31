@@ -169,6 +169,7 @@ public class MinotaurBehavior : KinematicBody2D
 			
 			case MinotaurAnimationState.Idle:
 				_animations.Play("idle");
+				break;
 		}
 	}
 

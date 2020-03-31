@@ -15,21 +15,12 @@ public enum PlayerAnimationState
 
 public enum PlayerState
 {
-<<<<<<< HEAD:minute-to-midnight/prefabs/Player/PlayerController.cs
-	Idle,
-	Runnning,
-	Jumping,
-	Falling,
-	Attacking,
-	Dead
-=======
     Idle,
     Running,
     Jumping,
     Falling,
     Attacking,
     Dead
->>>>>>> master:minute-to-midnight/prefabs/Player/Player.cs
 }
 
 public class Player : KinematicBody2D
@@ -73,14 +64,6 @@ public class Player : KinematicBody2D
         {
             return;
         }
-<<<<<<< HEAD:minute-to-midnight/prefabs/Player/PlayerController.cs
-        
-        // if (_state == PlayerState.Attacking)
-        // {
-        //     //PerformMeleeAttack();    
-        // }
-=======
->>>>>>> master:minute-to-midnight/prefabs/Player/Player.cs
 
         UpdatePlayerState();
         UpdateAnimation();
