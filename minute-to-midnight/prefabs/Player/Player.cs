@@ -281,6 +281,8 @@ public class Player : KinematicBody2D
     public void _on_Light_LightDimmedByHit()
     {
         _painDuration = Pain;
+        var hit = GetNodeOrNull<AudioStreamPlayer2D>("Hit");
+        hit.Play();    
     }
 
     public void _on_Sprite_animation_finished()

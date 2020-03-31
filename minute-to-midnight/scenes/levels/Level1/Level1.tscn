@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://resources/Memoraphile - Spooky Dungeon.ogg" type="AudioStream" id=11]
 [ext_resource path="res://prefabs/Enemies/Worm.tscn" type="PackedScene" id=12]
 [ext_resource path="res://prefabs/Enemies/Wolf.tscn" type="PackedScene" id=13]
+[ext_resource path="res://prefabs/Door.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -51,7 +52,54 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "ShowMonstHint1"
+resource_name = "ShowKeyHint1"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("KeyHint1:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "ShowKeyHint2"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("KeyHint2:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "ShowKeyHint3"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("KeyHint3:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("MonsterHint:self_modulate")
@@ -78,10 +126,16 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 41.2078, 48.04 )
 
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 26.2129, 31.8671 )
+
 [node name="Scene" type="Node2D"]
+
+[node name="Door" parent="." instance=ExtResource( 14 )]
+position = Vector2( 5580.6, 489.98 )
 
 [node name="Level" parent="." instance=ExtResource( 1 )]
 position = Vector2( -0.894591, 154.173 )
@@ -111,6 +165,75 @@ position = Vector2( 865.308, 443.153 )
 [node name="bazier7" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 376.052, 474.465 )
 
+[node name="bazier35" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2342.38, 313.34 )
+
+[node name="bazier11" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 160.022, 572.154 )
+
+[node name="bazier14" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 103.505, 780.138 )
+
+[node name="bazier15" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 625.396, 621.678 )
+
+[node name="bazier16" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 1059.92, 910.198 )
+
+[node name="bazier17" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 938.511, 621.678 )
+
+[node name="bazier18" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 1712.06, 795.586 )
+
+[node name="bazier28" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 1740.94, 984.008 )
+
+[node name="bazier19" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2163.86, 857.285 )
+
+[node name="bazier29" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2528.52, 685.167 )
+
+[node name="bazier20" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2465.71, 572.154 )
+
+[node name="bazier30" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2147.27, 554.317 )
+
+[node name="bazier21" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2985.84, 680.956 )
+
+[node name="bazier22" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2577.45, 267.551 )
+
+[node name="bazier31" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 2985.84, 345.53 )
+
+[node name="bazier32" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 3284.14, 688.009 )
+
+[node name="bazier23" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 3594.68, 409.042 )
+
+[node name="bazier24" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4067.05, 780.138 )
+
+[node name="bazier25" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4997.81, 811.034 )
+
+[node name="bazier33" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4808.72, 583.586 )
+
+[node name="bazier34" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4531.96, 567.502 )
+
+[node name="bazier26" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4369.55, 458.601 )
+
+[node name="bazier27" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 3986.09, 440.871 )
+
 [node name="bazier13" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 86.6657, 474.966 )
 
@@ -132,19 +255,25 @@ position = Vector2( 1052.39, 283.573 )
 [node name="bazier6" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 1463.36, 267.135 )
 
+[node name="Brazier" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 5363.61, 504.837 )
+
+[node name="Brazier2" parent="Powerups" instance=ExtResource( 5 )]
+position = Vector2( 4591.67, 925.646 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Wolf" parent="Enemies" instance=ExtResource( 13 )]
 position = Vector2( 848.724, 440.871 )
 
 [node name="Ghost" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 493.772, 335.655 )
+position = Vector2( 486.703, 330.335 )
 
 [node name="Ghost6" parent="Enemies" instance=ExtResource( 6 )]
 position = Vector2( 419.414, 479.774 )
 
 [node name="Ghost2" parent="Enemies" instance=ExtResource( 6 )]
-position = Vector2( 312.924, 255.322 )
+position = Vector2( 317.227, 251.373 )
 
 [node name="Minotaur" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 1130.9, 275.152 )
@@ -159,10 +288,10 @@ position = Vector2( 1361.07, 524.897 )
 position = Vector2( 1325.06, 299.021 )
 
 [node name="Worm" parent="Enemies" instance=ExtResource( 12 )]
-position = Vector2( 536.696, 310.687 )
+position = Vector2( 543.674, 308.295 )
 
 [node name="Worm4" parent="Enemies" instance=ExtResource( 12 )]
-position = Vector2( 786.18, 296.72 )
+position = Vector2( 786.364, 293.837 )
 
 [node name="Worm2" parent="Enemies" instance=ExtResource( 12 )]
 position = Vector2( 1221.83, 471.571 )
@@ -172,6 +301,87 @@ position = Vector2( 1607.75, 310.687 )
 
 [node name="Worm5" parent="Enemies" instance=ExtResource( 12 )]
 position = Vector2( 1052.94, 487.191 )
+
+[node name="Minotaur3" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 4808.72, 770.461 )
+
+[node name="Wolf2" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 3721.57, 424.975 )
+
+[node name="Worm6" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 3142.06, 695.337 )
+
+[node name="Worm7" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 2629.04, 721.93 )
+
+[node name="Ghost3" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2284.44, 711.957 )
+
+[node name="Worm8" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 1939.84, 550.184 )
+
+[node name="Minotaur4" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 1507.7, 734.118 )
+
+[node name="Minotaur5" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 2024.05, 995.616 )
+
+[node name="Ghost7" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 514.899, 761.819 )
+
+[node name="Ghost8" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 85.1461, 780.623 )
+
+[node name="Worm9" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 376.389, 583.586 )
+
+[node name="Ghost9" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 1265.38, 669.167 )
+
+[node name="Worm10" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 1679.36, 469.477 )
+
+[node name="Minotaur6" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 2231.32, 291.679 )
+
+[node name="Ghost10" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2514.61, 265.805 )
+
+[node name="Ghost11" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 2799.88, 379.251 )
+
+[node name="Worm11" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 2845.66, 311.582 )
+
+[node name="Ghost12" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 3331.28, 682.436 )
+
+[node name="Minotaur7" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 3700.15, 833.033 )
+
+[node name="Ghost13" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 4224.25, 876.156 )
+
+[node name="Ghost14" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 4444.51, 811.804 )
+
+[node name="Worm12" parent="Enemies" instance=ExtResource( 12 )]
+position = Vector2( 4555.96, 693.714 )
+
+[node name="Ghost15" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 4938.1, 570.317 )
+
+[node name="Minotaur8" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 5133.81, 499.331 )
+
+[node name="Wolf3" parent="Enemies" instance=ExtResource( 13 )]
+position = Vector2( 4064.98, 437.019 )
+
+[node name="Minotaur9" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 1083.51, 895.003 )
+
+[node name="Ghost" parent="Enemies/Minotaur9" instance=ExtResource( 6 )]
+position = Vector2( 3627.14, -279.429 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1.16632, 110.804 )
@@ -249,28 +459,83 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="KeyHint1" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 5478.47
+margin_top = 544.162
+margin_right = 5678.47
+margin_bottom = 563.162
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "You must find the key.
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyHint3" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 5478.47
+margin_top = 544.162
+margin_right = 5678.47
+margin_bottom = 563.162
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Run
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KeyHint2" type="Label" parent="CanvasLayer/Hints"]
+self_modulate = Color( 1, 1, 1, 0 )
+margin_left = 1035.81
+margin_top = 945.392
+margin_right = 1235.81
+margin_bottom = 964.392
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Fly you fool!
+"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Hints"]
 playback_speed = 1.2
 anims/ShowHint1 = SubResource( 2 )
 anims/ShowHint2 = SubResource( 3 )
-anims/ShowMonstHint1 = SubResource( 4 )
+anims/ShowKeyHint1 = SubResource( 4 )
+anims/ShowKeyHint2 = SubResource( 5 )
+anims/ShowKeyHint3 = SubResource( 6 )
+anims/ShowMonstHint1 = SubResource( 7 )
 
 [node name="HintTrigger1" type="Area2D" parent="."]
 position = Vector2( 46.4039, 283.573 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HintTrigger1"]
 position = Vector2( 29.0022, 29.3607 )
-shape = SubResource( 5 )
+shape = SubResource( 8 )
+
+[node name="EscapeTrigger" type="Area2D" parent="."]
+position = Vector2( 5610.35, 445.143 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EscapeTrigger"]
+position = Vector2( 13.5872, 44.4401 )
+shape = SubResource( 9 )
 
 [node name="Key" parent="." instance=ExtResource( 10 )]
-position = Vector2( 103.505, 481.803 )
+position = Vector2( 1166.74, 910.198 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
-[connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
-[connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
-[connection signal="GhostKilled" from="Enemies/Ghost6" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
-[connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="body_entered" from="HintTrigger1" to="CanvasLayer/Hints" method="_on_HintTrigger1_body_entered"]
+[connection signal="body_entered" from="EscapeTrigger" to="Player" method="_on_Player_Escaped"]
