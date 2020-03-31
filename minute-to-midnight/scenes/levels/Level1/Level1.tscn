@@ -16,7 +16,7 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "ShowHint1"
-length = 3.0
+length = 3.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("LightHint:self_modulate")
 tracks/0/interp = 1
@@ -24,7 +24,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5, 3 ),
+"times": PoolRealArray( 0.5, 2, 3.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -142,11 +142,11 @@ position = Vector2( 279.921, 330.536 )
 [node name="Minotaur" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 1130.9, 275.152 )
 
-[node name="Ghost" parent="Enemies/Minotaur" instance=ExtResource( 6 )]
-position = Vector2( -393.161, 166.682 )
-
 [node name="Minotaur2" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 151.191, 466.106 )
+
+[node name="Ghost3" parent="Enemies" instance=ExtResource( 6 )]
+position = Vector2( 737.739, 441.834 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2( -1.16632, 110.804 )
@@ -180,7 +180,7 @@ __meta__ = {
 }
 
 [node name="LightHint2" type="Label" parent="CanvasLayer/Hints"]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, -1.45783e-06 )
 margin_left = 29.7016
 margin_top = 322.568
 margin_right = 233.702
@@ -237,5 +237,6 @@ position = Vector2( 53.969, 256.92 )
 position = Vector2( 29.0022, 29.3607 )
 shape = SubResource( 5 )
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
+[connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="body_entered" from="HintTrigger1" to="CanvasLayer/Hints" method="_on_HintTrigger1_body_entered"]
