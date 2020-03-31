@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/32x32_brazier_unlit.png-caa3de635629255506aa51982734c5f9.stex"
+path="res://.import/brazier_unlit.png-9615a3d01e8b14ba87981f43fe2aaa78.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/powerups/32x32_brazier_unlit.png"
-dest_files=[ "res://.import/32x32_brazier_unlit.png-caa3de635629255506aa51982734c5f9.stex" ]
+source_file="res://resources/powerups/brazier_unlit.png"
+dest_files=[ "res://.import/brazier_unlit.png-9615a3d01e8b14ba87981f43fe2aaa78.stex" ]
 
 [params]
 
