@@ -1,7 +1,4 @@
-using System;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Godot;
-using Godot.Collections;
 
 public enum PlayerAnimationState
 {

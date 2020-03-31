@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Array = Godot.Collections.Array;
 
-public enum GhostAnimationState
+public enum MinotaurAnimationState
 {
 	Idle,
 	Walk,
@@ -9,7 +9,7 @@ public enum GhostAnimationState
 	Attack1
 }
 
-public enum GhostState
+public enum MinotaurState
 {
 	Idle,
 	Walking,
@@ -17,23 +17,22 @@ public enum GhostState
 	Dead
 }
 
-public class GhostBehavior : KinematicBody2D
+public class MinotaurBehavior : KinematicBody2D
 {
-	[Export] public float Speed = 50;
-	[Export] public float AttackSpeed = 100;
+	[Export] public float Speed = 10f;
 	[Export] public float Gravity = 9.8f;
-	[Export] public float Damage = 5f;
-	[Export] public int HitsToDestroy = 1;
+	[Export] public float Damage = 25f;
+	[Export] public int HitsToDestroy = 15;
 
 	private const int ChangeDirection = -1;
 
 	private Vector2 _movement;
 	private readonly Vector2 _floor = new Vector2(0, -1);
 
-	private GhostState _state;
+	private MinotaurState _state;
 	
-	private GhostAnimationState _animationState;
-	private AnimatedSprite _animations;
+	private MinotaurAnimationState _animationState;
+	private AnimationPlayer _animations;
 	private Node2D _display;
 
 	private RayCast2D _groundCheck;
@@ -43,7 +42,7 @@ public class GhostBehavior : KinematicBody2D
 	public override void _Ready()
 	{
 		_movement = new Vector2();
-		_animations = GetNode<AnimatedSprite>("Display/AnimatedSprite");
+		_animations = GetNode<AnimationPlayer>("AnimationPlayer");
 
 		_display = GetNode<Node2D>("Display");
 
@@ -57,7 +56,7 @@ public class GhostBehavior : KinematicBody2D
 	{
 		if (HitsToDestroy <= 0)
 		{
-			_state = GhostState.Dead;
+			_state = MinotaurState.Dead;
 			
 			GetNodeOrNull<CollisionShape2D>("AreaShape2D")?.QueueFree();
 			GetNodeOrNull<Area2D>("DamageArea")?.QueueFree();
@@ -70,7 +69,7 @@ public class GhostBehavior : KinematicBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
-		if (_state == GhostState.Dead)
+		if (_state == MinotaurState.Dead)
 		{
 			return;
 		}
@@ -83,7 +82,7 @@ public class GhostBehavior : KinematicBody2D
 				var bodyAsNode = (Node2D) body;
 				if (bodyAsNode.Name == "Player")
 				{
-					_state = GhostState.Attacking;
+					_state = MinotaurState.Attacking;
 				}
 			}
 		}
@@ -96,10 +95,9 @@ public class GhostBehavior : KinematicBody2D
 				if (bodyAsNode.Name == "Player")
 				{
 					_display.Scale = new Vector2(-1, 1);
-					_state = GhostState.Attacking;
+					_state = MinotaurState.Attacking;
 					
 					Speed *= ChangeDirection;
-					AttackSpeed *= ChangeDirection;
 					
 					_groundCheck.Position *= new Vector2(-1, 1);
 
@@ -110,12 +108,11 @@ public class GhostBehavior : KinematicBody2D
 		if (IsOnWall() || !_groundCheck.IsColliding())
 		{
 			Speed *= ChangeDirection;
-			AttackSpeed *= ChangeDirection;
 			
 			_groundCheck.Position *= new Vector2(-1, 1);
 		}
 
-		_movement.x = (_state == GhostState.Attacking) ? AttackSpeed : Speed;
+		_movement.x = Speed;
 		
 		_movement.y = Gravity;
 
@@ -127,16 +124,16 @@ public class GhostBehavior : KinematicBody2D
 	{
 		switch (_state)
 		{
-			case GhostState.Attacking:
-				_animationState = GhostAnimationState.Attack1;
+			case MinotaurState.Attacking:
+				_animationState = MinotaurAnimationState.Attack1;
 				break;
 			
-			case GhostState.Walking:
-				_animationState = GhostAnimationState.Walk;
+			case MinotaurState.Walking:
+				_animationState = MinotaurAnimationState.Walk;
 				break;
 			
-			case GhostState.Dead :
-				_animationState = GhostAnimationState.Death;
+			case MinotaurState.Dead :
+				_animationState = MinotaurAnimationState.Death;
 				break;
 		}
 	}
@@ -154,16 +151,16 @@ public class GhostBehavior : KinematicBody2D
 
 		switch (_animationState)
 		{
-			case GhostAnimationState.Death:
-				_animations.Animation = "death";
+			case MinotaurAnimationState.Death:
+				_animations.Play("death");
 				break;
 			
-			case GhostAnimationState.Attack1:
-				_animations.Animation = "attack_1";
+			case MinotaurAnimationState.Attack1:
+				_animations.Play("attack_1");
 				break;
 				
-			case GhostAnimationState.Walk:
-				_animations.Animation = "walking";
+			case MinotaurAnimationState.Walk:
+				_animations.Play("walking");
 				break;
 		}
 	}
@@ -177,20 +174,20 @@ public class GhostBehavior : KinematicBody2D
 	{
 		if (_movement == Vector2.Zero && IsOnFloor())
 		{
-			_state = GhostState.Walking;
+			_state = MinotaurState.Walking;
 		}
 
 		else if (IsOnFloor())
 		{
-			_state = GhostState.Walking;
+			_state = MinotaurState.Walking;
 		}
 
-		if (_state == GhostState.Attacking)
+		if (_state == MinotaurState.Attacking)
 		{
-			_state = GhostState.Walking;
+			_state = MinotaurState.Walking;
 		}
 
-		if (_state == GhostState.Dead || _animationState == GhostAnimationState.Death)
+		if (_state == MinotaurState.Dead || _animationState == MinotaurAnimationState.Death)
 		{
 			QueueFree();
 		}

@@ -84,8 +84,6 @@ public class Light : Node2D
 
     private Timer _timer;
     
-    private int _speedMultiplier = 100;
-
     private float _timeRemaining;
 
     private Light2D _lightSource;

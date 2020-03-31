@@ -380,8 +380,6 @@ __meta__ = {
 position = Vector2( 485.545, 262 )
 scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 4 )
-Speed = 150.0
-Gravity = 9.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="World/Player"]
 shape = SubResource( 1 )
