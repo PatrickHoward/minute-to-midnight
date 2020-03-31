@@ -24,6 +24,9 @@ public class MainMenu : Control
     {
         if (body.Name == "Player")
         {
+            var music = GetNodeOrNull<AudioStreamPlayer>("AudioStreamPlayer");
+            music?.Stop();
+            
             _animationPlayer.Play("Fade_Into_Game");
         }
     }
@@ -32,6 +35,9 @@ public class MainMenu : Control
     {
         if (body.Name == "Player")
         {
+            var music = GetNodeOrNull<AudioStreamPlayer>("AudioStreamPlayer");
+            music?.Stop();
+
             _animationPlayer.Play("Fade_Exit");
         }
     }

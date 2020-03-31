@@ -7,6 +7,9 @@
     <e p="C:\Users\pmont\Documents\Repos\acm-sb-gamejam\minute-to-midnight" t="IncludeRecursive">
       <e p=".mono\temp\bin" t="ExcludeRecursive" />
       <e p=".mono\temp\obj" t="ExcludeRecursive" />
+      <e p="effects" t="Include">
+        <e p="Burst.cs" t="Include" />
+      </e>
       <e p="minute-to-midnight.csproj" t="IncludeRecursive" />
       <e p="minute-to-midnight.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
