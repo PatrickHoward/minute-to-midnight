@@ -25,6 +25,7 @@ public class GhostBehavior : KinematicBody2D
 	[Export] public float AttackSpeed = 100;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 5f;
+	[Export] public float Pain = 0.06f;
 	[Export] public int HitsToDestroy = 1;
 
 	private const int ChangeDirection = -1;
@@ -42,6 +43,8 @@ public class GhostBehavior : KinematicBody2D
 	private RayCast2D _attackCheck;
 	private RayCast2D _behindCheck;
 
+	private float _painDuration = -1f;
+	
 	public override void _Ready()
 	{
 		_movement = new Vector2();
@@ -57,6 +60,18 @@ public class GhostBehavior : KinematicBody2D
 
 	public override void _Process(float delta)
 	{
+		// This is garbage, dont do this.
+		if (_painDuration > 0)
+		{
+			_painDuration -= delta;
+			_animations.SelfModulate = Color.Color8(255, 65, 65);
+		}
+		else
+		{
+			_animations.SelfModulate = Color.Color8(255, 255, 255);
+		}
+		
+		
 		if (HitsToDestroy <= 0)
 		{
 			_state = GhostState.Dead;
@@ -173,6 +188,7 @@ public class GhostBehavior : KinematicBody2D
 	public void DealDamageToEnemy()
 	{
 		--HitsToDestroy;
+		_painDuration = Pain;
 	}
 
 	public void _on_AnimatedSprite_animation_finished()
