@@ -9,7 +9,9 @@ public class Hints : Control
     private bool _hint1Played = false;
     private bool _hint2Played = false;
     private bool _monstHint1Played = false;
-    private bool _keyHintPlayed = false;
+    private bool _keyHint1Played = false;
+    private bool _keyHint2Played = false;
+    private bool _keyHint3Played = false;
     
     public override void _Ready()
     {
@@ -49,10 +51,28 @@ public class Hints : Control
 
     public void _on_Door_PlayerDoesNotHaveKey()
     {
-        if (!_keyHintPlayed)
+        if (!_keyHint1Played)
         {
             _animationPlayer.Play("ShowKeyHint1");
-            _keyHintPlayed = true;
+            _keyHint1Played = true;
+        }
+    }
+
+    public void _on_Door_PlayerHasKey()
+    {
+        if (!_keyHint3Played)
+        {
+            _animationPlayer.Play("ShowKeyHint3");
+            _keyHint3Played = true;
+        }
+    }
+
+    public void _on_Key__Key_Collected()
+    {
+        if (!_keyHint2Played)
+        {
+            _animationPlayer.Play("ShowKeyHint2");
+            _keyHint2Played = true;
         }
     }
 }

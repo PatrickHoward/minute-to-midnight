@@ -14,7 +14,7 @@ public class Key : Area2D
             body.Call("CollectKey");
             EmitSignal(nameof(_Key_Collected));
             
-            audio.Play("collectedkey");
+            audio?.Play("pickupkey");
             
             QueueFree();
         }
