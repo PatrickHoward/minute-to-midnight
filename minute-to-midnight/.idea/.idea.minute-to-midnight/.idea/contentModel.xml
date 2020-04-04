@@ -3,8 +3,8 @@
   <component name="ContentModelStore">
     <e p="C:\Users\pmont\.Rider2019.3\config\scratches" t="IncludeRecursive" />
     <e p="C:\Users\pmont\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\pmont\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_minute-to-midnight.1912992088.00" t="ExcludeRecursive" />
-    <e p="C:\Users\pmont\Documents\Repos\acm-sb-gamejam\minute-to-midnight" t="IncludeRecursive">
+    <e p="C:\Users\pmont\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_minute-to-midnight.-680512167.00" t="ExcludeRecursive" />
+    <e p="C:\Users\pmont\Documents\Repos\minute-to-midnight\minute-to-midnight" t="IncludeRecursive">
       <e p=".mono\temp\bin" t="ExcludeRecursive" />
       <e p=".mono\temp\obj" t="ExcludeRecursive" />
       <e p="effects" t="Include">

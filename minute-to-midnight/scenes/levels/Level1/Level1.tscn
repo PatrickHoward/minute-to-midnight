@@ -14,7 +14,6 @@
 [ext_resource path="res://prefabs/Enemies/Worm.tscn" type="PackedScene" id=12]
 [ext_resource path="res://prefabs/Enemies/Wolf.tscn" type="PackedScene" id=13]
 [ext_resource path="res://prefabs/Door.tscn" type="PackedScene" id=14]
-[ext_resource path="res://resources/ambience.ogg" type="AudioStream" id=14]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -538,14 +537,11 @@ position = Vector2( 1166.74, 910.198 )
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
-
-[node name="Ambience" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 14 )
-volume_db = -5.0
-autoplay = true
+[connection signal="PlayerDoesHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesHaveKey"]
+[connection signal="PlayerDoesNotHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesNotHaveKey"]
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
-[connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
-[connection signal="GhostKilled" from="Enemies/Ghost6" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
+[connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost_GhostKilled"]
 [connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="body_entered" from="HintTrigger1" to="CanvasLayer/Hints" method="_on_HintTrigger1_body_entered"]
 [connection signal="body_entered" from="EscapeTrigger" to="Player" method="_on_Player_Escaped"]
+[connection signal="_Key_Collected" from="Key" to="CanvasLayer/Hints" method="_on_Key__Key_Collected"]

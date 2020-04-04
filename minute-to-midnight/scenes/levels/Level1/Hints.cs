@@ -39,7 +39,7 @@ public class Hints : Control
         }
     }
 
-    public void _on_Ghost2_GhostKilled()
+    public void _on_Ghost_GhostKilled()
     {
         //Play show MonsterHint
         if (!_monstHint1Played)
