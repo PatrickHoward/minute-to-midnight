@@ -2,6 +2,10 @@
 
 A game made by Patrick M. Howard (PatrickHoward), Logan Crandall (link00000000), and Mason Roberts (UnknwonWarlock) for the 2020 Akron ACM Spring Break Jam
 
+#### Installation
+Clone (or download) the repo and run the executable of your platform.
+
+
 ![splash](https://media.githubusercontent.com/media/PatrickHoward/minute-to-midnight/master/minute-to-midnight/resources/splash/splash.png)
 
 ## You have little time remaining
