@@ -2,19 +2,19 @@
 
 A game made by Patrick M. Howard (PatrickHoward), Logan Crandall (link00000000), and Mason Roberts (UnknwonWarlock) for the 2020 Akron ACM Spring Break Jam
 
-![splash](minute-to-midnight\resources\splash\splash.png)
+![splash](https://media.githubusercontent.com/media/PatrickHoward/minute-to-midnight/master/minute-to-midnight/resources/splash/splash.png)
 
 ## You have little time remaining
 
 The game is centered around your constantly dimming light. Your light will only last 60 seconds. Collecting light from light sources can extend your light's lifespan... for a little while anyway.
 
-![collect-light](minute-to-midnight\resources\splash\collect-light.png)
+![collect-light](https://media.githubusercontent.com/media/PatrickHoward/minute-to-midnight/master/minute-to-midnight/resources/splash/collect-light.png)
 
 ## Watch where you are in the dark...
 
 Terrible souls dwell in the darkness of Minute to Midnight, if you're not careful, they can take your light away in a single blow.
 
-![monsters](minute-to-midnight\resources\splash\monsters.png)
+![monsters](https://media.githubusercontent.com/media/PatrickHoward/minute-to-midnight/master/minute-to-midnight/resources/splash/monsters.png)
 
 # Find the key and escape the dark...
 
