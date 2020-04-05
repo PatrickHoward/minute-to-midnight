@@ -41,11 +41,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -3.98312 )
+position = Vector2( 0, -3.19298 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="Sprite" parent="."]
-position = Vector2( 0, -3.65542 )
+position = Vector2( 0, -3.12865 )
 scale = Vector2( 0.200402, 0.189114 )
 texture = ExtResource( 1 )
 

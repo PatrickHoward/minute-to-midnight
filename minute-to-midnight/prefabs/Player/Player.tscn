@@ -351,10 +351,9 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 157
 
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
-position = Vector2( -6.95091, -24.1498 )
+position = Vector2( -14.5198, -19.4765 )
 MaxScale = 1.5
 MinScale = 0.5
 

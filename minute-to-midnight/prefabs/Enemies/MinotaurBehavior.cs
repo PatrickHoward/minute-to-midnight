@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Godot;
 using Array = Godot.Collections.Array;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ public class MinotaurBehavior : KinematicBody2D
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 25f;
 	[Export] public float Pain = 0.06f;
-	[Export] public int HitsToDestroy = 15;
+	[Export] public int HitsToDestroy = 16;
 	[Export] public float IdleTimeout = 30f;
 	[Export] public float PassiveSoundChance = 1.0f;
 
@@ -219,9 +219,10 @@ public class MinotaurBehavior : KinematicBody2D
 		}
 	}
 
-	public void DealDamageToEnemy()
+	public void DealDamageToEnemy(int Damage)
 	{
-		--HitsToDestroy;
+		GD.Print("Damage Dealt To Minotaur: " + Damage);
+		HitsToDestroy -= Damage;
 		_painDuration = Pain;
 	}
 

@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Array = Godot.Collections.Array;
 using System.Collections.Generic;
 
@@ -202,9 +202,10 @@ public class GhostBehavior : KinematicBody2D
 		}
 	}
 
-	public void DealDamageToEnemy()
+	public void DealDamageToEnemy(int Damage)
 	{
-		--HitsToDestroy;
+		GD.Print("Damage Dealt To Ghost: " + Damage);
+		HitsToDestroy -= Damage;
 		_painDuration = Pain;
 	}
 

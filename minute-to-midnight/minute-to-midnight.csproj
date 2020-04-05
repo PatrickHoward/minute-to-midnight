@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="effects\Burst.cs" />
+    <Compile Include="PlayerData.cs" />
     <Compile Include="prefabs\Brazier.cs" />
     <Compile Include="prefabs\Door.cs" />
     <Compile Include="prefabs\Enemies\GhostBehavior.cs" />

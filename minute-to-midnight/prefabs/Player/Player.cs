@@ -30,43 +30,54 @@ public class Player : KinematicBody2D
 	[Export] public float Speed = 75;
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Pain = 0.06f;
-	[Export] public bool DisableDimming = false;
 
+	[Export] public int AllowedJumps = 1;
+	[Export] public int PlayerDamage = 1;
+
+	[Export] public bool DisableDimming = false;
 	[Export] public bool HasKey = false;
+
+	private bool _onground;
 
 	private Vector2 _movement;
 	private Vector2 _floor = new Vector2(0, -1);
-	
+
+	private float _painDuration = -1f;
 	private int _gemcount;
+	private int _jumpcount;
 
 	private PlayerState _state;
-
 	private PlayerAnimationState _animationState;
 
 	private AnimationPlayer _animationPlayer;
 	private Sprite _sprite;
-
 	private Node2D _display;
 	private Area2D _damageArea;
-
 	private AudioStreamPlayer2D _audioPlayer;
 
-	private float _painDuration = -1f;
-	
 	private PackedScene _gameOverScreen;
 	private PackedScene _youWinScreen;
 
 	public override void _Ready()
 	{
+		//retrieve the scenes for beating a level and losing
 		_gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
 		_youWinScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/youwin/YouWin.tscn");
 
+		//initialize the vectore for movement and the intial gemcount and jumpcount
 		_movement = new Vector2();
-		_gemcount = 0;
+		_gemcount = PlayerData.GemCount;
+		_jumpcount = 0;
+		AllowedJumps = PlayerData.AllowedJumps;
+		PlayerDamage = PlayerData.PlayerDamage;
 
+		//get some nodes for the player character to be used
 		_display = GetNode<Node2D>("Display");
 		_damageArea = GetNode<Area2D>("Display/DamageArea");
 
+		_onground = false;
+
+		//retrieve the animation player and set player's initial state
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
 		_sprite = GetNode<Sprite>("Display/Sprite");    
 		_animationPlayer.Play("idle");
@@ -101,9 +112,20 @@ public class Player : KinematicBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(float delta)
 	{
+		//check if the player is on the ground and updates the flag accordingly
+		if(IsOnFloor())
+		{
+			_onground = true;
+			_jumpcount = 0;
+		}
+		else
+		{
+			_onground = false;
+		}
+
 		if (_state == PlayerState.Dead || _state == PlayerState.Escaped)
 		{
-			if (!IsOnFloor())
+			if (!_onground)
 			{
 				ApplyGravity();
 			}
@@ -114,7 +136,7 @@ public class Player : KinematicBody2D
 		//Left and Right Movement
 		if (Input.IsActionPressed("Move-Left"))
 		{
-			if (IsOnFloor() && _state != PlayerState.Attacking)
+			if (_onground && _state != PlayerState.Attacking)
 			{
 				_state = PlayerState.Running;
 			}
@@ -123,7 +145,7 @@ public class Player : KinematicBody2D
 		}
 		else if (Input.IsActionPressed("Move-Right"))
 		{
-			if (IsOnFloor() && _state != PlayerState.Attacking)
+			if (_onground && _state != PlayerState.Attacking)
 			{
 				_state = PlayerState.Running;
 			}
@@ -136,22 +158,25 @@ public class Player : KinematicBody2D
 		}
 
 		//Jump Action
-		if (Input.IsActionPressed("Jump"))
+		if (Input.IsActionJustPressed("Jump"))
 		{
-			if (IsOnFloor() && _animationState != PlayerAnimationState.JumpLoop)
+			if (_animationState != PlayerAnimationState.JumpLoop && _jumpcount < AllowedJumps)
 			{
+				_jumpcount++;
+				_onground = false;
 				_state = PlayerState.Jumping;
 				_movement.y = -JumpHeight;
+
 			}
 		}
 
+		//attack action
 		if (Input.IsActionPressed("Action"))
 		{
 			_state = PlayerState.Attacking;
-			//Action button 
 		}
 
-		if (IsOnFloor() && _state == PlayerState.Jumping)
+		if (_onground && _state == PlayerState.Jumping)
 		{
 			_state = PlayerState.Idle;
 		}
@@ -175,12 +200,15 @@ public class Player : KinematicBody2D
 
 	}
 
+	//function to keep applying gravity to player
 	private void ApplyGravity()
 	{
 		_movement.y += Gravity;
 		_movement = MoveAndSlide(_movement, _floor);
 	}
 
+
+	//function to update the player to the correct state for its animation
 	private void UpdatePlayerState()
 	{
 		switch (_state)
@@ -211,6 +239,7 @@ public class Player : KinematicBody2D
 		}
 	}
 
+	//function to update the player's animation
 	private void UpdateAnimation()
 	{
 		if (_movement.x < 0)
@@ -222,7 +251,7 @@ public class Player : KinematicBody2D
 			_display.Scale = new Vector2(1, 1);
 		}
 
-		if (_animationState == PlayerAnimationState.JumpLoop && IsOnFloor())
+		if (_animationState == PlayerAnimationState.JumpLoop && _onground)
 		{
 			_animationState = PlayerAnimationState.Idle;
 		}
@@ -260,15 +289,23 @@ public class Player : KinematicBody2D
 		}
 	}
 
+
+	//updates the key flag
+	//Called by key class
 	public void CollectKey()
 	{
 		HasKey = true;
 	}
 	
+	//Updates the gem count when a gem is collected
+	//Called by the PowerGem class
 	public void CollectGem()
 	{
 		_gemcount++;
+		PlayerData.GemCount = _gemcount;
 		GD.Print("Gem Count: " + _gemcount);
+		AbilityCheck();
+
 	}
 
 	public void PerformMeleeAttack()
@@ -283,7 +320,7 @@ public class Player : KinematicBody2D
 		foreach (var body in bodies)
 		{
 			var bodyAsNode = (Node2D)body;
-			bodyAsNode.Call("DealDamageToEnemy");
+			bodyAsNode.Call("DealDamageToEnemy", PlayerDamage);
 		}
 	}
 
@@ -293,7 +330,8 @@ public class Player : KinematicBody2D
 		var hit = GetNodeOrNull<AudioStreamPlayer2D>("Hit");
 		hit.Play();    
 	}
-
+	
+	//function to handle the jumping loop animation
 	public void _on_Sprite_animation_finished()
 	{
 		if (_state == PlayerState.Jumping && _animationState == PlayerAnimationState.JumpStart)
@@ -302,6 +340,8 @@ public class Player : KinematicBody2D
 		}
 	}
 
+
+	//On death screen
 	public void _on_Light_extinguished()
 	{
 		_state = PlayerState.Dead;
@@ -312,6 +352,7 @@ public class Player : KinematicBody2D
 		AddChild(_gameOverScreen.Instance());
 	}
 
+	//Level completed screen
 	public void _on_Player_Escaped(Node body)
 	{
 		if (body.Name == "Player")
@@ -321,4 +362,20 @@ public class Player : KinematicBody2D
 		}
 	}
 	
+	//Checks gem amounts when a gem is collected and updates player's ability
+	private void AbilityCheck()
+	{
+		if(_gemcount == 2)
+		{
+			AllowedJumps++;
+			PlayerData.AllowedJumps = AllowedJumps;
+			GD.Print("Allowed Jumps: " + AllowedJumps);
+		}
+		else if(_gemcount == 4)
+		{
+			PlayerDamage++;
+			PlayerData.PlayerDamage = PlayerDamage;
+			GD.Print("Player Damage: " + PlayerDamage);
+		}
+	}
 }
