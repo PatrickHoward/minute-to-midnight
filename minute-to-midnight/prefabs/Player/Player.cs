@@ -268,7 +268,7 @@ public class Player : KinematicBody2D
 	public void CollectGem()
 	{
 		_gemcount++;
-		GD.Print(_gemcount);
+		GD.Print("Gem Count: " + _gemcount);
 	}
 
 	public void PerformMeleeAttack()
