@@ -36,6 +36,7 @@ public class Player : KinematicBody2D
 
 	[Export] public bool DisableDimming = false;
 	[Export] public bool HasKey = false;
+	[Export] public bool FinalAttack;
 
 	private bool _onground;
 
@@ -45,6 +46,7 @@ public class Player : KinematicBody2D
 	private float _painDuration = -1f;
 	private int _gemcount;
 	private int _jumpcount;
+	private int _attackcount;
 
 	private PlayerState _state;
 	private PlayerAnimationState _animationState;
@@ -66,16 +68,20 @@ public class Player : KinematicBody2D
 
 		//initialize the vectore for movement and the intial gemcount and jumpcount
 		_movement = new Vector2();
-		_gemcount = PlayerData.GemCount;
 		_jumpcount = 0;
+		_attackcount = 0;
+		_onground = false;
+		
+		//get player state from saved player states
 		AllowedJumps = PlayerData.AllowedJumps;
 		PlayerDamage = PlayerData.PlayerDamage;
+		_gemcount = PlayerData.GemCount;
+		FinalAttack = PlayerData.FinalAttack;
+		
 
 		//get some nodes for the player character to be used
 		_display = GetNode<Node2D>("Display");
 		_damageArea = GetNode<Area2D>("Display/DamageArea");
-
-		_onground = false;
 
 		//retrieve the animation player and set player's initial state
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
@@ -367,15 +373,27 @@ public class Player : KinematicBody2D
 	{
 		if(_gemcount == 2)
 		{
+			PlayerDamage++;
+			PlayerData.PlayerDamage = PlayerDamage;
+			GD.Print("Player Damage: " + PlayerDamage);
+		}
+		else if(_gemcount == 4)
+		{
 			AllowedJumps++;
 			PlayerData.AllowedJumps = AllowedJumps;
 			GD.Print("Allowed Jumps: " + AllowedJumps);
 		}
-		else if(_gemcount == 4)
+		else if(_gemcount == 7)
 		{
 			PlayerDamage++;
 			PlayerData.PlayerDamage = PlayerDamage;
 			GD.Print("Player Damage: " + PlayerDamage);
+		}
+		else if(_gemcount == 10)
+		{
+			FinalAttack = true;
+			PlayerData.FinalAttack = true;
+			GD.Print("Final Attack Is Active");
 		}
 	}
 }

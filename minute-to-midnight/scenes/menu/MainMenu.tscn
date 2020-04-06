@@ -651,6 +651,24 @@ position = Vector2( 570.506, 263.923 )
 
 [node name="PowerGem4" parent="." instance=ExtResource( 16 )]
 position = Vector2( 395.226, 265.992 )
+
+[node name="PowerGem5" parent="." instance=ExtResource( 16 )]
+position = Vector2( 432.001, 244.001 )
+
+[node name="PowerGem6" parent="." instance=ExtResource( 16 )]
+position = Vector2( 580.881, 243.508 )
+
+[node name="PowerGem7" parent="." instance=ExtResource( 16 )]
+position = Vector2( 552.314, 242.147 )
+
+[node name="PowerGem8" parent="." instance=ExtResource( 16 )]
+position = Vector2( 370.023, 232.625 )
+
+[node name="PowerGem9" parent="." instance=ExtResource( 16 )]
+position = Vector2( 398.591, 239.427 )
+
+[node name="PowerGem10" parent="." instance=ExtResource( 16 )]
+position = Vector2( 364.581, 262.553 )
 [connection signal="body_entered" from="World/Exit Game Trigger" to="." method="_on_Exit_Game_Trigger_body_entered"]
 [connection signal="body_entered" from="World/Start Game Trigger" to="." method="_on_Start_Game_Trigger_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
