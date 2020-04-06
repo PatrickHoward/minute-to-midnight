@@ -85,6 +85,7 @@ public class Player : KinematicBody2D
 
 		//retrieve the animation player and set player's initial state
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		GD.Print(_animationPlayer.GetAnimationList());
 		_sprite = GetNode<Sprite>("Display/Sprite");    
 		_animationPlayer.Play("idle");
 
@@ -177,7 +178,7 @@ public class Player : KinematicBody2D
 		}
 
 		//attack action
-		if (Input.IsActionPressed("Action"))
+		if (Input.IsActionJustPressed("Action"))
 		{
 			_state = PlayerState.Attacking;
 		}
@@ -228,7 +229,21 @@ public class Player : KinematicBody2D
 				break;
 
 			case PlayerState.Attacking:
-				_animationState = PlayerAnimationState.Attack1;
+				if(_attackcount == 0)
+				{
+					_animationState = PlayerAnimationState.Attack1;
+					break;
+				}
+				else if(_attackcount == 1)
+				{
+					_animationState = PlayerAnimationState.Attack2;
+					break;
+				}
+				else if(_attackcount == 2)
+				{
+					_animationState = PlayerAnimationState.Attack3;
+					break;
+				}
 				break;
 
 			case PlayerState.Running:
@@ -291,6 +306,20 @@ public class Player : KinematicBody2D
 					break;
 				}
 				_animationPlayer.Play("attack_1");
+				break;
+			case PlayerAnimationState.Attack2:
+				if (_animationPlayer.AssignedAnimation == "attack_2")
+				{
+					break;
+				}
+				_animationPlayer.Play("attack_2");
+				break;
+			case PlayerAnimationState.Attack3:
+				if (_animationPlayer.AssignedAnimation == "attack_3")
+				{
+					break;
+				}
+				_animationPlayer.Play("attack_3");
 				break;
 		}
 	}
@@ -394,6 +423,32 @@ public class Player : KinematicBody2D
 			FinalAttack = true;
 			PlayerData.FinalAttack = true;
 			GD.Print("Final Attack Is Active");
+		}
+	}
+	
+	private void _on_AnimationPlayer_animation_finished(string anim_name)
+	{
+		if(anim_name == "attack_1")
+		{
+			_attackcount++;
+			_state = PlayerState.Idle;
+		}
+		else if (anim_name == "attack_2")
+		{
+			if(FinalAttack)
+			{
+				_attackcount++;
+			}
+			else
+			{
+				_attackcount = 0;
+			}
+			_state = PlayerState.Idle;
+		}
+		else if(anim_name == "attack_3")
+		{
+			_attackcount = 0;
+			_state = PlayerState.Idle;
 		}
 	}
 }

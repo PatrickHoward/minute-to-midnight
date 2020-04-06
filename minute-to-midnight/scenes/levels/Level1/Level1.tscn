@@ -150,10 +150,6 @@ follow_viewport_enable = true
 scale = Vector2( 0.712, 0.652 )
 transform = Transform2D( 0.712, 0, 0, 0.652, 0, 0 )
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 70.082, 193.001 )
-JumpHeight = 250.0
-
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="bazier3" parent="Powerups" instance=ExtResource( 5 )]
@@ -537,11 +533,13 @@ position = Vector2( 1166.74, 910.198 )
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 77.6515, 177.793 )
 [connection signal="PlayerDoesHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesHaveKey"]
 [connection signal="PlayerDoesNotHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesNotHaveKey"]
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
 [connection signal="GhostKilled" from="Enemies/Ghost" to="CanvasLayer/Hints" method="_on_Ghost_GhostKilled"]
 [connection signal="GhostKilled" from="Enemies/Ghost2" to="CanvasLayer/Hints" method="_on_Ghost2_GhostKilled"]
 [connection signal="body_entered" from="HintTrigger1" to="CanvasLayer/Hints" method="_on_HintTrigger1_body_entered"]
-[connection signal="body_entered" from="EscapeTrigger" to="Player" method="_on_Player_Escaped"]
 [connection signal="_Key_Collected" from="Key" to="CanvasLayer/Hints" method="_on_Key__Key_Collected"]
