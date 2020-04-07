@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://prefabs/Player/Player.cs" type="Script" id=1]
 [ext_resource path="res://prefabs/player/Light.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://resources/audio/player/step.wav" type="AudioStream" id=7]
 [ext_resource path="res://resources/audio/player/hit.wav" type="AudioStream" id=8]
 [ext_resource path="res://prefabs/Player/attack_2.tres" type="Animation" id=9]
+[ext_resource path="res://prefabs/PauseMenu/PopUpTip.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.8453, 21.0104 )
@@ -84,7 +85,7 @@ tracks/4/keys = {
 "times": PoolRealArray( 0.6 )
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=4]
 resource_name = "attack_3"
 length = 2.85
 step = 0.15
@@ -439,6 +440,8 @@ vframes = 12
 hframes = 14
 frame = 41
 
+[node name="Ability1" parent="Display/Sprite" instance=ExtResource( 10 )]
+
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
 position = Vector2( 12.5998, -11.3844 )
 rotation = -5.29601
@@ -459,7 +462,7 @@ __meta__ = {
 playback_speed = 7.0
 anims/attack_1 = SubResource( 3 )
 anims/attack_2 = ExtResource( 9 )
-anims/attack_3 = SubResource( 10 )
+anims/attack_3 = SubResource( 4 )
 anims/death = SubResource( 5 )
 anims/idle = SubResource( 6 )
 anims/jump_loop = SubResource( 7 )

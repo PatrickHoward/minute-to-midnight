@@ -59,12 +59,20 @@ public class Player : KinematicBody2D
 
 	private PackedScene _gameOverScreen;
 	private PackedScene _youWinScreen;
+	
+	private Popup _pop;
+	private ColorRect _popRect;
+	private Label _popLabel;
 
 	public override void _Ready()
 	{
 		//retrieve the scenes for beating a level and losing
 		_gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
 		_youWinScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/youwin/YouWin.tscn");
+			
+		_popLabel = GetNode<Label>("Display/Sprite/Ability1/PopUpTip/Popup/Label2");
+		_popRect = GetNode<ColorRect>("Display/Sprite/Ability1/PopUpTip/Popup/CanvasLayer/ColorRect");
+		_pop = GetNode<Popup>("Display/Sprite/Ability1/PopUpTip/Popup");
 
 		//initialize the vectore for movement and the intial gemcount and jumpcount
 		_movement = new Vector2();
@@ -405,24 +413,44 @@ public class Player : KinematicBody2D
 			PlayerDamage++;
 			PlayerData.PlayerDamage = PlayerDamage;
 			GD.Print("Player Damage: " + PlayerDamage);
+			
+			GetTree().Paused = true;
+			_popLabel.SetText("Damage Increased");
+			_pop.Visible = true;
+			_popRect.Visible = true;
 		}
 		else if(_gemcount == 4)
 		{
 			AllowedJumps++;
 			PlayerData.AllowedJumps = AllowedJumps;
 			GD.Print("Allowed Jumps: " + AllowedJumps);
+			
+			GetTree().Paused = true;
+			_popLabel.SetText("Double Jump Unlocked");
+			_pop.Visible = true;
+			_popRect.Visible = true;
 		}
 		else if(_gemcount == 7)
 		{
 			PlayerDamage++;
 			PlayerData.PlayerDamage = PlayerDamage;
 			GD.Print("Player Damage: " + PlayerDamage);
+			
+			GetTree().Paused = true;
+			_popLabel.SetText("Damage Increased");
+			_pop.Visible = true;
+			_popRect.Visible = true;
 		}
 		else if(_gemcount == 10)
 		{
 			FinalAttack = true;
 			PlayerData.FinalAttack = true;
 			GD.Print("Final Attack Is Active");
+			
+			GetTree().Paused = true;
+			_popLabel.SetText("Third Attack Added to Combo");
+			_pop.Visible = true;
+			_popRect.Visible = true;
 		}
 	}
 	
