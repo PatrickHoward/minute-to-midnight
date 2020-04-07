@@ -364,6 +364,14 @@ public class Player : KinematicBody2D
 		{
 			var bodyAsNode = (Node2D)body;
 			bodyAsNode.Call("DealDamageToEnemy", PlayerDamage);
+			if(_attackcount == 2)
+			{
+				bodyAsNode.Call("DealDamageToEnemy", 4);
+			}
+			else
+			{
+				bodyAsNode.Call("DealDamageToEnemy", PlayerDamage);
+			}
 		}
 	}
 
