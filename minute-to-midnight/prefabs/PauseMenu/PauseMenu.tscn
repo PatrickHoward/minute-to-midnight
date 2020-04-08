@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://prefabs/PauseMenu/Pause.cs" type="Script" id=1]
+[ext_resource path="res://resources/backgrounds/menu/MenuBackground.jpg" type="Texture" id=2]
+[ext_resource path="res://resources/fonts/Title.tres" type="DynamicFont" id=3]
 
-[node name="CanvasLayer2" type="CanvasLayer"]
-layer = 128
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 127
 
 [node name="Pause" type="Control" parent="."]
 pause_mode = 2
@@ -18,4 +20,30 @@ __meta__ = {
 [node name="ScreenOverlay" type="ColorRect" parent="Pause"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0.0313726, 0.027451, 0.027451, 0.937255 )
+color = Color( 0.0313726, 0.027451, 0.027451, 0.929412 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menu" type="CanvasLayer" parent="Pause"]
+layer = 128
+
+[node name="MenuBackground" type="Sprite" parent="Pause/Menu"]
+visible = false
+position = Vector2( 512, 296 )
+texture = ExtResource( 2 )
+
+[node name="MenuTitle" type="Label" parent="Pause/Menu"]
+margin_left = 416.0
+margin_top = 152.0
+margin_right = 608.0
+margin_bottom = 190.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Menu"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
