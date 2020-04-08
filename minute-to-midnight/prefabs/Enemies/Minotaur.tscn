@@ -173,10 +173,6 @@ tracks/0/keys = {
 
 [node name="Minotaur" type="KinematicBody2D"]
 script = ExtResource( 2 )
-Damage = 30.0
-HitsToDestroy = 10
-IdleTimeout = 0.5
-PassiveSoundChance = 0.003
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 5.43982, 2.17587 )

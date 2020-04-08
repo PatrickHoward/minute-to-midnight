@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Array = Godot.Collections.Array;
 
 public enum WormAnimationState
@@ -178,9 +178,10 @@ public class WormBehavior : KinematicBody2D
 		}
 	}
 
-	public void DealDamageToEnemy()
+	public void DealDamageToEnemy(int Damage)
 	{
-		--HitsToDestroy;
+		GD.Print("Damage Dealt To Worm: " + Damage);
+		HitsToDestroy -= Damage;
 		_painDuration = Pain;
 	}
 

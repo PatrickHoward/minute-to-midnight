@@ -1,4 +1,4 @@
-﻿using Godot;
+using Godot;
 using Array = Godot.Collections.Array;
 
 public enum WolfAnimationState
@@ -25,7 +25,7 @@ public class WolfBehavior : KinematicBody2D
 	[Export] public float Gravity = 9.8f;
 	[Export] public float Damage = 5f;
 	[Export] public float Pain = 0.06f;
-	[Export] public int HitsToDestroy = 1;
+	[Export] public int HitsToDestroy = 6;
 
 	private const int ChangeDirection = -1;
 
@@ -166,9 +166,12 @@ public class WolfBehavior : KinematicBody2D
 		}
 	}
 
-	public void DealDamageToEnemy()
+	public void DealDamageToEnemy(int Damage)
 	{
-		--HitsToDestroy;
+		GD.Print("Damage Dealt To Wolf: " + Damage);
+		GD.Print("Before: " + HitsToDestroy);
+		HitsToDestroy -= Damage;
+		GD.Print("After: " + HitsToDestroy);
 		_painDuration = Pain;
 	}
 

@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/fonts/Labels.tres" type="DynamicFont" id=1]
+[ext_resource path="res://prefabs/PauseMenu/Pop.cs" type="Script" id=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 4
+
+[node name="PopUpTip" type="Control" parent="."]
+pause_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="Popup" parent="PopUpTip"]
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 864.0
+margin_bottom = 384.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="PopUpTip/Popup"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 640.0
+margin_bottom = 256.0
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+autowrap = true
+
+[node name="ToolButton" type="ToolButton" parent="PopUpTip/Popup"]
+margin_left = 160.0
+margin_top = 272.0
+margin_right = 544.0
+margin_bottom = 296.0
+custom_fonts/font = ExtResource( 1 )
+text = "Okay"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PopUpTip/Popup"]
+
+[node name="ColorRect" type="ColorRect" parent="PopUpTip/Popup/CanvasLayer"]
+visible = false
+margin_left = 160.0
+margin_top = 128.0
+margin_right = 864.0
+margin_bottom = 448.0
+color = Color( 0.0196078, 0, 0, 0.866667 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="PopUpTip/Popup/ToolButton" to="PopUpTip/Popup" method="_on_ToolButton_button_down"]
