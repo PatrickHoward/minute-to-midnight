@@ -366,7 +366,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/path = NodePath("ChurchBell")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -409,7 +409,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/path = NodePath("ChurchBell")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -587,10 +587,9 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 51
 
 [node name="Light" parent="World/Player/Display" instance=ExtResource( 1 )]
-position = Vector2( 2.60567, 16.2555 )
+position = Vector2( -14.5198, -19.4765 )
 MaxScale = 2.0
 MinScale = 1.0
 DisableDimming = true
@@ -619,12 +618,12 @@ method_call_mode = 1
 anims/Fade_Exit = SubResource( 14 )
 anims/Fade_Into_Game = SubResource( 15 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ChurchBell" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
 
 [node name="Camera2D" type="Camera2D" parent="."]

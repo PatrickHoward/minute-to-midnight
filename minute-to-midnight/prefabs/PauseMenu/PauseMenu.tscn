@@ -1,15 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://prefabs/PauseMenu/Pause.cs" type="Script" id=1]
 [ext_resource path="res://resources/backgrounds/menu/MenuBackground.jpg" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/Title.tres" type="DynamicFont" id=3]
+[ext_resource path="res://resources/fonts/Labels.tres" type="DynamicFont" id=4]
 
 [node name="PauseMenu" type="CanvasLayer"]
-layer = 127
+layer = 126
 
 [node name="Pause" type="Control" parent="."]
 pause_mode = 2
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -18,6 +18,7 @@ __meta__ = {
 }
 
 [node name="ScreenOverlay" type="ColorRect" parent="Pause"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.0313726, 0.027451, 0.027451, 0.929412 )
@@ -33,11 +34,11 @@ visible = false
 position = Vector2( 512, 296 )
 texture = ExtResource( 2 )
 
-[node name="MenuTitle" type="Label" parent="Pause/Menu"]
-margin_left = 416.0
-margin_top = 152.0
-margin_right = 608.0
-margin_bottom = 190.0
+[node name="MenuTitle" type="Label" parent="Pause/Menu/MenuBackground"]
+margin_left = -96.0
+margin_top = -128.0
+margin_right = 96.0
+margin_bottom = -90.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Menu"
@@ -47,3 +48,201 @@ autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Save" type="ToolButton" parent="Pause/Menu/MenuBackground"]
+margin_left = -48.0
+margin_top = -72.0
+margin_right = 48.0
+margin_bottom = -24.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Load" type="ToolButton" parent="Pause/Menu/MenuBackground"]
+margin_left = -48.0
+margin_top = -8.0
+margin_right = 49.0
+margin_bottom = 40.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "Load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Options" type="ToolButton" parent="Pause/Menu/MenuBackground"]
+margin_left = -48.0
+margin_top = 56.0
+margin_right = 102.0
+margin_bottom = 104.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OptionMenu" type="CanvasLayer" parent="Pause"]
+layer = 128
+
+[node name="OptionBackground" type="Sprite" parent="Pause/OptionMenu"]
+visible = false
+position = Vector2( 512, 296 )
+texture = ExtResource( 2 )
+
+[node name="OptionTitle" type="Label" parent="Pause/OptionMenu/OptionBackground"]
+margin_left = -72.0
+margin_top = -144.0
+margin_right = 66.0
+margin_bottom = -122.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Options"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle"]
+margin_left = -128.0
+margin_top = 40.0
+margin_right = -28.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Audio"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Master" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_top = 48.0
+margin_right = 75.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Master"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_left = -8.0
+margin_top = 88.0
+margin_right = 67.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Music"
+align = 1
+valign = 1
+
+[node name="Monsters" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_top = 128.0
+margin_right = 95.0
+margin_bottom = 142.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Monsters"
+align = 1
+valign = 1
+
+[node name="MasterScroll" type="HScrollBar" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_top = 64.0
+margin_right = 136.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MusicScroll2" type="HScrollBar" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_top = 104.0
+margin_right = 136.0
+margin_bottom = 116.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MonsterScroll3" type="HScrollBar" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Audio"]
+margin_top = 144.0
+margin_right = 136.0
+margin_bottom = 156.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Screen" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle"]
+margin_left = 112.0
+margin_top = 40.0
+margin_right = 233.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Screen"
+align = 1
+valign = 1
+
+[node name="ScreenSizeDrop" type="OptionButton" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Screen"]
+margin_top = 64.0
+margin_right = 120.0
+margin_bottom = 84.0
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScreenSize" type="Label" parent="Pause/OptionMenu/OptionBackground/OptionTitle/Screen"]
+margin_top = 48.0
+margin_right = 125.0
+margin_bottom = 62.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Screen Size"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Apply" type="ToolButton" parent="Pause/OptionMenu/OptionBackground"]
+margin_left = -120.0
+margin_top = 72.0
+margin_right = -7.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="ToolButton" parent="Pause/OptionMenu/OptionBackground"]
+margin_left = 8.0
+margin_top = 72.0
+margin_right = 87.0
+margin_bottom = 102.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="button_down" from="Pause/Menu/MenuBackground/Save" to="Pause" method="_on_Save_button_down"]
+[connection signal="button_down" from="Pause/Menu/MenuBackground/Load" to="Pause" method="_on_Load_button_down"]
+[connection signal="button_down" from="Pause/Menu/MenuBackground/Options" to="Pause" method="_on_Options_button_down"]
+[connection signal="button_down" from="Pause/OptionMenu/OptionBackground/Apply" to="Pause" method="_on_Apply_button_down"]
+[connection signal="button_down" from="Pause/OptionMenu/OptionBackground/Cancel" to="Pause" method="_on_Cancel_button_down"]
