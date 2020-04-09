@@ -55,4 +55,9 @@ public class Pause : Control
 	{
 		_opMenu.Visible = false;
 	}
+	
+	private void _on_Quit_button_down()
+	{
+		GetTree().Quit();
+	}
 }

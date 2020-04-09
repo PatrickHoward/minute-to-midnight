@@ -30,7 +30,6 @@ __meta__ = {
 layer = 128
 
 [node name="MenuBackground" type="Sprite" parent="Pause/Menu"]
-visible = false
 position = Vector2( 512, 296 )
 texture = ExtResource( 2 )
 
@@ -65,9 +64,9 @@ __meta__ = {
 
 [node name="Load" type="ToolButton" parent="Pause/Menu/MenuBackground"]
 margin_left = -48.0
-margin_top = -8.0
+margin_top = -24.0
 margin_right = 49.0
-margin_bottom = 40.0
+margin_bottom = 24.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -79,14 +78,29 @@ __meta__ = {
 
 [node name="Options" type="ToolButton" parent="Pause/Menu/MenuBackground"]
 margin_left = -48.0
-margin_top = 56.0
+margin_top = 24.0
 margin_right = 102.0
-margin_bottom = 104.0
+margin_bottom = 72.0
 focus_mode = 0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 enabled_focus_mode = 0
 text = "Options"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="ToolButton" parent="Pause/Menu/MenuBackground"]
+margin_left = -48.0
+margin_top = 72.0
+margin_right = 102.0
+margin_bottom = 120.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "Quit"
+align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -244,5 +258,6 @@ __meta__ = {
 [connection signal="button_down" from="Pause/Menu/MenuBackground/Save" to="Pause" method="_on_Save_button_down"]
 [connection signal="button_down" from="Pause/Menu/MenuBackground/Load" to="Pause" method="_on_Load_button_down"]
 [connection signal="button_down" from="Pause/Menu/MenuBackground/Options" to="Pause" method="_on_Options_button_down"]
+[connection signal="button_down" from="Pause/Menu/MenuBackground/Quit" to="Pause" method="_on_Quit_button_down"]
 [connection signal="button_down" from="Pause/OptionMenu/OptionBackground/Apply" to="Pause" method="_on_Apply_button_down"]
 [connection signal="button_down" from="Pause/OptionMenu/OptionBackground/Cancel" to="Pause" method="_on_Cancel_button_down"]
