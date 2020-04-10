@@ -63,6 +63,9 @@ public class Pause : Control
 		_masterVolume = SettingsData.MasterVolume;
 		_musicVolume = SettingsData.MusicVolume;
 		_monsterVolume = SettingsData.MonsterVolume;
+		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MasterScroll").Value = SettingsData.MasterVolume;
+		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MusicScroll2").Value = SettingsData.MusicVolume;
+		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MonsterScroll3").Value = SettingsData.MonsterVolume;
 	}
 	
 	private void _on_Apply_button_down()
