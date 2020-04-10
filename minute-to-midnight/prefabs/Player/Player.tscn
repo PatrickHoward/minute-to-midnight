@@ -468,13 +468,17 @@ anims/jump_loop = SubResource( 7 )
 anims/jump_start = SubResource( 8 )
 anims/run = SubResource( 9 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." groups=[
+"Ao-Master",
+]]
 stream = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Step" type="AudioStreamPlayer2D" parent="."]
+[node name="Step" type="AudioStreamPlayer2D" parent="." groups=[
+"Ao-Master",
+]]
 stream = ExtResource( 7 )
 volume_db = -3.0
 pitch_scale = 0.72
@@ -482,7 +486,9 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+[node name="Hit" type="AudioStreamPlayer2D" parent="." groups=[
+"Ao-Master",
+]]
 stream = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true

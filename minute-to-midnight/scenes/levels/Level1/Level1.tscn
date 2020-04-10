@@ -531,7 +531,9 @@ shape = SubResource( 9 )
 [node name="Key" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1166.74, 910.198 )
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." groups=[
+"Ao-Music",
+]]
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
