@@ -4,10 +4,18 @@ using System;
 public class MainMenu : Control
 {
 	private AnimationPlayer _animationPlayer;
+	private AudioStreamPlayer _music;
+	private AudioStreamPlayer2D _player;
+	private AudioStreamPlayer _ambience;
+	private AudioStreamPlayer2D _bell;
 	
 	public override void _Ready()
 	{
 		_animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		_music = GetNode<AudioStreamPlayer>("MusicPlayer");
+		_player = GetNode<AudioStreamPlayer2D>("World/Player/AudioStreamPlayer2D");
+		_ambience = GetNode<AudioStreamPlayer>("Ambience");
+		_bell = GetNode<AudioStreamPlayer2D>("ChurchBell");
 	}
 
 	public void Quit()
@@ -40,4 +48,13 @@ public class MainMenu : Control
 			_animationPlayer.Play("Fade_Exit");
 		}
 	}
+	
+	private void _on_PauseMenu_visibility_changed()
+	{
+		_music.VolumeDb = SettingsData.MusicVolume;
+		_bell.VolumeDb = SettingsData.MasterVolume;
+		_player.VolumeDb = SettingsData.MasterVolume;
+		_ambience.VolumeDb = SettingsData.MasterVolume;
+	}
 }
+

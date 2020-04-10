@@ -438,13 +438,12 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 41
+frame = 70
 
 [node name="Ability1" parent="Display/Sprite" instance=ExtResource( 10 )]
 
 [node name="Light" parent="Display" instance=ExtResource( 2 )]
-position = Vector2( 12.5998, -11.3844 )
-rotation = -5.29601
+position = Vector2( -20.3148, -19.5108 )
 MaxScale = 1.5
 MinScale = 0.5
 

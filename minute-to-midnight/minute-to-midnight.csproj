@@ -73,6 +73,7 @@
     <Compile Include="scenes\menu\gameover\GameOver.cs" />
     <Compile Include="scenes\menu\MainMenu.cs" />
     <Compile Include="scenes\menu\youwin\YouWin.cs" />
+    <Compile Include="SettingsData.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="scenes\ambiance" />

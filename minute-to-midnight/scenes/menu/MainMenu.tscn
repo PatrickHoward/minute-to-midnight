@@ -566,7 +566,7 @@ position = Vector2( 44.9051, 88.0142 )
 shape = SubResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="World"]
 position = Vector2( 485.545, 257.305 )
@@ -643,3 +643,4 @@ autoplay = true
 [connection signal="body_entered" from="World/Exit Game Trigger" to="." method="_on_Exit_Game_Trigger_body_entered"]
 [connection signal="body_entered" from="World/Start Game Trigger" to="." method="_on_Start_Game_Trigger_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="visibility_changed" from="PauseMenu" to="." method="_on_PauseMenu_visibility_changed"]
