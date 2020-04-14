@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://prefabs/PauseMenu/Pause.cs" type="Script" id=1]
 [ext_resource path="res://resources/backgrounds/menu/MenuBackground.jpg" type="Texture" id=2]
 [ext_resource path="res://resources/fonts/Title.tres" type="DynamicFont" id=3]
 [ext_resource path="res://resources/fonts/Labels.tres" type="DynamicFont" id=4]
+[ext_resource path="res://prefabs/PauseMenu/ControlButton.cs" type="Script" id=5]
 
 [node name="Pause" type="Control"]
 pause_mode = 2
@@ -16,6 +17,7 @@ __meta__ = {
 }
 
 [node name="PauseMenu" type="CanvasLayer" parent="."]
+layer = 50
 
 [node name="ScreenOverlay" type="ColorRect" parent="PauseMenu"]
 visible = false
@@ -27,7 +29,7 @@ __meta__ = {
 }
 
 [node name="Menu" type="CanvasLayer" parent="."]
-layer = 128
+layer = 51
 
 [node name="MenuBackground" type="Sprite" parent="Menu"]
 visible = false
@@ -107,7 +109,7 @@ __meta__ = {
 }
 
 [node name="OptionMenu" type="CanvasLayer" parent="."]
-layer = 128
+layer = 52
 
 [node name="OptionBackground" type="Sprite" parent="OptionMenu"]
 visible = false
@@ -183,7 +185,7 @@ __meta__ = {
 margin_top = 64.0
 margin_right = 136.0
 margin_bottom = 76.0
-min_value = -50.0
+min_value = -100.0
 max_value = 3.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -193,7 +195,7 @@ __meta__ = {
 margin_top = 104.0
 margin_right = 136.0
 margin_bottom = 116.0
-min_value = -50.0
+min_value = -100.0
 max_value = 3.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -203,52 +205,231 @@ __meta__ = {
 margin_top = 144.0
 margin_right = 136.0
 margin_bottom = 156.0
-min_value = -50.0
+min_value = -100.0
 max_value = 3.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Screen" type="Label" parent="OptionMenu/OptionBackground/OptionTitle"]
+[node name="Controls" type="Label" parent="OptionMenu/OptionBackground/OptionTitle"]
 margin_left = 112.0
 margin_top = 40.0
-margin_right = 233.0
+margin_right = 269.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Screen"
+text = "Controls"
 align = 1
+valign = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
+margin_top = 96.0
+margin_right = 109.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Jump"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScreenSizeDrop" type="OptionButton" parent="OptionMenu/OptionBackground/OptionTitle/Screen"]
-margin_top = 64.0
-margin_right = 128.0
-margin_bottom = 84.0
+[node name="Attack" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
+margin_top = 120.0
+margin_right = 109.0
+margin_bottom = 134.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Attack"
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScreenSize" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Screen"]
+[node name="Pause" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
+margin_top = 144.0
+margin_right = 109.0
+margin_bottom = 158.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Pause"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Okay" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
+margin_top = 168.0
+margin_right = 109.0
+margin_bottom = 182.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Okay"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
+margin_top = 72.0
+margin_right = 109.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Left"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = -16.0
 margin_top = 48.0
-margin_right = 125.0
+margin_right = 109.0
 margin_bottom = 62.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-text = "Screen Size"
+text = "Right"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RightControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 40.0
+margin_right = 86.0
+margin_bottom = 60.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "D"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LeftControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 86.0
+margin_bottom = 84.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "A"
+
+[node name="JumpControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 88.0
+margin_right = 133.0
+margin_bottom = 108.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "Space"
+
+[node name="AttackControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 112.0
+margin_right = 166.0
+margin_bottom = 132.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "Shift"
+
+[node name="PauseControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 136.0
+margin_right = 166.0
+margin_bottom = 156.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "P"
+
+[node name="OkayControl" type="Button" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+margin_left = 64.0
+margin_top = 160.0
+margin_right = 166.0
+margin_bottom = 180.0
+focus_mode = 0
+toggle_mode = true
+enabled_focus_mode = 0
+text = "Enter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Prompt" type="CanvasLayer" parent="OptionMenu/OptionBackground/OptionTitle/Controls"]
+layer = 53
+
+[node name="Popup" type="Popup" parent="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PromptBack" type="ColorRect" parent="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt/Popup"]
+margin_left = 256.0
+margin_top = 112.0
+margin_right = 768.0
+margin_bottom = 496.0
+color = Color( 0.0196078, 0, 0, 0.866667 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Warning" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt/Popup/PromptBack"]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 384.0
+margin_bottom = 112.0
+custom_fonts/font = ExtResource( 3 )
+text = "Warning"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Message" type="Label" parent="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt/Popup/PromptBack"]
+margin_left = 64.0
+margin_top = 88.0
+margin_right = 448.0
+margin_bottom = 280.0
+custom_fonts/font = ExtResource( 4 )
+text = "An empty control was left inside the control options and none of them was saved!"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Okay" type="ToolButton" parent="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt/Popup/PromptBack"]
+margin_left = 216.0
+margin_top = 272.0
+margin_right = 276.0
+margin_bottom = 294.0
+custom_fonts/font = ExtResource( 4 )
+text = "Okay"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Apply" type="ToolButton" parent="OptionMenu/OptionBackground"]
 margin_left = -120.0
-margin_top = 72.0
+margin_top = 96.0
 margin_right = -7.0
-margin_bottom = 102.0
+margin_bottom = 126.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Apply"
@@ -258,9 +439,9 @@ __meta__ = {
 
 [node name="Cancel" type="ToolButton" parent="OptionMenu/OptionBackground"]
 margin_left = 8.0
-margin_top = 72.0
+margin_top = 96.0
 margin_right = 87.0
-margin_bottom = 102.0
+margin_bottom = 126.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Cancel"
@@ -274,5 +455,14 @@ __meta__ = {
 [connection signal="value_changed" from="OptionMenu/OptionBackground/OptionTitle/Audio/MasterScroll" to="." method="_on_MasterScroll_value_changed"]
 [connection signal="value_changed" from="OptionMenu/OptionBackground/OptionTitle/Audio/MusicScroll2" to="." method="_on_MusicScroll2_value_changed"]
 [connection signal="value_changed" from="OptionMenu/OptionBackground/OptionTitle/Audio/MonsterScroll3" to="." method="_on_MonsterScroll3_value_changed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/RightControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_RightControl_pressed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/LeftControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_LeftControl_pressed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/JumpControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_JumpControl_pressed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/AttackControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_AttackControl_pressed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/PauseControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_PauseControl_pressed"]
+[connection signal="pressed" from="OptionMenu/OptionBackground/OptionTitle/Controls/OkayControl" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_OkayControl_pressed"]
+[connection signal="button_down" from="OptionMenu/OptionBackground/OptionTitle/Controls/Prompt/Popup/PromptBack/Okay" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Okay_button_down"]
 [connection signal="button_down" from="OptionMenu/OptionBackground/Apply" to="." method="_on_Apply_button_down"]
+[connection signal="button_down" from="OptionMenu/OptionBackground/Apply" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Apply_button_down"]
 [connection signal="button_down" from="OptionMenu/OptionBackground/Cancel" to="." method="_on_Cancel_button_down"]
+[connection signal="button_down" from="OptionMenu/OptionBackground/Cancel" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Cancel_button_down"]

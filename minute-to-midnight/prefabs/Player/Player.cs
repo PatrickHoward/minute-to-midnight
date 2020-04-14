@@ -66,6 +66,8 @@ public class Player : KinematicBody2D
 
 	public override void _Ready()
 	{
+		if(!SettingsData.FileFound)
+			GetTree().Quit();
 		//retrieve the scenes for beating a level and losing
 		_gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
 		_youWinScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/youwin/YouWin.tscn");

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class MainMenu : Control
 {
@@ -16,6 +17,12 @@ public class MainMenu : Control
 		_player = GetNode<AudioStreamPlayer2D>("World/Player/AudioStreamPlayer2D");
 		_ambience = GetNode<AudioStreamPlayer>("Ambience");
 		_bell = GetNode<AudioStreamPlayer2D>("ChurchBell");
+		
+		var audio = SettingsData.Settings["audio"] as Dictionary;
+		_music.VolumeDb = (float)audio["music"];
+		_bell.VolumeDb = (float)audio["master"];
+		_player.VolumeDb = (float)audio["master"];
+		_ambience.VolumeDb = (float)audio["master"];
 	}
 
 	public void Quit()
@@ -51,10 +58,11 @@ public class MainMenu : Control
 	
 	private void _on_PauseMenu_visibility_changed()
 	{
-		_music.VolumeDb = SettingsData.MusicVolume;
-		_bell.VolumeDb = SettingsData.MasterVolume;
-		_player.VolumeDb = SettingsData.MasterVolume;
-		_ambience.VolumeDb = SettingsData.MasterVolume;
+		var audio = SettingsData.Settings["audio"] as Dictionary;
+		_music.VolumeDb = (float)audio["music"];
+		_bell.VolumeDb = (float)audio["master"];
+		_player.VolumeDb = (float)audio["master"];
+		_ambience.VolumeDb = (float)audio["master"];
 	}
 }
 

@@ -62,6 +62,7 @@
     <Compile Include="prefabs\Enemies\WolfBehavior.cs" />
     <Compile Include="prefabs\Enemies\WormBehavior.cs" />
     <Compile Include="prefabs\Key.cs" />
+    <Compile Include="prefabs\PauseMenu\ControlButton.cs" />
     <Compile Include="prefabs\PauseMenu\Pause.cs" />
     <Compile Include="prefabs\PauseMenu\Pop.cs" />
     <Compile Include="prefabs\Player\Light.cs" />

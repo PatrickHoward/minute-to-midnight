@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Godot.Collections;
 
 public class Pause : Control
 {
@@ -10,6 +11,9 @@ public class Pause : Control
 	private float _masterVolume;
 	private float _monsterVolume;
 	private float _musicVolume;
+	private HScrollBar _masterScroll;
+	private HScrollBar _musicScroll;
+	private HScrollBar _monsterScroll;
 	
 	public override void _Ready()
 	{
@@ -23,11 +27,33 @@ public class Pause : Control
 		
 		_screen = GetNode<ColorRect>("PauseMenu/ScreenOverlay");
 		_screen.Visible = false;
+		
+		Dictionary audio = SettingsData.Settings["audio"] as Dictionary;
+		
+		_masterVolume = (float)audio["master"];
+		_masterScroll = GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MasterScroll");
+		_musicVolume = (float)audio["music"];
+		_musicScroll = GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MusicScroll2");
+		_monsterVolume = (float)audio["monster"];
+		_monsterScroll = GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MonsterScroll3");
+		
+		_masterScroll.Value = _masterVolume;
+		_musicScroll.Value = _musicVolume;
+		_monsterScroll.Value = _monsterVolume;
+		
+		foreach(AudioStreamPlayer node in GetTree().GetNodesInGroup("Ao-Music"))
+			node.VolumeDb = _musicVolume;
+			
+		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Monsters"))
+			node.VolumeDb = _monsterVolume;
+			
+		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Master"))
+			node.VolumeDb = _masterVolume;
 	}
 	
 	public override void _Input(InputEvent e)
 	{
-		if(e.IsActionPressed("Pause") )
+		if(e.IsActionPressed("Pause") && !_opMenu.Visible)
 		{
 			_pauseState = !GetTree().Paused;
 			GD.Print("Pause State: " + _pauseState);
@@ -59,21 +85,28 @@ public class Pause : Control
 	
 	private void _on_Cancel_button_down()
 	{
+		SettingsData.Load();
+		Dictionary audio = SettingsData.Settings["audio"] as Dictionary;
+		
 		_opMenu.Visible = false;
-		_masterVolume = SettingsData.MasterVolume;
-		_musicVolume = SettingsData.MusicVolume;
-		_monsterVolume = SettingsData.MonsterVolume;
-		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MasterScroll").Value = SettingsData.MasterVolume;
-		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MusicScroll2").Value = SettingsData.MusicVolume;
-		GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MonsterScroll3").Value = SettingsData.MonsterVolume;
+		_masterVolume = (float)audio["master"];
+		_musicVolume = (float)audio["music"];
+		_monsterVolume = (float)audio["monster"];
+		
+		_masterScroll.Value = _masterVolume;
+		_musicScroll.Value = _musicVolume;
+		_monsterScroll.Value = _monsterVolume;
 	}
 	
 	private void _on_Apply_button_down()
 	{
+		var audio = SettingsData.Settings["audio"] as Dictionary;
+		
 		_opMenu.Visible = false;
-		SettingsData.MasterVolume = _masterVolume;
-		SettingsData.MusicVolume = _musicVolume; 
-		SettingsData.MonsterVolume = _monsterVolume;
+		audio["master"] = _masterVolume;
+		audio["music"] = _musicVolume; 
+		audio["monster"] = _monsterVolume;
+		SettingsData.Settings["audio"] = audio.Duplicate();
 		
 		foreach(AudioStreamPlayer node in GetTree().GetNodesInGroup("Ao-Music"))
 			node.VolumeDb = _musicVolume;
@@ -83,6 +116,8 @@ public class Pause : Control
 			
 		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Master"))
 			node.VolumeDb = _masterVolume;
+			
+		SettingsData.Save();
 	}
 	
 	private void _on_Quit_button_down()

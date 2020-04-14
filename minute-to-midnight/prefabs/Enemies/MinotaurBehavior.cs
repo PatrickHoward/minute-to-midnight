@@ -113,7 +113,7 @@ public class MinotaurBehavior : KinematicBody2D
 
 		if (_state == MinotaurState.Idle)
 		{
-			_timeoutDuration -= delta;
+			_timeoutDuration -= 2f;
 			if (_timeoutDuration <= 0)
 			{
 				_state = MinotaurState.Walking;
