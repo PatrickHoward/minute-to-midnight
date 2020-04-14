@@ -57,6 +57,25 @@ public class SettingsData : Node
 		
 	}
 	
+	static public void Default()
+	{
+		var audio = Settings["audio"] as Dictionary;
+		var keys = Settings["keys"] as Dictionary;
+		
+		audio["master"] = _conf.GetValue("defaultaudio", "master");
+		audio["music"] = _conf.GetValue("defaultaudio", "music");
+		audio["monster"] = _conf.GetValue("defaultaudio", "monster");
+		
+		keys["Move-Left"] = _conf.GetValue("defaultkeys", "Move-Left");
+		keys["Move-Right"] = _conf.GetValue("defaultkeys", "Move-Right");
+		keys["Jump"] = _conf.GetValue("defaultkeys", "Jump");
+		keys["Action"] = _conf.GetValue("defaultkeys", "Action");
+		keys["Pause"] = _conf.GetValue("defaultkeys", "Pause");
+		keys["Okay"] = _conf.GetValue("defaultkeys", "Okay");
+		
+		Save();
+	}
+	
 	static public void Save()
 	{
 		var audio = Settings["audio"] as Dictionary;

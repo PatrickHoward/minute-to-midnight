@@ -426,10 +426,10 @@ __meta__ = {
 }
 
 [node name="Apply" type="ToolButton" parent="OptionMenu/OptionBackground"]
-margin_left = -120.0
-margin_top = 96.0
-margin_right = -7.0
-margin_bottom = 126.0
+margin_left = -192.0
+margin_top = 88.0
+margin_right = -79.0
+margin_bottom = 118.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Apply"
@@ -438,13 +438,25 @@ __meta__ = {
 }
 
 [node name="Cancel" type="ToolButton" parent="OptionMenu/OptionBackground"]
-margin_left = 8.0
-margin_top = 96.0
-margin_right = 87.0
-margin_bottom = 126.0
+margin_left = 72.0
+margin_top = 88.0
+margin_right = 151.0
+margin_bottom = 118.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Cancel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Default" type="ToolButton" parent="OptionMenu/OptionBackground"]
+margin_left = -64.0
+margin_top = 88.0
+margin_right = 30.0
+margin_bottom = 118.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "Default"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -466,3 +478,5 @@ __meta__ = {
 [connection signal="button_down" from="OptionMenu/OptionBackground/Apply" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Apply_button_down"]
 [connection signal="button_down" from="OptionMenu/OptionBackground/Cancel" to="." method="_on_Cancel_button_down"]
 [connection signal="button_down" from="OptionMenu/OptionBackground/Cancel" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Cancel_button_down"]
+[connection signal="button_down" from="OptionMenu/OptionBackground/Default" to="." method="_on_Default_button_down"]
+[connection signal="button_down" from="OptionMenu/OptionBackground/Default" to="OptionMenu/OptionBackground/OptionTitle/Controls" method="_on_Default_button_down"]

@@ -37,18 +37,9 @@ public class Pause : Control
 		_monsterVolume = (float)audio["monster"];
 		_monsterScroll = GetNode<HScrollBar>("OptionMenu/OptionBackground/OptionTitle/Audio/MonsterScroll3");
 		
-		_masterScroll.Value = _masterVolume;
-		_musicScroll.Value = _musicVolume;
-		_monsterScroll.Value = _monsterVolume;
+		UpdateScrollButton();
 		
-		foreach(AudioStreamPlayer node in GetTree().GetNodesInGroup("Ao-Music"))
-			node.VolumeDb = _musicVolume;
-			
-		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Monsters"))
-			node.VolumeDb = _monsterVolume;
-			
-		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Master"))
-			node.VolumeDb = _masterVolume;
+		UpdateVolume();
 	}
 	
 	public override void _Input(InputEvent e)
@@ -93,9 +84,7 @@ public class Pause : Control
 		_musicVolume = (float)audio["music"];
 		_monsterVolume = (float)audio["monster"];
 		
-		_masterScroll.Value = _masterVolume;
-		_musicScroll.Value = _musicVolume;
-		_monsterScroll.Value = _monsterVolume;
+		UpdateScrollButton();
 	}
 	
 	private void _on_Apply_button_down()
@@ -108,14 +97,7 @@ public class Pause : Control
 		audio["monster"] = _monsterVolume;
 		SettingsData.Settings["audio"] = audio.Duplicate();
 		
-		foreach(AudioStreamPlayer node in GetTree().GetNodesInGroup("Ao-Music"))
-			node.VolumeDb = _musicVolume;
-			
-		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Monsters"))
-			node.VolumeDb = _monsterVolume;
-			
-		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Master"))
-			node.VolumeDb = _masterVolume;
+		UpdateVolume();
 			
 		SettingsData.Save();
 	}
@@ -138,5 +120,39 @@ public class Pause : Control
 	private void _on_MonsterScroll3_value_changed(float value)
 	{
 		_monsterVolume = value;
+	}
+	
+	private void _on_Default_button_down()
+	{
+		SettingsData.Default();
+		Dictionary audio = SettingsData.Settings["audio"] as Dictionary;
+		
+		_opMenu.Visible = false;
+		_masterVolume = (float)audio["master"];
+		_musicVolume = (float)audio["music"];
+		_monsterVolume = (float)audio["monster"];
+		
+		UpdateScrollButton();
+		
+		UpdateVolume();
+	}
+	
+	private void UpdateVolume()
+	{
+		foreach(AudioStreamPlayer node in GetTree().GetNodesInGroup("Ao-Music"))
+			node.VolumeDb = _musicVolume;
+			
+		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Monsters"))
+			node.VolumeDb = _monsterVolume;
+			
+		foreach(AudioStreamPlayer2D node in GetTree().GetNodesInGroup("Ao-Master"))
+			node.VolumeDb = _masterVolume;
+	}
+	
+	private void UpdateScrollButton()
+	{
+		_masterScroll.Value = _masterVolume;
+		_musicScroll.Value = _musicVolume;
+		_monsterScroll.Value = _monsterVolume;
 	}
 }
