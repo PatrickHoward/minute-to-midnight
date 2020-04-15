@@ -366,7 +366,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/path = NodePath("ChurchBell")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -409,7 +409,7 @@ tracks/1/keys = {
 } ]
 }
 tracks/2/type = "audio"
-tracks/2/path = NodePath("AudioStreamPlayer2D")
+tracks/2/path = NodePath("ChurchBell")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -566,7 +566,7 @@ position = Vector2( 44.9051, 88.0142 )
 shape = SubResource( 5 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="World"]
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="Player" type="KinematicBody2D" parent="World"]
 position = Vector2( 485.545, 257.305 )
@@ -587,10 +587,9 @@ position = Vector2( 13.9822, -10.0604 )
 texture = ExtResource( 3 )
 vframes = 12
 hframes = 14
-frame = 51
 
 [node name="Light" parent="World/Player/Display" instance=ExtResource( 1 )]
-position = Vector2( 2.60567, 16.2555 )
+position = Vector2( -14.5198, -19.4765 )
 MaxScale = 2.0
 MinScale = 1.0
 DisableDimming = true
@@ -619,12 +618,12 @@ method_call_mode = 1
 anims/Fade_Exit = SubResource( 14 )
 anims/Fade_Into_Game = SubResource( 15 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 10 )
 volume_db = -10.0
 autoplay = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="ChurchBell" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 11 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -644,3 +643,4 @@ autoplay = true
 [connection signal="body_entered" from="World/Exit Game Trigger" to="." method="_on_Exit_Game_Trigger_body_entered"]
 [connection signal="body_entered" from="World/Start Game Trigger" to="." method="_on_Start_Game_Trigger_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="visibility_changed" from="PauseMenu" to="." method="_on_PauseMenu_visibility_changed"]

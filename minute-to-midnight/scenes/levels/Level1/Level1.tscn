@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/levels/Level1/Level1Platforms.tscn" type="PackedScene" id=1]
 [ext_resource path="res://prefabs/Player/Player.tscn" type="PackedScene" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://prefabs/Enemies/Wolf.tscn" type="PackedScene" id=13]
 [ext_resource path="res://prefabs/Door.tscn" type="PackedScene" id=14]
 [ext_resource path="res://prefabs/PauseMenu/PauseMenu.tscn" type="PackedScene" id=15]
+[ext_resource path="res://prefabs/Player/PowerGems.tscn" type="PackedScene" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 size = 8
@@ -530,7 +531,9 @@ shape = SubResource( 9 )
 [node name="Key" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1166.74, 910.198 )
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="." groups=[
+"Ao-Music",
+]]
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
@@ -539,6 +542,12 @@ autoplay = true
 position = Vector2( 77.6515, 177.793 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 15 )]
+
+[node name="PowerGem" parent="." instance=ExtResource( 16 )]
+position = Vector2( 137.895, 290.527 )
+
+[node name="PowerGem2" parent="." instance=ExtResource( 16 )]
+position = Vector2( 210.527, 302.106 )
 [connection signal="PlayerDoesHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesHaveKey"]
 [connection signal="PlayerDoesNotHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesNotHaveKey"]
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]

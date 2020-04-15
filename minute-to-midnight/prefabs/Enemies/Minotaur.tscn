@@ -175,7 +175,7 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="AreaShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 5.43982, 2.17587 )
+position = Vector2( -1.36678, 1.7788 )
 scale = Vector2( 0.92, 1 )
 shape = SubResource( 1 )
 
@@ -186,10 +186,10 @@ position = Vector2( 15.5214, -16.5228 )
 texture = ExtResource( 1 )
 vframes = 6
 hframes = 8
-frame = 29
+frame = 16
 
 [node name="BehindCheck" type="RayCast2D" parent="Display"]
-position = Vector2( -14.3364, 9 )
+position = Vector2( -20.671, 9 )
 scale = Vector2( -1, 1 )
 enabled = true
 cast_to = Vector2( 12.831, 0 )
@@ -212,16 +212,22 @@ anims/death = SubResource( 4 )
 anims/idle = SubResource( 5 )
 anims/walk = SubResource( 6 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." groups=[
+"Ao-Monsters",
+]]
 stream = ExtResource( 3 )
 max_distance = 600.0
 
 [node name="Node2D" type="Node2D" parent="."]
 
-[node name="AttackGrunt" type="AudioStreamPlayer2D" parent="Node2D"]
+[node name="AttackGrunt" type="AudioStreamPlayer2D" parent="Node2D" groups=[
+"Ao-Monsters",
+]]
 stream = ExtResource( 4 )
 
-[node name="AttackSwing" type="AudioStreamPlayer2D" parent="Node2D"]
+[node name="AttackSwing" type="AudioStreamPlayer2D" parent="Node2D" groups=[
+"Ao-Monsters",
+]]
 stream = ExtResource( 5 )
 [connection signal="body_entered" from="Display/DamageArea" to="." method="_on_MinotaurDamageArea_body_entered"]
 [connection signal="body_exited" from="Display/DamageArea" to="." method="_on_MinotaurDamageArea_body_exited"]

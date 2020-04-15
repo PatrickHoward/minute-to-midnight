@@ -3,9 +3,9 @@ using System;
 
 public class Pop : Popup
 {
-	public override void _Process(float delta)
+	public override void _Input(InputEvent e)
 	{
-		if(Input.IsActionPressed("Okay"))
+		if(e.IsActionPressed("Okay"))
 		{
 			Visible = false;
 			GetNode<ColorRect>("CanvasLayer/ColorRect").Visible = false;

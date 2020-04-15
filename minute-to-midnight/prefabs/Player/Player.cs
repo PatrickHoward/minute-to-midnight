@@ -66,6 +66,8 @@ public class Player : KinematicBody2D
 
 	public override void _Ready()
 	{
+		if(!SettingsData.FileFound)
+			GetTree().Quit();
 		//retrieve the scenes for beating a level and losing
 		_gameOverScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/gameover/GameOver.tscn");
 		_youWinScreen = ResourceLoader.Load<PackedScene>("res://scenes/menu/youwin/YouWin.tscn");
@@ -423,7 +425,7 @@ public class Player : KinematicBody2D
 			GD.Print("Player Damage: " + PlayerDamage);
 			
 			GetTree().Paused = true;
-			_popLabel.SetText("Damage Increased");
+			_popLabel.Text = "Damage Increased";
 			_pop.Visible = true;
 			_popRect.Visible = true;
 		}
@@ -434,7 +436,7 @@ public class Player : KinematicBody2D
 			GD.Print("Allowed Jumps: " + AllowedJumps);
 			
 			GetTree().Paused = true;
-			_popLabel.SetText("Double Jump Unlocked");
+			_popLabel.Text = "Double Jump Unlocked";
 			_pop.Visible = true;
 			_popRect.Visible = true;
 		}
@@ -445,7 +447,7 @@ public class Player : KinematicBody2D
 			GD.Print("Player Damage: " + PlayerDamage);
 			
 			GetTree().Paused = true;
-			_popLabel.SetText("Damage Increased");
+			_popLabel.Text = "Damage Increased";
 			_pop.Visible = true;
 			_popRect.Visible = true;
 		}
@@ -456,7 +458,7 @@ public class Player : KinematicBody2D
 			GD.Print("Final Attack Is Active");
 			
 			GetTree().Paused = true;
-			_popLabel.SetText("Third Attack Added to Combo");
+			_popLabel.Text = "Third Attack Added to Combo";
 			_pop.Visible = true;
 			_popRect.Visible = true;
 		}
