@@ -135,6 +135,7 @@ extents = Vector2( 41.2078, 48.04 )
 extents = Vector2( 26.2129, 31.8671 )
 
 [node name="Scene" type="Node2D"]
+position = Vector2( 4.41174, -15.126 )
 
 [node name="Door" parent="." instance=ExtResource( 14 )]
 position = Vector2( 5580.6, 489.98 )
@@ -259,6 +260,15 @@ position = Vector2( 5363.61, 504.837 )
 [node name="Brazier2" parent="Powerups" instance=ExtResource( 5 )]
 position = Vector2( 4591.67, 925.646 )
 
+[node name="PowerGem" parent="Powerups" instance=ExtResource( 16 )]
+position = Vector2( 75.4502, 788.695 )
+
+[node name="PowerGem2" parent="Powerups" instance=ExtResource( 16 )]
+position = Vector2( 2189.1, 866.573 )
+
+[node name="PowerGem3" parent="Powerups" instance=ExtResource( 16 )]
+position = Vector2( 4480.84, 912.227 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Wolf" parent="Enemies" instance=ExtResource( 13 )]
@@ -382,6 +392,7 @@ position = Vector2( 1083.51, 895.003 )
 position = Vector2( 3627.14, -279.429 )
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 position = Vector2( -1.16632, 110.804 )
 color = Color( 0, 0, 0, 1 )
 
@@ -542,12 +553,6 @@ autoplay = true
 position = Vector2( 77.6515, 177.793 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 15 )]
-
-[node name="PowerGem" parent="." instance=ExtResource( 16 )]
-position = Vector2( 137.895, 290.527 )
-
-[node name="PowerGem2" parent="." instance=ExtResource( 16 )]
-position = Vector2( 210.527, 302.106 )
 [connection signal="PlayerDoesHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesHaveKey"]
 [connection signal="PlayerDoesNotHaveKey" from="Door" to="CanvasLayer/Hints" method="_on_Door_PlayerDoesNotHaveKey"]
 [connection signal="_On_Collected" from="Powerups/bazier12" to="CanvasLayer/Hints" method="_on_bazier12__On_Collected"]
